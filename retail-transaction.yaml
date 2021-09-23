@@ -1,0 +1,61 @@
+RetailTransaction:
+  description: |
+    A type of Transaction that contains major retail activity.
+    Retail transaction records the main business conducted
+    between the retail enterprise and a CUSTOMER involving the
+    exchange in ownership and/or accountability for merchandise
+    and/or TENDER or involving the exchange of tender for
+    services. It also includes creation and modificaiton of
+    customer orders.
+  type: object
+  properties:
+    typeCode:
+      description: |
+        A code that describes the type of the Retail Transaction.
+      $ref: "#/RetailTransactionTypeCodeEnum"
+    trade:
+      description: |
+        Settlement part of the transaction.
+      $ref: "trade.yaml#/Trade"
+    voidedInProcessFlag:
+      description: |
+        A flag that indicates that the Retail Transaction was voided in
+        process. It means that it had been voided before tendering was
+        finished.
+      type: boolean
+      default: false
+    voidInProcess:
+      description: |
+        Details of the Retail Transaction void in process operation.
+      $ref: "void.yaml#/Void"
+    salespeople:
+      description: |
+        Salespeople associated with the whole retail transaction.
+        This property should only be used if sales people are not
+        specified per line item .
+      $ref: "associate.yaml#/SalespersonCollection"
+    employeeCustomer:
+      description: |
+        If customer is an employee then employee data may be captured
+        within retail transaction.
+      $ref: "associate.yaml#/Employee"
+    rewardCoupons:
+      description: |
+        Collection of reward coupons associated with the retail transaction.
+      $ref: "reward-coupon.yaml#/RewardCouponCollection"
+  additionalProperties: false
+
+RetailTransactionTypeCodeEnum:
+  description: |
+    Type of the Retail Transaction.
+    Trade - transaction mostly deals with trade (sales, returns, etc.)
+    Order - transaction mostly deals with customer orders (create, cancel, etc.)
+    TradeAndOrder - transaction deal with both trade and orders.  For example,
+      it includes some sold items and an order is created for other items.
+  type: string
+  enum:
+    - Trade
+    - Order
+    - TradeAndOrder
+    - Unknown
+

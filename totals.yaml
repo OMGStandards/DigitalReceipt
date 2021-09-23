@@ -1,0 +1,104 @@
+MonetaryTotal:
+  description: |
+    An aggregated monetary value or countable quantity that summarizes
+    the details.
+  type: object
+  properties:
+    totalAmount:
+      description: |
+        Amount of the Total.
+      $ref: "common.yaml#/MonetaryAmount"
+    totalQuantity:
+      description: |
+        Countable quantity of the Total.
+      type: integer
+      format: int32
+    typeCode:
+      description: |
+        Code that identifies the type the Total.
+      $ref: "#/TransactionTotalTypeCodeEnum"
+    customTotalTypeCode:
+      description: |
+        Custom code that identifies the type the Total.
+        It can only be used if totalTypeCode is set to Custom.
+      type: string
+    beforeVoidedFlag:
+      description: |
+        The total amount before transaction was voided.
+        Since some totals might be zeroed when transaction is voided,
+        the total values can be captured with raised beforeVoidedFlag.
+      type: boolean
+      default: false
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  required:
+    - typeCode
+  additionalProperties: false
+
+TransactionTotalTypeCodeEnum:
+  description: |
+    Enumeration of types of Totals.
+    ExcludingTax - total net amount of transaction excluding tax amount.
+    IncludingTax - total amount of transaction including tax amount.
+    Tax - total amount of tax (excluding tax on fees) collected from customer
+      for this transaction.
+    Discounts - total amount of all discounts within transaction
+    Savings - total of customer savings that might include discounts and
+      prices compared to competition.
+    Tender - total net amount of all tenders applied to transaction.
+    TaxExempt - total amount of all tax exemptions
+    SaleQuantity - total countable quantity of items sold in the transaction.
+    ReturnQuantity - total countable quantity of items returned in the
+      transaction.
+    NonTaxableFees - total non-taxable fees. Fees are typically added
+      to total including tax to receive grand total for the transaction.
+    TaxableFeesExcludingTax - total taxable fees excluding tax amount.
+      Fees are typically added to total including tax to receive grand
+      total for the transaction.  Since this total excudes taxes (see below),
+      fee taxes have to be added as well to calculate grand total.
+    FeesTax - total amount of fee taxes collected in this transaction.
+      Fee taxes are added to taxable fees excluding tax to get actual amount
+      to be included into grand total.
+    Grand - grand total. The final amount after everything is added up.
+      Grand Total formula:
+        Total-ExcludingTax
+        +
+        Total-Tax
+        = ---------------------
+        Total-IncludingTax
+        +
+        Total-NonTaxableFees
+        +
+        Total-TaxableFeesExcludingTax
+        +
+        Total-FeesTax
+        = ---------------------
+        Grand-Total
+  type: string
+  enum:
+    - ExcludingTax
+    - IncludingTax
+    - Tax
+    - Discounts
+    - Savings
+    - Tender
+    - TaxExempt
+    - SaleQuantity
+    - ReturnQuantity
+    - NonTaxableFees
+    - TaxableFeesExcludingTax
+    - FeesTax
+    - Grand
+    - Custom
+
+TotalCollection:
+  description: |
+    Collection of transaction totals.
+  type: array
+  items:
+    $ref: "#/MonetaryTotal"
+

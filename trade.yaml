@@ -1,0 +1,84 @@
+Trade:
+  description: |
+    A part of Retail Transaction that represents settlement.
+    Trade records the main business conducted
+    between the retail enterprise and a CUSTOMER involving the
+    exchange in ownership and/or accountability for merchandise
+    and/or TENDER or involving the exchange of tender for
+    services. Trade can also include adjustments
+    to customer accounts associated with such exchange.
+    Trade represents a record of settlement associated
+    with sales activity and therefore it should be always
+    balanced.
+  type: object
+  properties:
+    typeCode:
+      description: |
+        A code that describes the type of the Trade.
+      $ref: "#/TradeTypeEnum"
+    tillID:
+      description: |
+        An ID for the till associated with the trade.
+        Till is a tender repository that is assigned a unique
+        ID within a business unit (e.g. a store). It can be moved around
+        the business unit and can be inserted inside a cash drawer.
+      type: string
+    tillNumber:
+      description: |
+        A unique identifier for the till within store.
+        This is unique per business unit, meaningful number.
+      type: integer
+      format: int32
+    tillAccountabilityMode:
+      description: |
+        Till accountability mode.
+      $ref: "common.yaml#/TenderRepositoryAccountabilityModeEnum"
+    cashDrawerID:
+      description: |
+        Cash drawer identifier captured as part of retail transaction
+      type: string
+    cashDrawerEntryMethod:
+      description: |
+        Method used to enter cashdrawer code.
+      $ref: "common.yaml#/CodeEntryMethodEnum"
+    cashDrawerAccessMode:
+      description: |
+        Cash drawer access mode.
+      $ref: "common.yaml#/CashDrawerAccessModeEnum"
+    cashLimitOverride:
+      description: |
+        Override of soft maximum cash amount allowed per Transaction.
+      $ref: "common.yaml#/LimitOverride"
+    postVoidingFlag:
+      description: |
+        A flag denoting that Trade voids another transaction's Trade.
+        This is a process of reversing Trade that was previously
+        completed. To maintain a strict record, the reversed line items
+        can contain a link to the original items in voided Trade.
+      type: boolean
+      default: false
+    postVoid:
+      description: |
+        Details of the postVoiding operation.
+      $ref: "void.yaml#/Void"
+    lineItems:
+      description: |
+        Line items within retail transaction.
+      $ref: "trade-lineitem.yaml#/TradeLineItemCollection"
+  additionalProperties: false
+
+TradeTypeEnum:
+  description: |
+    Type of the trade.
+    Sale - Sale items only
+    Return - Return items only
+    Exchange - Sale and return items
+    TenderExchange - Exchange of one tender for another
+    Account - Transfer money to/from account.
+  type: string
+  enum:
+    - Sale
+    - Return
+    - Exchange
+    - TenderExchange
+    - Account

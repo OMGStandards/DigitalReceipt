@@ -1,0 +1,91 @@
+RewardCoupon:
+  description: |
+    A ticket, document or electronic code that can be redeemed for a
+    financial reward when purchasing item(s) from retailer. It is
+    different from Tender Coupons that are applied after Retail Transaction
+    has been totaled (including taxes) and are considered tenders.
+  type: object
+  properties:
+    rewardCouponID:
+      description: |
+        A global unique identifier for the Reward Coupon.
+      type: string
+    couponCode:
+      description: |
+        A meaningful alphanumeric value or a code that is used for
+        identification of the Reward Coupon. It can be printed on the
+        face of the ticket or document.
+      type: string
+    typeCode:
+      description: |
+        A code to designate the type of the Reward Coupon
+        discount, rebate, points, etc.).
+      type: string
+    discountReferenceCode:
+      description: |
+        An internal code that identifies the discount to be triggered by the coupon.
+      type: string
+    sequenceNumber:
+      description: |
+        Sequence number of the coupon within transaction.
+        When coupon is added to or generated within transaction
+        it can be assigend a sequence number that is unique
+        per transaction.
+      type: integer
+      format: int32
+    startDate:
+      description: |
+        The date before which the Reward Coupon cannot be used.
+      type: string
+      format: date
+    expirationDate:
+      description: |
+        The date after which the Reward Coupon cannot be used.
+      type: string
+      format: date
+    customer:
+      description: |
+        A customer associaed with the coupon.
+      $ref: "customer.yaml#/Customer"
+    status:
+      description: |
+        The status of the coupon within transaction.
+      $ref: "#/RewardCouponStatusEnum"
+    generatedFlag:
+      description: |
+        Flag that indicates that coupond was generated within Transaction.
+      type: boolean
+      default: false
+    generatedCouponScope:
+      description: |
+        Shows if generated coupon can be applied only within
+        the current transaction, outside of the current transaction, or both.
+      $ref: "#/GeneratedCouponScopeEnum"
+  additionalProperties: false
+
+RewardCouponStatusEnum:
+  description: |
+    Types of supported document body formats.
+  type: string
+  enum:
+    - Added
+    - Applied
+    - Removed
+
+GeneratedCouponScopeEnum:
+  description: |
+    Shows if generated coupon can be applied only within
+    the current transaction, outside of the current transaction, or both.
+  type: string
+  enum:
+    - InsideTran
+    - OutsideTran
+    - Anywhere
+
+RewardCouponCollection:
+  description: |
+    Collection of Reward Coupons.
+  type: array
+  items:
+    $ref: "#/RewardCoupon"
+

@@ -1,0 +1,132 @@
+Employee:
+  description: |
+    An employee associated with the Transaction.
+  type: object
+  properties:
+    employeeID:
+      description: |
+        A unique ID of the Employee.
+      type: string
+    employeeNumber:
+      description: |
+        Employee number that can be used for Employee identification.
+        It typically has some business meaning, for example, as a
+        reference in external HR system.
+      type: string
+    name:
+      description: |
+        Name of the Employee.
+      $ref: "#/PersonName"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSet where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "#/ExtensibilityData"
+  additionalProperties: false
+
+Operator:
+  description: |
+    An operator implies person's ability to access computer system.
+    Operators can be granted rights to perform different activities
+    using computer systems such as creation of transactions, customer
+    service, merchandising, etc. Operator data and their actions can
+    be captured for audit and reporting purposes.
+  type: object
+  properties:
+    operatorID:
+      description: |
+        A unique ID assigned to Operator.
+      type: string
+    loginName:
+      description: |
+        A unique string identifying the Operator to a computer system.
+      type: string
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSet where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "#/ExtensibilityData"
+  additionalProperties: false
+
+Associate:
+  description: |
+    A person who performs a variety of activities in a retail store.
+    They can operate workstations, help customers, perform some
+    backroom activities, etc.
+  type: object
+  properties:
+    name:
+      description: |
+        Name of the Associate.
+      $ref: "#common.yaml/PersonName"
+    operator:
+      description: |
+        If an associate has access to computer system they are also operators.
+      $ref: "#/Operator"
+    employee:
+      description: |
+        Employee data of the Associate.
+        For example, name, employeeNumber, etc.
+      $ref: "#/Employee"
+  additionalProperties: false
+
+Salesperson:
+  description: |
+    An salesperson associated with the Transaction or line item.
+  type: object
+  properties:
+    associate:
+      description: |
+        Salesperson is an Associate.
+      $ref: "#/Associate"
+    commissions:
+      description: |
+        Commissions to be rewarded to sales person for the Transaction or Line Item.
+      $ref: "#/CommissionCollection"
+  required:
+    - associate
+  additionalProperties: false
+
+SalespersonCollection:
+  description: |
+    Collection of salespeople.
+  type: array
+  items:
+    $ref: "#/Salesperson"
+
+Commission:
+  description: |
+    Commission to be awarded to a Salesperson as part of the transaction.
+  type: object
+  properties:
+    commissionPlanID:
+      description: |
+        Identifier of the commision plan that is used to calculate the Commission.
+      type: string
+    typeCode:
+      description: |
+        Type of the commision .
+      type: string
+    spiffFlag:
+      description: |
+        Flag that indicates that commission is a spiff.
+      type: boolean
+      default: false
+    amount:
+      description: |
+        The amount of the commission.
+      $ref: "#/MonetaryAmount"
+    percent:
+      description: |
+        Percent value of the commission.
+      $ref: "#/DecimalString"
+  additionalProperties: false
+
+CommissionCollection:
+  description: |
+    Collection of commissions.
+  type: array
+  items:
+    $ref: "#/Commission"

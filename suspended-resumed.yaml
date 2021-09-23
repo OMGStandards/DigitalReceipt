@@ -1,0 +1,46 @@
+Suspended:
+  description: |
+    Data specific to suspended transaction.
+    If a transaction is suspended this element contains data
+    related to suspended transaction.
+  type: object
+  properties:
+    resumeToken:
+      description: |
+        A token that can be used to retrieve the suspended transaction.
+        Suspended transaction is typically retrieved for resumption.
+      type: string
+    controlledOperation:
+      description: |
+        Additional control information about Suspend.
+      $ref: "common.yaml#/ControlledOperation"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  additionalProperties: false
+
+Resumed:
+  description: |
+    Data specific to transaction that is resumed.
+    If a transaction is resumed from previously suspended transaction
+    this element contains data related to resumption.
+  type: object
+  properties:
+    resumeToken:
+      description: |
+        A token that was used to retrieve the suspended transaction.
+      type: string
+    suspendedTransaction:
+      description: |
+        Link to the suspended transaction that was resumed.
+      $ref: "common.yaml#/TransactionLink"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  additionalProperties: false

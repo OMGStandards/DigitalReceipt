@@ -1,0 +1,210 @@
+Tax:
+  description: |
+    Data about taxes collected as part of the Transaction.
+  type: object
+  properties:
+    taxAuthority:
+      description: |
+        The tax authority that administers the Tax
+      $ref: "#/TaxAuthority"
+    taxRuleID:
+      description: |
+        A unique identifier of the Tax Rule that was used to calculate |
+        the Tax.
+      type: string
+    taxRegionID:
+      description: |
+        A unique identifier of the Tax Region that was used to calculate |
+        the Tax.
+      type: string
+    sequenceNumber:
+      description: |
+        A sequence number of the tax.
+        It is used when multiple taxes are applied to the same
+        line item. The order in which different taxes are applied
+        can be important if tax jurisdiction uses compound taxes.
+      type: integer
+      format: int32
+    name:
+      description: |
+        Name of the tax rule.
+      type: string
+    description:
+      description: |
+        Description of the tax rule.
+      type: string
+    taxableAmount:
+      description: |
+        The amount that is subject to the Tax. By default this amount |
+        equals the amount paid for items (excluding taxes) but in some |
+        circumstances it could be different.
+      $ref: "common.yaml#/MonetaryAmount"
+    excludedPercentage:
+      description: |
+        The percentage of the Item price that is excluded from taxes. For |
+        example, if book with CD is sold in a jurisdiction where books are |
+        taxable but CDs are not, 30% of the book with CD could be |
+        excluded from taxes.
+      $ref: "common.yaml#/DecimalString"
+      default: 0
+    amount:
+      description: |
+        The tax amount expressed in terms of default currency, specified |
+        in the transaction header.
+      $ref: "common.yaml#/MonetaryAmount"
+    unroundedAmount:
+      description: |
+        The tax amount that was calculated before it was rounded.
+      $ref: "common.yaml#/MonetaryAmount"
+    rate:
+      description: |
+        If rate based tax rule was used this column shows the rate |
+        that was used to calculate the Tax.
+      $ref: "common.yaml#/DecimalString"
+    effectiveRate:
+      description: |
+        The ratio of tax amount to taxable amount.
+      $ref: "common.yaml#/DecimalString"
+    includedInPriceFlag:
+      description: |
+        A flag that shows if tax amount is included in extendedNetAmount |
+        of the corresponding line item or in sub-total for transaction level |
+        taxes.
+      type: boolean
+      default: false
+    override:
+      description: |
+        Tax override.
+      $ref: "#/TaxOverride"
+    taxExemption:
+      description: |
+        Tax exemption.
+      $ref: "#/TaxExemption"
+    taxCode:
+      description: |
+        A short code associated with Tax Rule that can be used
+        on a receipt to display collected taxes.  There is also
+        tax code associated with tax authority that can be used
+        if rule tax code is not set. A single tax authority can
+        have multiple associated tax rules with different tax
+        codes.
+      type: string
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  required:
+    - taxRuleID
+    - amount
+  additionalProperties: false
+
+TaxExemption:
+  description: |
+    Data about tax exemption within transaction.
+  type: object
+  properties:
+    certificateID:
+      description: |
+        A unique identifier for tax exempt certificate.
+      type: string
+    preExemptTaxRuleID:
+      description: |
+        A unique identifier of the Tax Rule that would be used if there
+        were no tax exemption.
+      type: string
+    preExemptName:
+      description: |
+        Name of the tax rule that would be used if there were no tax exemption.
+      type: string
+    preExemptTaxableAmount:
+      description: |
+        The amount that would be subject to the Tax if there were no tax exemption.
+      $ref: "common.yaml#/MonetaryAmount"
+    preExemptAmount:
+      description: |
+        The tax amount that woudl be collected if there were no tax exemption.
+      $ref: "common.yaml#/MonetaryAmount"
+    preExemptRate:
+      description: |
+        Tax rate that would be used if there were no tax exemption.
+      $ref: "common.yaml#/DecimalString"
+    itemLevelFlag:
+      description: |
+        Flag that indicates that Tax Execmpt was applied at the
+        item level. If this flag is set to false or omitted then
+        Tax Override took place at the transaction level.
+      type: boolean
+    controlledOperation:
+      description: |
+        Additional control information about tax exemption.
+      $ref: "common.yaml#/ControlledOperation"
+  additionalProperties: false
+
+TaxCollection:
+  description: |
+    Collection of Tax structures usually, one per Tax Authority.
+  type: array
+  items:
+    $ref: "#/Tax"
+
+TaxOverride:
+  description: |
+    Manual tax override.
+  type: object
+  properties:
+    originalAmount:
+      description: |
+        Original tax amount.
+      $ref: "common.yaml#/DecimalString"
+    overrideAmount:
+      description: |
+        Override tax amount.
+      $ref: "common.yaml#/DecimalString"
+    originalRate:
+      description: |
+        Original tax rate.
+      type: string
+    overrideRate:
+      description: |
+        Override tax rate.
+      type: string
+    itemLevelFlag:
+      description: |
+        Flag that indicates that Tax Override was applied at the
+        item level. If this flag is set to false or omitted then
+        Tax Override took place at the transaction level.
+      type: boolean
+      default: false
+    controlledOperation:
+      description: |
+        Additional control information about Tax Override.
+      $ref: "common.yaml#/ControlledOperation"
+  additionalProperties: false
+
+  TaxAuthority:
+    description: |
+      A government entity that is authorized by law to assess, levy and |
+      collect Taxes. A Tax Authority administers Taxes for one or more |
+      Tax Jurisdictions.
+    type: object
+    properties:
+      taxAuthorityID:
+        description: |
+          A global unique identifier for the Tax Authority.
+        type: string
+      name:
+        description: |
+          Name of the Tax Authority.
+        type: string
+      description:
+        description: |
+          Description of the Tax Authority.
+        type: string
+      taxCode:
+        description: |
+          A short code associated with Tax Authority that can be used
+          on a receipt to display collected taxes.
+        type: string
+    additionalProperties: false

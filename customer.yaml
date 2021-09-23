@@ -1,0 +1,107 @@
+Customer:
+  description: |
+    A company or individual who purchases, may purchase, or did purchase |
+    goods and/or servicies from retailer.
+  type: object
+  properties:
+    customerID:
+      description: |
+        A global unique identifier for the Customer. It could be UUID.
+      type: string
+    alternativeCustomerID:
+      description: |
+        An alternative global unique identifier for the Customer. It could |
+        identifier from third party system that is used for mapping.
+      type: string
+    typeCode:
+      description: |
+        A code to designate the type of the Customer.
+      $ref: "#/CustomerTypeCodeEnum"
+    customTypeCode:
+      description: |
+        This property only should be used if typeCode=Custom.
+      type: string
+    employeeFlag:
+      description: |
+        A flag that indicates that the customer is also an Employee.
+      type: boolean
+      default: false
+    customerNumber:
+      description: |
+        A unique human-meaningful alphanumeric value to identify the |
+        Customer. This number maybe used in UI and different communications.
+      type: string
+    name:
+      description: |
+        Name of the Customer
+      $ref: "common.yaml#/PersonName"
+    gender:
+      description: |
+        Customer gender.
+      $ref: "common.yaml#/GenderEnum"
+    birthDate:
+      description: |
+        Customer date of birth.
+      type: string
+      format: date
+    addresses:
+      description: |
+        Collection of addresses associated with the Customer.
+      $ref: "common.yaml#/PostalAddressCollection"
+    telephoneNumbers:
+      description: |
+        Collection of Customer's telephone numbers.
+      $ref: "common.yaml#/TelephoneCollection"
+    emailAddresses:
+      description: |
+        Collection of Customer's email addresses.
+      $ref: "common.yaml#/EmailCollection"
+    governmentIdentifications:
+      description: |
+        Collection of Customer's identifications.
+      $ref: "common.yaml#/GovernmentIdentificationCollection"
+    companyName:
+      description: |
+        Name of the company the Customer works for.
+      type: string
+    offlineFlag:
+      description: |
+        A flag that indicates that the customer info was captured offline from CRM.
+        Typically the system is considered offline if the workstation cannot access or
+        had a problem while accessing the CRM system.
+      type: boolean
+      default: false
+    customerActionCode:
+      description: |
+        Code describes what type of action was perfomed on the Customer data.
+      $ref: "#/CustomerActionCodeEnum"
+      default: None
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  additionalProperties: false
+
+CustomerActionCodeEnum:
+  description: |
+    Defines the type of action performed on Customer data.
+  type: string
+  enum:
+    - Added
+    - Updated
+    - Deleted
+    - None
+    - Unknown
+
+CustomerTypeCodeEnum:
+  description: |
+    Type of customer.
+  type: string
+  enum:
+    - Person
+    - Business
+    - Household
+    - Custom
+

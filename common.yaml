@@ -1,0 +1,630 @@
+PersonName:
+  description: |
+    A set of words by which a person is known, addressed or referred to.
+  type: object
+  properties:
+    firstName:
+      description: |
+        The name that comes first in someone's full name.  Typically it is
+        a given name or the name that occurs first in a given name.
+      type: string
+    middleName:
+      description: |
+        A name that is typically placed after the first name and before the
+        last name. It is often abbreviated to middle initial.
+      type: string
+    lastName:
+      description: |
+        The name that comes at the end of someone's full name.  It is often
+        referred to as family name or surname.
+      type: string
+    shortName:
+      description: |
+        The name to use, when space is limited, or as a common-use name.
+      type: string
+    honorificPrefix:
+      description: |
+        An honorific prefix preceding the name such as Dr/Mrs/Mr.
+      type: string
+    honorificSuffix:
+      description: |
+        An honorific suffix following the name such as M.D. /PhD/MSCSW.
+      type: string
+  additionalProperties: false
+
+GovernmentBusinessID:
+  description: |
+    An identification issued by a government agency to a business.
+    It is usually some kind of government identification number.
+    If it is a document then that document number is the most important
+  type: object
+  properties:
+    idNumber:
+      description: |
+        Number of the identification document or identification number.
+      type: string
+    typeCode:
+      description: |
+        A code to denote the type of the ID for business.
+        It could be regisration number or taxpayer ID.
+      $ref: "#/GovernmentBusinessIDTypeEnum"
+    customTypeCode:
+      description: |
+        Custom type of identification that is not covered by GovernmentBusinessIDTypeEnum.
+        This property should only be used if typeCode is equal to Custom.
+      type: string
+    localTypeCode:
+      description: |
+        Local code for type of identification.
+        This code is defined and understood in the context of a particule locale
+        (usually a country) where the transaction takes place.
+        It could be defined in addition to generic typeCode.  For example,
+        generic typeCode can be TaxpayerID and localTypeCode can be VATNumber.
+      type: string
+    taxAuthority:
+      description: |
+        Tax Authority that issued ID number if it is a TaxpayerID
+      $ref: "tax.yaml#/TaxAuthority"
+  required:
+    - idNumber
+  additionalProperties: false
+
+GovernmentBusinessIDTypeEnum:
+  description: |
+    Type of government government business identification
+  type: string
+  enum:
+    - TaxpayerID
+    - Registration
+    - Custom
+
+GovernmentBusinessIDCollection:
+  description: |
+    Collection of government IDs.
+  type: array
+  items:
+    $ref: "#/GovernmentBusinessID"
+
+GovernmentIdentification:
+  description: |
+    An identification issued by a government agency.
+    It could be an identification document or just an identification number.
+    If it is a document then that document number is the most important
+    property. Many countries have a national identification number, national
+    identity number, or national insurance number that is used by the
+    governments as a means of tracking their citizens, permanent residents,
+    and temporary residents for the purposes of work, taxation, government
+    benefits, health care, and other governmentally-related functions.
+    The number often appears on identity documents issued by government agencies.
+  type: object
+  properties:
+    idNumber:
+      description: |
+        Number of the identification document or identification number.
+      type: string
+    typeCode:
+      description: |
+        A code to denote the type of the ID (passport, driving license, military, etc.).
+      $ref: "#/GovernmentIdentificationTypeEnum"
+    customTypeCode:
+      description: |
+        Custom type of identification that is not covered by GovernmentIdentificationTypeEnum.
+        This property should only be used if typeCode is equal to Custom.
+      type: string
+    localTypeCode:
+      description: |
+        Local code for type of identification.
+        This code is defined and understood in the context of a particule locale
+        (usually a country) where the transaction takes place.
+        It could be defined in addition to generic typeCode.  For exaple,
+        generic typeCode can be TaxpayerID and localTypeCode for US can be SSN.
+      type: string
+    idName:
+      description: |
+        Name of the identification document or identification number.
+        It can especially useful if you have many ids of the same type.
+      type: string
+    issueDate:
+      description: |
+        Identification issue date.
+      type: string
+      format: date
+    expirationDate:
+      description: |
+        Identification expiration date.
+      type: string
+      format: date
+    securedFlag:
+      description: |
+        Flag that indicates that government issued identifier is secured.
+      type: boolean
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSet where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "#/ExtensibilityData"
+  required:
+    - idNumber
+  additionalProperties: false
+
+GovernmentIdentificationTypeEnum:
+  description: |
+    Type of government identification document or identification number
+  type: string
+  enum:
+    - Passport
+    - DriverLicense
+    - IDCard
+    - MilitaryID
+    - NationalID
+    - TaxpayerID
+    - BirthCertificate
+    - NaturalizationCertificate
+    - VisitorID
+    - ResidentID
+    - Custom
+
+GovernmentIdentificationCollection:
+  description: |
+    Collection of government IDs.
+  type: array
+  items:
+    $ref: "#/GovernmentIdentification"
+
+GovernmentIssuedDataPiece:
+  description: |
+    Piece of Data issued by a government agency to the retailer.
+    It could be an authorization number or just a reference to a government
+    document or resolution.
+    Typically such data represents government's authorization to perform a
+    certain activity. Such data can have a cetain validity period.
+  type: object
+  properties:
+    typeCode:
+      description: |
+        A code to denote the type of the government issued data piece.
+      $ref: "#/GovernmentIssuedDataTypeEnum"
+    customTypeCode:
+      description: |
+        Custom type of government issued data that is not covered by
+        GovernmentIssuedDataPieceTypeEnum.  This property should only
+        be used if typeCode is equal to Custom.
+      type: string
+    localTypeCode:
+      description: |
+        Local code for type of government issued data piece.
+        This code is defined and understood in the context of a particular locale
+        (usually a country) where the transaction takes place.
+        It could be defined in addition to generic typeCode.  For example,
+        generic typeCode can be Authorization and localTypeCode for
+        Colombia can be ResolutionNumber.
+      type: string
+    dataName:
+      description: |
+        Name of the government issued data.
+        It can especially useful if you have many pieces of data of the same type.
+      type: string
+    dataValue:
+      description: |
+        Value of the government issued data piece.
+      type: string
+    issueDate:
+      description: |
+        Government data issue date.
+      type: string
+      format: date
+    expirationDate:
+      description: |
+        Government data expiration date.
+      type: string
+      format: date
+  additionalProperties: false
+
+GovernmentIssuedDataTypeEnum:
+  description: |
+    Type of government data
+  type: string
+  enum:
+    - Authorization
+    - Classification
+    - Custom
+    - Unknown
+
+GovernmentIssuedData:
+  description: |
+    Collection of government issued pieces of data.
+  type: array
+  items:
+    $ref: "#/GovernmentIssuedDataPiece"
+
+Application:
+  description: |
+    Computer application that participates in retail business process.
+  type: object
+  properties:
+    applicationID:
+      description: |
+        Unique identifier for the application.
+      type: string
+    typeCode:
+      description: |
+        A code to denote the type application, for example, POS, InventoryControl, etc.
+      type: string
+    companyName:
+      description: |
+        Name of the company that produced the application.
+      type: string
+    version:
+      description: |
+        The version of the application.
+      type: string
+    certification:
+      description: |
+        Certification for this application.
+      $ref: "#/ApplicationCertification"
+  additionalProperties: false
+
+ApplicationCertification:
+  description: |
+    Computer application certification data.
+  type: object
+  properties:
+    certificateNumber:
+      description: |
+        Certificate number.
+      type: string
+    certificationDate:
+      description: |
+        Date the certification was obtained
+      type: string
+      format: date
+    version:
+      description: |
+        The version of the application certified.
+      type: string
+    validThroughDate:
+      description: |
+        Date the certification will expire
+      type: string
+      format: date
+  additionalProperties: false
+
+TransactionLink:
+  description: |
+    Link to another Transaction and optionally Line Item.
+  type: object
+  properties:
+    transactionID:
+      description: |
+        A globally unique immutable identifier for the Transaction.
+        This is typically a system generated UUID.
+      type: string
+    businessUnit:
+      description: |
+        Retailer's business unit such as RetailStore, DistributionCenter
+        or AdministrationCenter that given Transaction is allocated to.
+      $ref: "business-unit.yaml#/BusinessUnit"
+    tenantID:
+      description: |
+        A globally unique identifier for a tenant that represents a certain
+        group of users who share a specific solution that is logically
+        isolated but physically might be integrated utilizing a common
+        infrastructure. A retail organization can have multiple tenants.
+      type: string
+    clientDeviceID:
+      description: |
+        A unique identifier of a client device that was used to create the
+        Transaction.
+      type: string
+    workstationNumber:
+      description: |
+        A unique within BusinessUnit meaningful number for workstation,
+        such as register number.
+      type: integer
+      format: int32
+    businessDayDate:
+      description: |
+        System date that Transaction is assigned to.  It can be diffrent
+        from calendar date especially for 24 hour businesses.
+      type: string
+      format: date
+    sequenceNumber:
+      description: |
+        A sequential counter used to uniquely identify the Transaction
+        within a transaction set identified by: BusinessUnit,
+        BusinessDayDate, and WorkstationNumber or ClientDeviceID. It is
+        typically reset to 1 at the beginning of every BusinessDayDate.
+        This sequence number is often referred to as a transaction number.
+      type: integer
+      format: int32
+    referenceNumber:
+      description: |
+        An alphanumeric value that is used to reference transaction for
+        searches.  It can also be printed on the receipt as a barcode.
+      type: string
+    endDateTime:
+      description: |
+        Date and time transaction finished.
+      type: string
+      format: date-time
+    lineItemSequenceNumber:
+      description: |
+        A sequential counter of line item within Transaction.
+      type: integer
+      format: int32
+    subItemSequenceNumber:
+      description: |
+        A sequential counter of sub-item within a line item.
+      type: integer
+      format: int32
+    beginDateTime:
+      description: |
+        Date and time transaction started.
+      type: string
+      format: date-time
+    timezoneOffsetInMinutes:
+      description: |
+        The time difference in minutes between UTC and place of the
+        original transaction.
+        For example, If the  transaction took place in EST (UTC-05) then
+        timezoneOffset is -300. In Moscow timezoneOffset equals to 180.
+        The sign of the offset is the same as defined by ISO 8601 standard.
+        So, it equals local-UTC, or the time difference in minutes between
+        the place of transaction and UTC.
+      type: integer
+      format: int32
+  additionalProperties: false
+
+ExtensibilityData:
+  description: |
+    Extensibility data is a collection of extensibility data sets.
+    Each extensibility data set represents a set of data that
+    might be logically related or grouped for processing purposes.
+    Extensibility data should be used only for custom extensions. The
+    semantics of the data elements is unknown. Therefore, organization
+    of the extensibility data can be only implemented by a the owner of
+    extensibility data.
+  type: array
+  items:
+    $ref: "#/ExtensibilityDataSet"
+
+ExtensibilityDataSet:
+  description: |
+    Extensibility DataSet is a the main extensibility data structure.
+    It contains a collection of extensibility properties. Having multiple
+    data sets helps group properties logically and only deal with a relevant
+    subset of properies.
+  type: object
+  properties:
+    dataSetName:
+      description: |
+        Name of the dataset that contains custom properties.
+        The name can be use to retrieve only relavant dataset.
+      type: string
+    extensibilityProperties:
+      description: |
+        A collection of extensibility properties.
+      $ref: "#/NameValuePairCollection"
+  required:
+    - extensibilityProperties
+  additionalProperties: false
+
+NameValuePairCollection:
+  description: |
+    Collection of extensibility properties.
+  type: array
+  items:
+    $ref: "#/NameValuePair"
+
+NameValuePair:
+  description: |
+    Name-Value pair property
+  type: object
+  properties:
+    name:
+      description: |
+        Name of the property.
+      type: string
+    value:
+      description: |
+        Value of the property.
+      type: string
+    typeOfData:
+      description: |
+        Type of data inside the the value of the property.
+        Since the semantics of data properties is unknown data type
+        can be useful to properly present the data.
+      $ref: "#/NameValueTypeOfDataEnum"
+    base64EncodedFlag:
+      description: |
+        Flag that indicates if the data is a base64 encoded string
+      type: boolean
+  required:
+    - name
+  additionalProperties: false
+
+NameValueTypeOfDataEnum:
+  description: |
+    Type of data contained inside the value of name-value property.
+    The "Data" suffix is used to avoid collision with reserved words.
+  type: string
+  enum:
+    - StringData
+    - IntegerData
+    - BooleanData
+    - DecimalData
+    - BinaryData
+    - DateData
+    - TimeData
+    - DateTimeData
+    - XmlData
+    - JsonData
+    - YamlData
+    - Unknown
+
+DecimalString:
+  description: |
+    A numeric value that can include a fractional part represented as a string to avoid rounding issues with
+    languages/libraries that automatically convert JSON numbers to floating-point values.
+  type: string
+  additionalProperties: false
+
+MonetaryAmount:
+  description: |
+    Money represents an amount of a specific currency.
+  type: object
+  properties:
+    amount:
+      $ref: "#/DecimalString"
+    currency:
+      description: |
+        The currency denotes the currency of the amount.  This should be an ISO 4217 code (see
+        https://en.wikipedia.org/wiki/ISO_4217).
+        Note:  The currency is not required as it might be specified by context, expecially where a number of
+        monetary amounts are provides in the context of a single currency.
+      type: string
+  required:
+    - amount
+  additionalProperties: false
+
+MeasuredQuantity:
+  description: |
+    Structure that describes quantity measured in certain units.
+  type: object
+  properties:
+    value:
+      description: |
+        A numeric value in units of the unit of measure.  This is encoded as a string, so that full and accurate
+        precision can be represented.
+      $ref: "#/DecimalString"
+    unitOfMeasure:
+      description: |
+        The units in which the quantity is measured.  The unit of measure values are defined and adopted by
+        convention or by law.
+      type: string
+  required:
+    - value
+    - unitOfMeasure
+  additionalProperties: false
+
+Approval:
+  description: |
+    An authorization of an action performed by an Operator.
+  type: object
+  properties:
+    approver:
+      description: |
+        The operator who approved an action performed by another operator.
+        The approving operator must have the authority to approve the action.
+      $ref: "#/Associate"
+    dateTime:
+      description: |
+        Date and time the Approval took place.
+      type: string
+      format: date-time
+    status:
+      description: |
+        Status of the approval.
+      $ref: "#/ApprovalStatusEnum"
+  additionalProperties: false
+
+ApprovalStatusEnum:
+  description: |
+    The status of the approval.
+    Pending - still has to take place.
+    InProcess - requested but response has not been received.
+    Approved - successfuly granted by approver.
+    Denied - rejected by approver.
+    Error - error happened during the approval process.
+    Cancelled - approval request was withdrawn.
+  type: string
+  enum:
+    - Pending
+    - InProcess
+    - Approved
+    - Denied
+    - Error
+    - Cancelled
+    - Unknown
+
+Reason:
+  description: |
+    A cause or justification for an action performed by an Operator.
+  type: object
+  properties:
+    code:
+      description: |
+        A short string that is used to identify the Reason.
+      type: string
+    description:
+      description: |
+        A detailed explanation of the Reason.
+      type: string
+    typeCode:
+      description: |
+        A type of Reason.
+        There are different types of reasons (return, void, suspend, etc.)
+      type: string
+  required:
+    - code
+  additionalProperties: false
+
+ControlledOperation:
+  description: |
+    Additional details about an operation that require special control.
+  type: object
+  properties:
+    reason:
+      description: |
+        Reason for the Controlled Operation.
+      $ref: "#/Reason"
+    approval:
+      description: |
+        Approval of the Controlled Operation.
+      $ref: "#/Approval"
+    dateTime:
+      description: |
+        Date and time Control Operation happened.
+      type: string
+      format: date-time
+    electronicJournalLinks:
+      description: |
+        Links to the related electronic journal entries.
+      $ref: "#/ElectronicJournalEntryLinkCollection"
+    comment:
+      description: |
+        Comment associated with the Controlled Operation.
+        It may provide more contextual information and complements more
+        formal reason.
+      type: string
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSet where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "#/ExtensibilityData"
+    additionalProperties: false
+
+  HypermediaLink:
+    type: object
+    properties:
+      rel:
+        type: string
+      href:
+        type: string
+      method:
+        type: string
+      desc:
+        type: string
+    required:
+      - rel
+      - href
+    additionalProperties: false
+
+  HypermediaLinkCollection:
+    description: |
+      Collection of hypermedia.
+    type: array
+    items:
+      $ref: "#/HypermediaLink"

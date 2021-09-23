@@ -1,0 +1,360 @@
+TradeLineItem:
+  description: |
+    The concept of line item goes back to representation of
+    retail transaction on a receipt as itemized statement of
+    transaction details. Each retail transaction line item
+    represents an important piece of information that typically
+    has impact on transaction total such as sold and/or
+    returned items, taxes, payments, transaction level
+    discounts, fees, donations, etc.
+  type: object
+  properties:
+    sequenceNumber:
+      description: |
+        A line item sequence number.  It is an identifier of
+        the line item within transaction.
+      type: integer
+      format: int32
+    lineItemType:
+      description: |
+        Type of line item.
+      $ref: "#/LineItemTypeEnum"
+    beginDateTime:
+      description: |
+        Datetime when line item entry began.
+      type: string
+      format: date-time
+    endDateTime:
+      description: |
+        Datetime when line item entry ended.
+      type: string
+      format: date-time
+    entryMethod:
+      description: |
+        The method used to enter line item.
+      $ref: "common.yaml#/EntryMethodCodeEnum"
+    customEntryMethod:
+      description: |
+        The custom method used to enter line item.
+      type: string
+    entryMethodFallbackFlag:
+      description: |
+        Flag that indicates that the entry method was a fallback from another entry method
+        that could not be used for technical or business reasons.
+      type: boolean
+      default: false
+    voidedInProcessFlag:
+      description: |
+        A flag that indicates that the line was voided in
+        process.
+      type: boolean
+      default: false
+    voidInProcess:
+      description: |
+        Details of void operation if Line Item was voided in process.
+      $ref: "void.yaml#/Void"
+    sale:
+      $ref: "#/SaleLineItem"
+    return:
+      $ref: "#/ReturnLineItem"
+    tenderIn:
+      $ref: "#/TenderInLineItem"
+    tenderOut:
+      $ref: "#/TenderOutLineItem"
+    tax:
+      $ref: "#/TaxLineItem"
+    taxRefund:
+      $ref: "#/TaxRefundLineItem"
+    amountModifier:
+      $ref: "#/AmountModifierLineItem"
+    fee:
+      $ref: "#/FeeLineItem"
+    feeRefund:
+      $ref: "#/FeeRefundLineItem"
+    saleReversal:
+      $ref: "#/SaleLineItem"
+    returnReversal:
+      $ref: "#/ReturnLineItem"
+    tenderInReversal:
+      $ref: "#/TenderInLineItem"
+    tenderOutReversal:
+      $ref: "#/TenderOutLineItem"
+    taxReversal:
+      $ref: "#/TaxLineItem"
+    taxRefundReversal:
+      $ref: "#/TaxRefundLineItem"
+    amountModifierReversal:
+      $ref: "#/AmountModifierLineItem"
+    feeReversal:
+      $ref: "#/FeeLineItem"
+    feeRefundReversal:
+      $ref: "#/FeeRefundLineItem"
+  required:
+    - sequenceNumber
+    - lineItemType
+  additionalProperties: false
+
+TradeLineItemCollection:
+  type: array
+  items:
+    $ref: "#/TradeLineItem"
+
+LineItemTypeEnum:
+  description: |
+    Enumeration of possible types of line items.
+  type: string
+  enum:
+    - Sale
+    - Return
+    - TenderIn
+    - TenderOut
+    - Tax
+    - AmountModifier
+    - TaxRefund
+    - Fee
+    - FeeRefund
+    - SaleReversal
+    - ReturnReversal
+    - TenderInReversal
+    - TenderOutReversal
+    - TaxReversal
+    - AmountModifierReversal
+    - TaxRefundReversal
+    - FeeReversal
+    - FeeRefundReversal
+
+SaleLineItem:
+  description: |
+    A Line Item that represents a sale of an Item.
+  type: object
+  properties:
+    item:
+      description: |
+        Information about item within Transaction
+      $ref: "transaction-item.yaml#/TransactionItem"
+  required:
+    - item
+  additionalProperties: false
+
+ReturnLineItem:
+  description: |
+    A Line Item that represents a return of an Item.
+  type: object
+  properties:
+    item:
+      description: |
+        Information about item within Transaction.
+      $ref: "transaction-item.yaml#/TransactionItem"
+    originalSale:
+      description: |
+        Link to original Sale line item.
+      $ref: "common.yaml#/TransactionLink"
+    originalOperator:
+      description: |
+        Operator who performed the original transaction.
+      $ref: "associate.yaml#/Operator"
+    originalCustomer:
+      description: |
+        Customer who participated in the original transaction.
+      $ref: "customer.yaml#/Customer"
+    originalUnitPrice:
+      description: |
+        The actual price per unit in the original transaction.
+        This amount can be rounded if original Line Item
+        contains multiple units sold.
+      $ref: "common.yaml#/MonetaryAmount"
+    defaultReturnUnitPrice:
+      description: |
+        The default return price per unit as defined by retailer.
+        This price can be set to the lowest price over a certain time
+        period, percentage of the current price, or some other value
+        defined by the retailer.
+      $ref: "common.yaml#/MonetaryAmount"
+    originalSalespeople:
+      description: |
+        Salespeople associated with original transaction line time
+      $ref: "associate.yaml#/SalespersonCollection"
+    receiptUnavailableFlag:
+      description: |
+        A flag that indicates that the original transaction receipt is unavailable.
+      type: boolean
+      default: false
+    offlineFlag:
+      description: |
+        A flag that indicates that the return was performed offline.
+        In this case, it is impossible to get the electronic version of
+        the original transaction and all the corresponding addtional
+        information.  Return can still be done but some of the business
+        rules might be impossible to enforce.  For example, the same item
+        can be returned twice.
+      type: boolean
+      default: false
+    controlledOperation:
+      description: |
+        Additional control information about Return.
+      $ref: "common.yaml#/ControlledOperation"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  required:
+    - item
+  additionalProperties: false
+
+TenderInLineItem:
+  description: |
+    A Line Item that represents a tender moving into the retailer's possession.
+  type: object
+  properties:
+    tenderInType:
+      description: |
+        Type of tender in.
+      $ref: "#/TenderInTypeEnum"
+    tender:
+      description: |
+        Information about Tender within Transaction.
+      $ref: "transaction-tender.yaml#/TransactionTender"
+    controlledOperation:
+      description: |
+        Additional control information about tender in.
+        This could be authorization for maximum amount allowed.
+      $ref: "common.yaml#/ControlledOperation"
+  required:
+    - tender
+  additionalProperties: false
+
+TenderInTypeEnum:
+  type: string
+  enum:
+    - Payment
+    - ExchangeIn
+
+TenderOutLineItem:
+  description: |
+    A Line Item that represents a tender moving into customer's possession.
+    Change and CashBack are considered types of TenderOut.
+  type: object
+  properties:
+    tender:
+      description: |
+        Information about Tender within Transaction.
+      $ref: "transaction-tender.yaml#/TransactionTender"
+    tenderOutType:
+      description: |
+        Type of tender out.
+      $ref: "#/TenderOutTypeEnum"
+    tenderInLinks:
+      description: |
+        Links to tenderIn line items associated with this tenderOut.
+        For example, it could be a payment tenderIn that is being
+        refunded by this tenderOut.
+      $ref: "common.yaml#/LineItemValueLinkCollection"
+    controlledOperation:
+      description: |
+        Additional control information about tender out.
+        This could be reason or authorization for refund.
+      $ref: "common.yaml#/ControlledOperation"
+  required:
+    - tender
+    - tenderOutType
+  additionalProperties: false
+
+TenderOutTypeEnum:
+  type: string
+  enum:
+    - Refund
+    - Change
+    - CashBack
+    - ExchangeOut
+
+TaxLineItem:
+  description: |
+    A Line Item that represents Tax collected within Transaction.
+    It is usually for a particular Tax Authority.
+  type: object
+  properties:
+    tax:
+      description: |
+        Information about Tax within Transaction.
+      $ref: "tax.yaml#/Tax"
+  required:
+    - tax
+  additionalProperties: false
+
+TaxRefundLineItem:
+  description: |
+    A Line Item that represents Tax collected within Transaction.
+    It is usually for a particular Tax Authority.
+  type: object
+  properties:
+    tax:
+      description: |
+        Information about Tax refund within Transaction.
+      $ref: "tax.yaml#/Tax"
+    reason:
+      description: |
+        Reason for the tax refund.
+      $ref: "common.yaml#/Reason"
+    originalTax:
+      description: |
+        Link to original Tax line item.
+      $ref: "common.yaml#/TransactionLink"
+  required:
+    - tax
+  additionalProperties: false
+
+FeeLineItem:
+  description: |
+    A Line Item that represents Fee collected within Transaction.
+    These could be convenience fees, tare fees, fees forredevelopment, etc..
+  type: object
+  properties:
+    fee:
+      description: |
+        Fee collected within this line item.
+      $ref: "fee.yaml#/Fee"
+    controlledOperation:
+      description: |
+        Additional control information about fee.
+      $ref: "common.yaml#/ControlledOperation"
+  required:
+    - fee
+  additionalProperties: false
+
+FeeRefundLineItem:
+  description: |
+    A Line Item that represents Refund of the Fee collected before.
+  type: object
+  properties:
+    fee:
+      description: |
+        Fee collected within this line item.
+      $ref: "fee.yaml#/Fee"
+    controlledOperation:
+      description: |
+        Additional control information about fee.
+      $ref: "common.yaml#/ControlledOperation"
+    originalFee:
+      description: |
+        Link to fee associated with this refund.
+      $ref: "common.yaml#/TransactionLink"
+  required:
+    - fee
+  additionalProperties: false
+
+AmountModifierLineItem:
+  description: |
+    A Line Item that represents transaction level Amount Modifier.
+    Examples of amount modifiers include but not limited to discounts
+    or markdowns.
+  type: object
+  properties:
+    amountModifier:
+      description: |
+        Information about transaction  level amount modifier.
+      $ref: "amountmodifier.yaml#/AmountModifier"
+  required:
+    - amountModifier
+  additionalProperties: false

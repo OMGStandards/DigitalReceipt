@@ -1,0 +1,215 @@
+AmountModificationRule:
+  description: |
+    Rule that is used to modify the amounts at transaction and item level.
+  type: object
+  properties:
+    amountModificationRuleID:
+      description: |
+        A unique identifier of the Amount Modification Rule that was used
+        to calculate new amount.
+      type: string
+    amountModificationTypeCode:
+      description: |
+        The type of amount modifiction.
+        It can be percentage or amount off, or replacing the whole
+        amount with a new value
+      $ref: "#/AmountModificationTypeCodeEnum"
+    amount:
+      description: |
+        The amount of the modification if rule type is AmountOff or NewAmount.
+      $ref: "common.yaml#/MonetaryAmount"
+    percent:
+      description: |
+        Percent value of the modification if rule type is PercentOff.
+      $ref: "common.yaml#/DecimalString"
+    manualFlag:
+      description: |
+        A flag that indicates that amount modification was triggered by
+        manual actions of the Operator.
+      type: boolean
+      default: false
+    employeeFlag:
+      description: |
+        A flag that indicates that amount modification was triggered by some
+        Employee reward program. In this case purchasing Employee should
+        be captured as part of the transaction.
+      type: boolean
+      default: false
+    name:
+      description: |
+        Name of the amount modification rule.
+      type: string
+    description:
+      description: |
+        Description of the amount modification rule.
+      type: string
+    promotionID:
+      description: |
+        Unique identifier for the Promotion associated with the amount
+        modification.
+      type: string
+    promotionName:
+      description: |
+        Name of the promotion associated with amount modification.
+      type: string
+    amountModificationLevel:
+      description: |
+        Level at wich amount modification rule is applied.
+        It can be Item, Group, or Transaction.
+      $ref: "#/AmountModificationLevelEnum"
+  additionalProperties: false
+
+AmountModificationTypeCodeEnum:
+  description: |
+    Defines the type of amount modification.
+  type: string
+  enum:
+    - PercentOff
+    - AmountOff
+    - NewAmount
+
+AmountModificationLevelEnum:
+  description: |
+    Defines the level of amount modification.
+  type: string
+  enum:
+    - Item
+    - Group
+    - Transaction
+
+AmountModificationTrigger:
+  description: |
+    Trigger that causes the amount modification.
+  type: object
+  properties:
+    triggerType:
+      description: |
+        Type of amount modification trigger.
+      $ref: "#/AmountModificationTriggerTypeEnum"
+    rewardCoupon:
+      description: |
+        Reward Coupon that was part of the amount modification trigger.
+      $ref: "rewardcoupon.yaml#/RewardCoupon"
+  additionalProperties: false
+
+AmountModificationTriggerTypeEnum:
+  description: |
+    Type of the amount modification trigger.
+    Triggers can be of the following types:
+    Coupon - amount modification was triggered by applying a coupon.
+    AutoCoupon - amount modification was triggered by auto-coupon.
+  type: string
+  enum:
+    - Coupon
+    - AutoCoupon
+
+AmountModifier:
+  description: |
+    Data about Line Item and Transaction amounts modifications that took
+    place within the Transaction.
+  type: object
+  properties:
+    amount:
+      description: |
+        The amount of modification expressed in terms of default currency,
+        specified in the transaction header.
+      $ref: "common.yaml#/MonetaryAmount"
+    actionCode:
+      description: |
+        Amount modification action code that describes if the amount was
+        modified as subtraction, addition, or replacement.
+      $ref: "#/AmountModificationActionEnum"
+    sequenceNumber:
+      description: |
+        A sequence number of the amount modifier.
+        It is used when multiple amount modifiers are applied to the same
+        line item. The order in which different amount modifiers are applied
+        is important.
+      type: integer
+      format: int32
+    amountBefore:
+      description: |
+        The amount before the modification.
+      $ref: "common.yaml#/MonetaryAmount"
+    amountAfter:
+      description: |
+        The amount after the modification.
+      $ref: "common.yaml#/MonetaryAmount"
+    aggregationIndex:
+      description: |
+        An index associated with a particlar transaction or group level rule.
+        Such index allows to pull together all modification related to the
+        same application of a particular rule. It is necessary since
+        all the amount modifiers prorated to line item level.
+      type: integer
+      format: int32
+    amountModificationRule:
+      description: |
+        Rule that was used to get this amount modification.
+      $ref: "#/AmountModificationRule"
+    amountModificationTrigger:
+      description: |
+        Trigger for this amount modification.
+      $ref: "#/AmountModificationTrigger"
+    controlledOperation:
+      description: |
+        Additional control information about manual amount modifiction.
+      $ref: "common.yaml#/ControlledOperation"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  required:
+    - amount
+    - actionCode
+  additionalProperties: false
+
+AmountModifierCollection:
+  description: |
+    Collection of the Amount Modifiers.
+  type: array
+  items:
+    $ref: "#/AmountModifier"
+
+AmountModificationActionEnum:
+  description: |
+    Enumeration of actions used to modify amounts.
+  type: string
+  enum:
+    - Add
+    - Subtract
+    - Replace
+
+PriceOverride:
+  description: |
+    Manual price override. This is different from manual amount |
+    modifications such as discounts and markdowns. The Price |
+    Override is used to override price that was obtained as |
+    initial price lookup when it is necessary to establish correct |
+    unit price. For example, it could happen if item is not on file.
+  type: object
+  properties:
+    lookupUnitPrice:
+      description: |
+        Unit price that was obtained as part of item lookup.
+      $ref: "common.yaml#/MonetaryAmount"
+    overrideUnitPrice:
+      description: |
+        New unit price specified by the Operator.
+      $ref: "common.yaml#/MonetaryAmount"
+    controlledOperation:
+      description: |
+        Additional control information about Price Override.
+      $ref: "common.yaml#/ControlledOperation"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  required:
+    - overrideUnitPrice
+  additionalProperties: false
+

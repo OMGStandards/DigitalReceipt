@@ -1,0 +1,294 @@
+DigitalReceipt:
+  description: |
+    A pure subset of Transction that contains the necessary data
+    elements for customer facing receipts and fiscal audit.
+    Transaction is a self-contained unit of essential business activity.
+    The activity involves important business such as financial
+    and/or merchandise exchange, movement of money and/or inventory,
+    creation or modification of business documents, granting access to a
+    device, etc. As any activity, a transaction begins and ends at specific
+    points in time and can be associated with a particular performing
+    Operator for accountability and audit purposes. A transaction usually
+    takes some time and its completion time is considered the actual time
+    of the transaction. Once completed, transactions are immutable.
+  type: object
+  properties:
+    transactionID:
+      description: |
+        A globally unique immutable identifier for the Transaction.
+        This is typically a system generated UUID.
+      type: string
+    fiscalTransactionID:
+      description: |
+        A fiscal unique identifier for the Transaction.
+        This is typically either provided by a fiscal device or generated
+        according to country specific fiscal rules.
+        type: string
+    sequenceNumber:
+      description: |
+        A sequential counter used to identify the Transaction.
+        This number is unique within a transaction set identified by:
+        BusinessUnit, BusinessDayDate, and WorkstationNumber. It is
+        typically reset to 1 at the beginning of every BusinessDayDate.
+        This sequence number is often referred to as a transaction number.
+      type: integer
+      format: int32
+    referenceNumber:
+      description: |
+        An alphanumeric value that is used to reference transaction.
+        This number can be used for searches.  It can also be printed
+        on the receipt as a barcode.
+      type: string
+    businessUnit:
+      description: |
+        A place of business where retailer conducts retail operations.
+        Trasactions are performed within a certain business unit such as
+        RetailStore, DistributionCenter or AdministrationCenter.
+      $ref: "business-unit.yaml#/BusinessUnit"
+    clientDeviceID:
+      description: |
+        A unique identifier of a client device.
+        This identifier is for the device that was used as an as interface
+        create this transaction.
+      type: string
+    workstationID:
+      description: |
+        A unique identifier for workstation.
+      type: integer
+      format: string
+    fiscalWorkstationID:
+      description: |
+        Workstation ID in a special format or issued by a fiscal authority.
+      type: integer
+      format: string
+    workstationNumber:
+      description: |
+        A unique within BusinessUnit meaningful number for workstation.
+        It is an integer value such as register number.
+      type: integer
+      format: int32
+    businessDayDate:
+      description: |
+        System date that Transaction is assigned to.
+        It can be diffrent from calendar date especially for 24 hour
+        businesses.
+      type: string
+      format: date
+    timezoneOffsetInMinutes:
+      description: |
+        The time difference in minutes between UTC and place of transaction.
+        For example, If the  transaction took place in EST (UTC-05) then
+        timezoneOffset is -300. In Moscow timezoneOffset is equal to 180.
+        The sign of the offset is the same as defined by ISO 8601 standard.
+        So, it equals local-UTC, or the time difference in minutes between
+        the place of transaction and UTC.
+      type: integer
+      format: int32
+    beginDateTime:
+      description: |
+        The date and time transaction started.
+      type: string
+      format: date-time
+    endDateTime:
+      description: |
+        The date and time transaction finished.
+      type: string
+      format: date-time
+    typeCode:
+      description: |
+        Code that designates the type of the Transaction.
+      $ref: "#/TransactionTypeCodeEnum"
+    customTypeCode:
+      description: |
+        Code that designates the custom type of the Transaction.
+        It should only be used if typeCode is set to Custom.
+      type: string
+    performingAssociate:
+      description: |
+        The Associate who performed the Transaction.
+      $ref: "common.yaml#/Associate"
+    currencyCode:
+      description: |
+        Currency code that is used by monetary values within transaction.
+        It is ISO-4217 three character code.
+      type: string
+    countryCode:
+      description: |
+        Code of the country that has jurisdiction over the transaction.
+        That could be important for interpretation of some data,
+        especially related to tax and fiscal regulations.
+        It is one or more ISO-3166-1 character code representatioins. Alpha3
+        is the preferred representation since it provides the best balance
+        between the readability and the compactness.
+      $ref: "address.yaml#/CountryCode"
+    customer:
+      description: |
+        Customer that participates in the Transaction.
+      $ref: "customer.yaml#/Customer"
+    rewardCoupons:
+      description: |
+        Reward Coupons that are part of the Transaction.
+      $ref: "reward-coupon.yaml#/RewardCouponCollection"
+    application:
+      description: |
+        Application that was used to create the Transaction.
+      $ref: "common.yaml#/Application"
+    offlineFlag:
+      description: |
+        A flag that indicates that the Transaction was created offline.
+        Typically the system is considered offline if workstation cannot
+        access a server and some functionality might not be available.
+      type: boolean
+      default: false
+    suspendedFlag:
+      description: |
+        A flag that indicates that the Transaction was suspended.
+        It means that transaction state was preserved so that it could later
+        be resumed within the same business unit.
+      type: boolean
+      default: false
+    resumedFlag:
+      description: |
+        A flag that indicates that the Transaction was resumed.
+        It means that previously suspended transaction was loaded as a
+        starting point for this Transaction.
+      type: boolean
+      default: false
+    selfServiceFlag:
+      description: |
+        A flag that indicates that this is a self-service Transaction.
+        It typically means it was created at self-service checkout or some
+        kind of kiosk.
+      type: boolean
+      default: false
+    trainingFlag:
+      description: |
+        A flag that indicates that the Transaction was performed in training mode.
+        It means that business activity described by the transaction was just a
+        training exercise and should have no material impact on state of the business.
+      type: boolean
+      default: false
+    retailTransaction:
+      description: |
+        RetailTransaction part of this transaction.
+      $ref: "retail-transaction.yaml#/RetailTransaction"
+    stageCode:
+      description: |
+        Classification of transaction as stage in some business process.
+        For example, it could be inital loan (SafeToTill) or final pickup
+        (TillToSafe). Transaction performed in the middle of the day that
+        are neither initial nor final can be classified as intermediate.
+      $ref: "#/TransactionStageCodeEnum"
+    totals:
+      description: |
+        Collection of transaction totals.
+      $ref: "totals.yaml#/TotalCollection"
+    suspended:
+      description: |
+        Data associated with suspended transaction.
+      $ref: "suspended-resumed.yaml#/Suspended"
+    resumed:
+      description: |
+        Data associated with transaction that was resumed.
+      $ref: "suspended-resumed.yaml#/Resumed"
+    governmentIssuedData:
+      description: |
+        Data issued by government agencies to the retailer.
+        This property is an array of data pieces where each piece
+        is a single data element.
+      $ref: "common.yaml#/GovernmentIssuedData"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+    links:
+      description: |
+        Collection of hypermedia links to support APIs
+      $ref: "common.yaml#/HypermediaLinkCollection"
+  required:
+    - transactionID
+    - businessUnit
+    - sequenceNumber
+    - endDateTime
+    - typeCode
+  additionalProperties: false
+
+TransactionTypeCodeEnum:
+  description: |
+    Code that designates the type of the Transaction.
+    Transaction can be of the following types:
+    Retail - trasaction that includes main retail activities.
+      Such acctivities deal with exchnge of goods and services for tender:
+      sales, returns, customer orders, creation and modification of customer
+      records, enrollment in loyalty programs, etc.
+    Operator - transactions that included operator control activities.
+      Such activities include logins, logouts, changing passwords,
+      employee clock-in/outs, etc.
+    Financial - transaction that record transfer of funds to/from retailer's accounts
+      Such transactions include Paid In/Out.
+    Tender - transactions that record movement of tender to and from tender repositories.
+      Such transactions include loans, pickups, banking, etc.
+    TenderSettlement - transactions that record settlement of tender inside repositories.
+      Such transactions include counts, comparison of actual vs expected, and reconsiliation.
+    Till - transaction that record movement of tills and their assignments.
+      Insertion of till into workstation, assigning till to an operator, etc.
+    Inventory - transactions that record movement of inventory.
+      Such transactions include receiving, shipments, return-to-vendor, etc.
+      Inventory transactions also include inventory adjustments and cycle counts.
+    Document - transactions that record activities with different types
+      of documents (receipts, invoices, statements, etc.).
+    CustomerService - transactions that record activities to satisfy customer requests.
+      For example, it could be balance inquiry.
+    Custom - custom transaction that are not covered by any of the well-know types.
+      If a custom transaction type is specified then customTransactionType should be set.
+    Application - transactions that include application control activities.
+      Such activities include application Launch, Terminanate, etc.
+    Fiscal - transactions that record communications with fiscal "device".
+      Such communications might include data sync and other exchanges of
+      information that happen outside the context of retail, tender control
+      or other transaction types that might include fiscal activities.
+    Business - transactions that included business control activities.
+      Such activities SOD/EOD, Open/Close register, etc.
+    NoSale - transactions that capture openning of a cash drawer by an Operator
+      outside of the context of Retail or Tender Control transactions. It typically
+      happens when a customer asks to exchange banknotes with different denomiantions.
+
+  type: string
+  enum:
+    - Retail
+    - Operator
+    - Financial
+    - Tender
+    - TenderSettlement
+    - Till
+    - Inventory
+    - Document
+    - CustomerService
+    - Custom
+    - Application
+    - Business
+    - Fiscal
+    - NoSale
+
+TransactionStageCodeEnum:
+  description: |
+    Classification of transaction as stage of the business process.
+    Initial - transaction that is designated as the first in some business
+      process.  For example, initial tender loan (SafeToTill) transaction
+      puts initial float into the till usually after SOD.
+    Final - transaction that is designated as the last in some business
+      process.  For example, final settlement transaction counts all the
+      tenders usually around EOD.
+    Intermediate - transaction that are neither Initial nor Final.
+      They typically take place in the middle of the business day.
+      For example, intermediate till count can be perfomed
+      in the middle of the day. Vast majority of transactions belong to
+      this stage.
+  type: string
+  enum:
+    - Initial
+    - Intermediate
+    - Final
+    - Unknown

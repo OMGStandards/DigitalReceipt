@@ -1,0 +1,30 @@
+Void:
+  description: |
+    A Controlled Operation that performs voiding action.
+    The Void can cancel an operation in progress (VoidInProgress) or
+    it can reverse a previously completed operation (PostVoid).
+  type: object
+  properties:
+    originalTransaction:
+      description: |
+        Link to the Transaction associated with voiding operation.
+        It could link to the whole Transacion or a particular Line Item.
+      $ref: "common.yaml#/TransactionLink"
+    controlledOperation:
+      description: |
+        Additional control information about Void.
+      $ref: "common.yaml#/ControlledOperation"
+    forcedFlag:
+      description: |
+        Flag that indicated that Voiding was forced by the system.
+        Typically void operation is originated from associate request.
+      type: boolean
+      default: false
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  additionalProperties: false
+

@@ -1,0 +1,219 @@
+PostalAddress:
+  description: |
+    A postal address data structure.
+  type: object
+  properties:
+    typeCode:
+      description: |
+        A code to denote type of the Address such as (primary, billing,
+        shipping, etc.).
+      type: string
+    addressLine1:
+      description: |
+        Line 1 of the Address (typically, number and street name).
+      type: string
+    addressLine2:
+      description: |
+        Line 2 of the Address, for additional information.
+      type: string
+    addressLine3:
+      description: |
+        Line 3 of the Address, for additional information.
+      type: string
+    addressLine4:
+      description: |
+        Line 4 of the Address, for additional information.
+      type: string
+    city:
+      description: |
+        Address city or town.
+      type: string
+    firstAdminDivision:
+      description: |
+        Largest administrative division of a country.
+        A subnational entity, constituent unit, or country subdivision,
+        is a portion of a country or other region delineated for the
+        purpose of administration, such as a state, province, territory, etc.
+      type: string
+    firstAdminDivisionType:
+      description: |
+        A type of Administrative Division such as (state, province, region,
+        republic, territory, etc.)
+      $ref: "#/AdministrativeDivisionTypeEnum"
+    secondAdminDivision:
+      description: |
+        Largest administrative division of a country.
+        A subnational entity, constituent unit, or country subdivision,
+        is a portion of a country or other region delineated for the
+        purpose of administration, such as a state, province, territory, etc.
+      type: string
+    secondAdminDivisionType:
+      description: |
+        Second level administrative division or subdivision.
+        A smaller type of  Administrative Division such as (county, district,
+        municipalities, etc.)
+      $ref: "#/AdministrativeDivisionTypeEnum"
+    postalCode:
+      description: |
+        A series of letters and/or digits, sometimes including spaces
+        and punctuation, that are included into Address for the purpose
+        of sorting mail (postcode, zip, eircode, etc.).
+      type: string
+    countryCode:
+      description: |
+        A short alphabetic geographical code developed to represent
+        countries. It could be two-letter (ISO 3166-1) or three-letter
+        (ISO 31661-1)
+      type: string
+    countryName:
+      description: |
+        Name of the country.
+      type: string
+  additionalProperties: false
+
+PostalAddressCollection:
+  description: |
+    Collection of postal addresses.
+  type: array
+  items:
+    $ref: "#/PostalAddress"
+
+AdministrativeDivisionTypeEnum:
+  description: |
+    Types of administrative divisions.
+  type: string
+  enum:
+    - Area
+    - County
+    - District
+    - Division
+    - Oblast
+    - Parish
+    - Prefecture
+    - Province
+    - Region
+    - Republic
+    - State
+    - Territory
+    - Unknown
+
+CountryCode:
+  description: |
+    Country code in one of ISO-3166-1 standard representations.
+    Alpha3 is a preferred option since it provides the best
+    balance between readability and compactness.
+  type: object
+  properties:
+    alpha2:
+      description: |
+        Two-letter ISO-3166-1 country codes.
+        They are also used to create the ISO 3166-2 country subdivision codes
+        and the Internet country code top-level domains.
+        They are the most concise representation in 3166-1 standard, and hence
+        may be useful for systems communicating a lot of country codes in messages.
+      type: string
+    alpha3:
+      description: |
+        Three-letter ISO-3166-1 country codes.
+        They may allow a better visual association between the codes and the
+        country names than the 3166-1 alpha-2 codes
+      type: string
+    numeric:
+      description: |
+        Three-digit ISO-3166-1 country codes.
+        They are identical to those developed and maintained by the United Nations
+        Statistics Division, with the advantage of script (writing system)
+        independence, and hence useful for systems using non-Latin scripts.
+      type: string
+  additionalProperties: false
+
+Telephone:
+  description: |
+    A set of values the represent telephone numbers.
+  type: object
+  properties:
+    phoneNumber:
+      description: |
+        Telephone number presented as a single string, as most appropriate
+        for retailer. Can be E.123 format or local.
+      type: string
+    countryCode:
+      description: |
+        The country or region code that contains one to three digits from
+        0 to 9.
+      type: string
+    areaCode:
+      description: |
+        The area or city code for the telephone number. It may contain one
+        or more digits from 0 through 9. This part of telephone number is
+        optional depending on the country/region.
+      type: string
+    subscriberNumber:
+      description: |
+        The subscriber number contains one or more digits from 0 to 9,
+        formatting character, or the dialing control characters:
+        A a B b C c D d P p T t W w * ! @ $ ? and hashtag.
+      type: string
+    extension:
+      description: |
+        Number used to reach a telephone connected to a private branch
+        exchange (PBX) or Centrex system.
+      type: string
+    typeCode:
+      description: |
+        A code to denote the type of the Phone Number (home, work,
+        mobile, etc.).
+      type: string
+    callOptIn:
+      description: |
+        Customer opt-in associated with calling this telephone number.
+      $ref: "#/CustomerOptIn"
+    textOptIn:
+      description: |
+        Customer opt-in associated with texting to this telephone number.
+      $ref: "#/CustomerOptIn"
+  required:
+    - phoneNumber
+  additionalProperties: false
+
+TelephoneCollection:
+  description: |
+    Collection of telephone numbers.
+  type: array
+  items:
+    $ref: "#/Telephone"
+
+Email:
+  description: |
+    A set of values the represent an e-mail address.
+  type: object
+  properties:
+    address:
+      description: |
+        Email address.
+      type: string
+    typeCode:
+      description: |
+        A code to denote the type of the email (personal, work, etc.).
+      type: string
+    certifiedFlag:
+      description: |
+        Flag that indicates that email is certified.
+        Certified email is a special type  of email that is meant to provide
+        a legal equivalent of the traditional registered mail.
+      type: boolean
+      default: false
+    optIn:
+      description: |
+        Customer opt-in associated with sending emails to this address.
+      $ref: "#/CustomerOptIn"
+  required:
+    - address
+  additionalProperties: false
+
+EmailCollection:
+  description: |
+    Collection of email addresses.
+  type: array
+  items:
+    $ref: "#/Email"

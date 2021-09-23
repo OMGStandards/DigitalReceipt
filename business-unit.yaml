@@ -1,0 +1,59 @@
+BusinessUnit:
+  description: |
+    A logical segment of retail organization where business is conducted.
+    This logical segement represents a certain business function
+    such as retail store, distribution center, call center
+    administration center, eCommerce site, etc.
+  type: object
+  properties:
+    businessUnitID:
+      description: |
+        A global unique identifier for the Business Unit.
+      type: string
+    typeCode:
+      description: |
+        A code to designate the type of the Business Unit.
+      $ref: "#/BusinessUnitTypeCodeEnum"
+    name:
+      description: |
+        The name of the Business Unit.
+      type: string
+    businessUnitNumber:
+      description: |
+        A unique value assigned to a certain type of Business Unit.
+        It is guarantees to be unique only within that business unit type.
+        For example, all stores have unique number but there could be store
+        number 10 and distribution center number 10.
+      type: integer
+      format: int32
+    governmentIssuedIDs:
+      description: |
+        A collection of identifiers issued be a government agency to Business Unit.
+        It is usually used as tax payer idendifier.
+      $ref: "common.yaml#/GovernmentBusinessIDCollection"
+    address:
+      description: |
+        Business unit address.
+      $ref: "address.yaml#/PostalAddress"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSet where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  required:
+    - typeCode
+  additionalProperties: false
+
+BusinessUnitTypeCodeEnum:
+  description: |
+    Defines the type of business unit.
+  type: string
+  enum:
+    - Store
+    - DistCenter
+    - eComm
+    - CallCenter
+    - AdminCenter
+    - Unknown
+
