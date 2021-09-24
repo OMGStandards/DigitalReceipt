@@ -245,12 +245,6 @@ TenderOutLineItem:
       description: |
         Type of tender out.
       $ref: "#/TenderOutTypeEnum"
-    tenderInLinks:
-      description: |
-        Links to tenderIn line items associated with this tenderOut.
-        For example, it could be a payment tenderIn that is being
-        refunded by this tenderOut.
-      $ref: "common.yaml#/LineItemValueLinkCollection"
     controlledOperation:
       description: |
         Additional control information about tender out.

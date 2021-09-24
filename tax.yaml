@@ -183,28 +183,28 @@ TaxOverride:
       $ref: "common.yaml#/ControlledOperation"
   additionalProperties: false
 
-  TaxAuthority:
-    description: |
-      A government entity that is authorized by law to assess, levy and |
-      collect Taxes. A Tax Authority administers Taxes for one or more |
-      Tax Jurisdictions.
-    type: object
-    properties:
-      taxAuthorityID:
-        description: |
-          A global unique identifier for the Tax Authority.
-        type: string
-      name:
-        description: |
-          Name of the Tax Authority.
-        type: string
-      description:
-        description: |
-          Description of the Tax Authority.
-        type: string
-      taxCode:
-        description: |
-          A short code associated with Tax Authority that can be used
-          on a receipt to display collected taxes.
-        type: string
-    additionalProperties: false
+TaxAuthority:
+  description: |
+    A government entity that is authorized by law to assess, levy and |
+    collect Taxes. A Tax Authority administers Taxes for one or more |
+    Tax Jurisdictions.
+  type: object
+  properties:
+    taxAuthorityID:
+      description: |
+        A global unique identifier for the Tax Authority.
+      type: string
+    name:
+      description: |
+        Name of the Tax Authority.
+      type: string
+    description:
+      description: |
+        Description of the Tax Authority.
+      type: string
+    taxCode:
+      description: |
+        A short code associated with Tax Authority that can be used
+        on a receipt to display collected taxes.
+      type: string
+  additionalProperties: false

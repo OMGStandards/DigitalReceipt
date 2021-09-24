@@ -16,13 +16,13 @@ Employee:
     name:
       description: |
         Name of the Employee.
-      $ref: "#/PersonName"
+      $ref: "#common.yaml/PersonName"
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.
         This property is an array of DataSet where each DataSet is a
         named collection of name-value pairs.
-      $ref: "#/ExtensibilityData"
+      $ref: "common.yaml#/ExtensibilityData"
   additionalProperties: false
 
 Operator:
@@ -47,7 +47,7 @@ Operator:
         Data that provides extensibility to the defined data structure.
         This property is an array of DataSet where each DataSet is a
         named collection of name-value pairs.
-      $ref: "#/ExtensibilityData"
+      $ref: "common.yaml#/ExtensibilityData"
   additionalProperties: false
 
 Associate:
@@ -117,11 +117,11 @@ Commission:
     amount:
       description: |
         The amount of the commission.
-      $ref: "#/MonetaryAmount"
+      $ref: "common.yaml#/MonetaryAmount"
     percent:
       description: |
         Percent value of the commission.
-      $ref: "#/DecimalString"
+      $ref: "common.yaml#/DecimalString"
   additionalProperties: false
 
 CommissionCollection:

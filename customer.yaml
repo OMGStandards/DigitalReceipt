@@ -47,15 +47,15 @@ Customer:
     addresses:
       description: |
         Collection of addresses associated with the Customer.
-      $ref: "common.yaml#/PostalAddressCollection"
+      $ref: "address.yaml#/PostalAddressCollection"
     telephoneNumbers:
       description: |
         Collection of Customer's telephone numbers.
-      $ref: "common.yaml#/TelephoneCollection"
+      $ref: "address.yaml#/TelephoneCollection"
     emailAddresses:
       description: |
         Collection of Customer's email addresses.
-      $ref: "common.yaml#/EmailCollection"
+      $ref: "address.yaml#/EmailCollection"
     governmentIdentifications:
       description: |
         Collection of Customer's identifications.

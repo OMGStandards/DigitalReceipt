@@ -32,6 +32,16 @@ PersonName:
       type: string
   additionalProperties: false
 
+GenderEnum:
+  description: |
+    List of genders.
+  type: string
+  enum:
+    - Female
+    - Male
+    - Other
+    - Unknown
+
 GovernmentBusinessID:
   description: |
     An identification issued by a government agency to a business.
@@ -517,7 +527,7 @@ Approval:
       description: |
         The operator who approved an action performed by another operator.
         The approving operator must have the authority to approve the action.
-      $ref: "#/Associate"
+      $ref: "associate.yaml#/Associate"
     dateTime:
       description: |
         Date and time the Approval took place.
@@ -588,10 +598,6 @@ ControlledOperation:
         Date and time Control Operation happened.
       type: string
       format: date-time
-    electronicJournalLinks:
-      description: |
-        Links to the related electronic journal entries.
-      $ref: "#/ElectronicJournalEntryLinkCollection"
     comment:
       description: |
         Comment associated with the Controlled Operation.
@@ -606,25 +612,51 @@ ControlledOperation:
       $ref: "#/ExtensibilityData"
     additionalProperties: false
 
-  HypermediaLink:
-    type: object
-    properties:
-      rel:
-        type: string
-      href:
-        type: string
-      method:
-        type: string
-      desc:
-        type: string
-    required:
-      - rel
-      - href
-    additionalProperties: false
+EntryMethodCodeEnum:
+  description: |
+    Defines different methods the data can be entered into the system.
+  type: string
+  enum:
+    - Keyboard
+    - BarcodeScanner
+    - MSR
+    - Scale
+    - MICR
+    - CheckScanner
+    - RFID
+    - Chip
+    - PINpad
+    - CashAcceptor
+    - BumpBar
+    - Biometrics
+    - Voice
+    - SigCap
+    - OCR
+    - Mobile
+    - Unknown
+    - Custom
 
-  HypermediaLinkCollection:
-    description: |
-      Collection of hypermedia.
-    type: array
-    items:
-      $ref: "#/HypermediaLink"
+HypermediaLink:
+  description: |
+    Hypermedia link.
+  type: object
+  properties:
+    rel:
+      type: string
+    href:
+      type: string
+    method:
+      type: string
+    desc:
+      type: string
+  required:
+    - rel
+    - href
+  additionalProperties: false
+
+HypermediaLinkCollection:
+  description: |
+    Collection of hypermedia links.
+  type: array
+  items:
+    $ref: "#/HypermediaLink"

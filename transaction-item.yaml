@@ -118,7 +118,7 @@ TransactionItem:
       description: |
         Manual adjustment of the regular unit price.
         This process is used if item lookup fails or item price is incorrect.
-      $ref: "amountmodifier.yaml.yaml#/PriceOverride"
+      $ref: "amountmodifier.yaml#/PriceOverride"
     manuallyEnteredPriceFlag:
       description: |
         Flag that indicates that item price was entered manually.
@@ -277,7 +277,7 @@ MerchandiseHierarchyNode:
     level:
       description: |
         The level of merchindise hierarchy to which the node belongs.
-      $ref: "common.yaml#/HierarchyLevelEnum"
+      $ref: "#/HierarchyLevelEnum"
     customLevel:
       description: |
         Custom level of merchandise hierarchy.
@@ -309,6 +309,22 @@ MerchandiseHierarchyNode:
   required:
     - level
   additionalProperties: false
+
+HierarchyLevelEnum: 
+  description: |
+    List of well-known Levels of merchandise hierarchy.
+  type: string
+  enum:
+    - Division
+    - DepartmentGroup
+    - Department
+    - SubDepartment
+    - Category
+    - SubCategory
+    - Class
+    - SubClass
+    - Style
+    - Custom
 
 ItemGroup:
   description: |

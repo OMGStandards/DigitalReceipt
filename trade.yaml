@@ -29,26 +29,6 @@ Trade:
         This is unique per business unit, meaningful number.
       type: integer
       format: int32
-    tillAccountabilityMode:
-      description: |
-        Till accountability mode.
-      $ref: "common.yaml#/TenderRepositoryAccountabilityModeEnum"
-    cashDrawerID:
-      description: |
-        Cash drawer identifier captured as part of retail transaction
-      type: string
-    cashDrawerEntryMethod:
-      description: |
-        Method used to enter cashdrawer code.
-      $ref: "common.yaml#/CodeEntryMethodEnum"
-    cashDrawerAccessMode:
-      description: |
-        Cash drawer access mode.
-      $ref: "common.yaml#/CashDrawerAccessModeEnum"
-    cashLimitOverride:
-      description: |
-        Override of soft maximum cash amount allowed per Transaction.
-      $ref: "common.yaml#/LimitOverride"
     postVoidingFlag:
       description: |
         A flag denoting that Trade voids another transaction's Trade.

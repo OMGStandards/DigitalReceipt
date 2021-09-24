@@ -89,7 +89,7 @@ AmountModificationTrigger:
     rewardCoupon:
       description: |
         Reward Coupon that was part of the amount modification trigger.
-      $ref: "rewardcoupon.yaml#/RewardCoupon"
+      $ref: "reward-coupon.yaml#/RewardCoupon"
   additionalProperties: false
 
 AmountModificationTriggerTypeEnum:

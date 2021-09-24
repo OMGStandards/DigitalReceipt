@@ -42,7 +42,7 @@ DigitalReceipt:
     businessUnit:
       description: |
         A place of business where retailer conducts retail operations.
-        Trasactions are performed within a certain business unit such as
+        Transactions are performed within a certain business unit such as
         RetailStore, DistributionCenter or AdministrationCenter.
       $ref: "business-unit.yaml#/BusinessUnit"
     clientDeviceID:
@@ -54,13 +54,11 @@ DigitalReceipt:
     workstationID:
       description: |
         A unique identifier for workstation.
-      type: integer
-      format: string
+      type: string
     fiscalWorkstationID:
       description: |
         Workstation ID in a special format or issued by a fiscal authority.
-      type: integer
-      format: string
+      type: string
     workstationNumber:
       description: |
         A unique within BusinessUnit meaningful number for workstation.
@@ -106,7 +104,7 @@ DigitalReceipt:
     performingAssociate:
       description: |
         The Associate who performed the Transaction.
-      $ref: "common.yaml#/Associate"
+      $ref: "associate.yaml#/Associate"
     currencyCode:
       description: |
         Currency code that is used by monetary values within transaction.
