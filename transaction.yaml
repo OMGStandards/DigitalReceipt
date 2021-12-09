@@ -44,7 +44,7 @@ DigitalReceipt:
         A place of business where retailer conducts retail operations.
         Transactions are performed within a certain business unit such as
         RetailStore, DistributionCenter or AdministrationCenter.
-      $ref: "business-unit.yaml#/BusinessUnit"
+      $ref: "business-unit.yaml#/RetailBusinessUnit"
     clientDeviceID:
       description: |
         A unique identifier of a client device.

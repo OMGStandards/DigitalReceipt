@@ -16,7 +16,7 @@ Employee:
     name:
       description: |
         Name of the Employee.
-      $ref: "#common.yaml/PersonName"
+      $ref: "common.yaml#/PersonName"
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.
@@ -27,11 +27,7 @@ Employee:
 
 Operator:
   description: |
-    An operator implies person's ability to access computer system.
-    Operators can be granted rights to perform different activities
-    using computer systems such as creation of transactions, customer
-    service, merchandising, etc. Operator data and their actions can
-    be captured for audit and reporting purposes.
+    An individual or organization that operates a system, equipment or a machines.
   type: object
   properties:
     operatorID:

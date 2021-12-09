@@ -1,6 +1,6 @@
 PersonName:
   description: |
-    A set of words by which a person is known, addressed or referred to.
+    A designation by which someone is known in some context
   type: object
   properties:
     firstName:
@@ -314,7 +314,7 @@ TransactionLink:
       description: |
         Retailer's business unit such as RetailStore, DistributionCenter
         or AdministrationCenter that given Transaction is allocated to.
-      $ref: "business-unit.yaml#/BusinessUnit"
+      $ref: "business-unit.yaml#/RetailBusinessUnit"
     tenantID:
       description: |
         A globally unique identifier for a tenant that represents a certain
@@ -610,7 +610,7 @@ ControlledOperation:
         This property is an array of DataSet where each DataSet is a
         named collection of name-value pairs.
       $ref: "#/ExtensibilityData"
-    additionalProperties: false
+  additionalProperties: false
 
 EntryMethodCodeEnum:
   description: |
@@ -638,7 +638,7 @@ EntryMethodCodeEnum:
 
 HypermediaLink:
   description: |
-    Hypermedia link.
+    A hypermedia link.
   type: object
   properties:
     rel:

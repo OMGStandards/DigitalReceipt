@@ -1,6 +1,8 @@
 Tax:
   description: |
-    Data about taxes collected as part of the Transaction.
+    A compulsory monetary contribution to the state's revenue, assessed and imposed 
+    by a government on the activities, enjoyment, expenditure, income, occupation, 
+    privilege, property, etc., of individuals and organizations.
   type: object
   properties:
     taxAuthority:
@@ -185,9 +187,8 @@ TaxOverride:
 
 TaxAuthority:
   description: |
-    A government entity that is authorized by law to assess, levy and |
-    collect Taxes. A Tax Authority administers Taxes for one or more |
-    Tax Jurisdictions.
+    Any Governmental Authority having jurisdiction over the assessment, 
+    determination, collection, or imposition of any Tax.
   type: object
   properties:
     taxAuthorityID:

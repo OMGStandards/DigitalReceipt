@@ -1,6 +1,7 @@
 PostalAddress:
   description: |
-    A postal address data structure.
+    A physical address used by delivery services to deliver mail, packages or 
+    other physical goods and correspondence.
   type: object
   properties:
     typeCode:
@@ -42,7 +43,8 @@ PostalAddress:
       $ref: "#/AdministrativeDivisionTypeEnum"
     secondAdminDivision:
       description: |
-        Largest administrative division of a country.
+        A second level administrative division of a country or a secondary division 
+        of a first level adiminstrative division.
         A subnational entity, constituent unit, or country subdivision,
         is a portion of a country or other region delineated for the
         purpose of administration, such as a state, province, territory, etc.
@@ -127,9 +129,13 @@ CountryCode:
       type: string
   additionalProperties: false
 
-Telephone:
+TelephoneNumber:
   description: |
-    A set of values the represent telephone numbers.
+    A virtual address that may be assigned to a fixed-line telephone subscriber station 
+    connected to a telephone line or to a wireless electronic telephony device, such as 
+    a radio telephone or a mobile telephone, or to other devices or services for data 
+    transmission via the public switched telephone network (PSTN) or other public and 
+    private networks.
   type: object
   properties:
     phoneNumber:
@@ -167,25 +173,27 @@ Telephone:
     callOptIn:
       description: |
         Customer opt-in associated with calling this telephone number.
-      $ref: "#/CustomerOptIn"
+      $ref: "customer.yaml#/CustomerOptIn"
     textOptIn:
       description: |
         Customer opt-in associated with texting to this telephone number.
-      $ref: "#/CustomerOptIn"
+      $ref: "customer.yaml#/CustomerOptIn"
   required:
     - phoneNumber
   additionalProperties: false
 
-TelephoneCollection:
+TelephoneNumberCollection:
   description: |
     Collection of telephone numbers.
   type: array
   items:
-    $ref: "#/Telephone"
+    $ref: "#/TelephoneNumber"
 
-Email:
+ElectronicMailAddress:
   description: |
-    A set of values the represent an e-mail address.
+    A virtual address that defines an electronic messaging endpoint to which 
+    email messages can be delivered, typically via a Simple Mail Transfer 
+    Protocol (SMTP) based communications system.
   type: object
   properties:
     address:
@@ -206,14 +214,14 @@ Email:
     optIn:
       description: |
         Customer opt-in associated with sending emails to this address.
-      $ref: "#/CustomerOptIn"
+      $ref: "customer.yaml#/CustomerOptIn"
   required:
     - address
   additionalProperties: false
 
-EmailCollection:
+ElectronicMailAddressCollection:
   description: |
     Collection of email addresses.
   type: array
   items:
-    $ref: "#/Email"
+    $ref: "#/ElectronicMailAddress"

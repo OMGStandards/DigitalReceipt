@@ -105,8 +105,8 @@ AmountModificationTriggerTypeEnum:
 
 AmountModifier:
   description: |
-    Data about Line Item and Transaction amounts modifications that took
-    place within the Transaction.
+    An adjustment that is applied to a monetary amount, expressed as either a 
+    percentage of the monetary amount or a flat amount that is added or subtracted.
   type: object
   properties:
     amount:

@@ -1,4 +1,4 @@
-BusinessUnit:
+RetailBusinessUnit:
   description: |
     A logical segment of retail organization where business is conducted.
     This logical segement represents a certain business function

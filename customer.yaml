@@ -1,7 +1,7 @@
 Customer:
   description: |
-    A company or individual who purchases, may purchase, or did purchase |
-    goods and/or servicies from retailer.
+    One who purchases or receives a good, service or right from a business 
+    or merchant, or intends to do so.
   type: object
   properties:
     customerID:
@@ -51,16 +51,16 @@ Customer:
     telephoneNumbers:
       description: |
         Collection of Customer's telephone numbers.
-      $ref: "address.yaml#/TelephoneCollection"
+      $ref: "address.yaml#/TelephoneNumberCollection"
     emailAddresses:
       description: |
         Collection of Customer's email addresses.
-      $ref: "address.yaml#/EmailCollection"
+      $ref: "address.yaml#/ElectronicMailAddressCollection"
     governmentIdentifications:
       description: |
         Collection of Customer's identifications.
       $ref: "common.yaml#/GovernmentIdentificationCollection"
-    companyName:
+    employerName:
       description: |
         Name of the company the Customer works for.
       type: string
@@ -93,6 +93,41 @@ CustomerActionCodeEnum:
     - Updated
     - Deleted
     - None
+    - Unknown
+
+CustomerOptIn:
+  description: |
+    Express consent given by a customer to the retailer.
+    This consent acknowledges customer's permission or interest to participate
+    in an activity performed by the retailer or an affiliated third party.
+  type: object
+  properties:
+    optInValue:
+      description: |
+        Value of the customer opt-in.
+        The most common values are Yes and No but there could be custom values
+        that specifie a degree of the opt-in, for example, OnlyMonthly.
+      $ref: "#/CustomerOptInValueEnum"
+    optInCustomValue:
+      description: |
+        Custom value of the customer opt-in.
+        This property can be set only if optInValue is set to Custom.
+      type: string
+    optInChangeDateTime:
+      description: |
+        The date and time consent value was set or changed.
+      type: string
+      format: date-time
+  additionalProperties: false
+
+CustomerOptInValueEnum:
+  description: |
+    Defines possible customer opt-in values.
+  type: string
+  enum:
+    - Yes
+    - No
+    - Custom
     - Unknown
 
 CustomerTypeCodeEnum:
