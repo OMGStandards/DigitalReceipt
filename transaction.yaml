@@ -65,6 +65,11 @@ DigitalReceipt:
         It is an integer value such as register number.
       type: integer
       format: int32
+    businessDayID:
+      description: |
+        Unique identifier for business date.
+        Some systems may use date identifiers instead of calendar dates.
+      type: string
     businessDayDate:
       description: |
         System date that Transaction is assigned to.

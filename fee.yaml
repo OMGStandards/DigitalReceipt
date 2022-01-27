@@ -33,6 +33,10 @@ Fee:
       description: |
         Type of fee collected as part of the Transaction.
       $ref: "#/FeeTypeEnum"
+    customFeeType:
+      description: |
+        Custom fee type when feeType is set to Custom.
+      type: string
     description:
       description: |
         A description of the Fee.
@@ -58,8 +62,8 @@ Fee:
       description: |
         Merchandise hierarchy nodes associated with the Fee.
         Even though Fees are not considered to be merchandise
-        they may still be associated wiht nodes from merchandise
-        heirarchy, for example, departements
+        they may still be associated with nodes from merchandise
+        hierarchy, for example, departments
       $ref: "transaction-item.yaml#/MerchandiseHierarchy"
     extendedNetAmount:
       description: |
@@ -84,10 +88,24 @@ FeeTypeEnum:
   description: |
     Defines the type of fee.
     Bag - fee charged by a retailer for use of plastic bags to reduce
-      their prevalance.
-    Shipping - fee for the shipment of items to the customer
+      their prevalence.
+    Shipping - fee for the shipment of items to the customer. Depending on
+      jurisdiction this fee might be treated as non-merchandise service item.
+    Bottle - fee paid by customers when purchasing a beverage and reimbursed
+      when the empty container is returned. Deposit amounts vary by jurisdiction
+      and may depend on the type of beverage and size of the container.
+    Restocking - fee charged to a customer when merchandise is returned
+      for a refund.
+    Cancellation - fee charged to a customer who has cancelled previously
+      placed order that included cancellation penalty provisions.
+      Such fees might be imposed on special orders on customized merchandise
+      that will be difficult to sell once such order is cancelled.
   type: string
   enum:
     - Bag
     - Shipping
+    - Bottle
+    - Restocking
+    - Cancellation 
+    - Custom
     - Unknown
