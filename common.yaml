@@ -384,6 +384,10 @@ TransactionLink:
         the place of transaction and UTC.
       type: integer
       format: int32
+    extensibilityData:
+      description: |
+        Extensibility data of the transaction link.
+      $ref: "#/ExtensibilityData"
   additionalProperties: false
 
 ExtensibilityData:
@@ -419,6 +423,12 @@ ExtensibilityDataSet:
   required:
     - extensibilityProperties
   additionalProperties: false
+
+StringCollection:
+  description: |
+    Collection of strings.
+  type: array
+  items: string
 
 NameValuePairCollection:
   description: |
@@ -480,6 +490,88 @@ DecimalString:
   type: string
   additionalProperties: false
 
+Image:
+  description: |
+    Image data.
+  type: object
+  properties:
+    format:
+      $ref: "#/ImageFormatEnum"
+    imageUrl:
+      type: string
+    primaryImageFlag:
+      type: boolean
+    imageWidth:
+      type: integer
+      format: int32
+    imageHeight:
+      type: integer
+      format: int32
+    data:
+      type: string
+  additionalProperties: false
+  required:
+    - format
+
+ImageFormatEnum:
+  description: |
+    Enumeration of different common image formats.
+    JPEG - (Joint Photographic Experts Group) is the common format
+      for photos. Its lossy compression algorithm is suited for
+      squeezing photos to small files.
+    GIF - (Graphics Interchange Format) is an old low-color image
+      format, common on the web. It is suitable for simple graphics
+      such as drawings, logos and icons. A GIF can be animated.
+    PNG - (Portable Network Graphics) is another common web format.
+      Especially suitable for web use are its compression ratio
+      (except for photos) and transparency features.
+    TIFF - (Tagged Image File Format) is a versatile image format.
+      It has the ability to store multiple images, such as the
+      pages of a scanned or faxed document.
+    Unknown - Unknown image format
+  type: string
+  enum:
+    - JPEG
+    - GIF
+    - PNG
+    - BMP
+    - TIFF
+    - Unknown
+
+Markup:
+  description: |
+    Data represented in a form of a  markup language.
+  type: object
+  properties:
+    format:
+      description: |
+        Type of the markup language
+      $ref: "#/MarkupLanguageEnum"
+    url:
+      description: |
+        Web address that represent a reference to markup document.
+      type: string
+    data:
+      description: |
+        Data that represents markup document.
+      type: string
+  additionalProperties: false
+  required:
+    - format
+
+MarkupLanguageEnum:
+  description: |
+    Enumeration of different markup languages.
+    HTML - Standard markup language designed for documents to be
+      viewed in a web browser.
+    XML - Standard markup language designed to represent data in
+      a structured format that is both human and machine readable.
+  type: string
+  enum:
+    - HTML
+    - XML
+    - Unknown
+
 MonetaryAmount:
   description: |
     Money represents an amount of a specific currency.
@@ -517,6 +609,72 @@ MeasuredQuantity:
     - value
     - unitOfMeasure
   additionalProperties: false
+
+Barcode:
+  description: |
+    A method of representing data in a visual, machine-readable form.
+    Initially, barcodes represented data by varying the widths and spacings
+    of parallel lines (1D barcodes). They are read by special devices like
+    called barcode scanners. 
+    Later, two-dimensional (2D) variants were developed that using rectangles,
+    dots, hexagons and other patterns.  They are read by optical scanners,
+    which exist in a few different forms. 2D barcodes can also be read by a
+    digital camera connected to a microcomputer running software that takes
+    a photographic image, such as camera of a mobile device.
+    Optical scanners and digital cameras can also read 1D barcodes.
+  type: object
+  properties:
+    symbology:
+      description: |
+        Barcode symbology.
+      $ref: "#/BarcodeSymbologyEnum"
+    rawData:
+      description: |
+        Raw barcode data.
+      type: string
+    parsedData:
+      description: |
+        Data elements parsed from raw barcode data.
+      $ref: "#/NameValuePairCollection"
+  additionalProperties: false
+
+BarcodeSymbologyEnum:
+  description: |
+    The mapping between data and barcodes is called a symbology.
+    The specification of a symbology includes the encoding of the message
+    into bars and spaces, any required start and stop markers, the size of
+    the quiet zone required to be before and after the barcode, and the
+    computation of a checksum. This enumeration contains the list of
+    most common symbologies used in retail.
+    Code39 - A variable length symbology used to label goods across many
+      industries.
+    Code128 - A high density symbology commonly used for ordering and
+      distribution.
+    UPC - Universal Product Code is a symbology used to track trade items.
+    EAN - European Article Number is a symbology used to track trade items.
+    DataBar - A symbology that is commonly used for coupons.
+    ITF - Interleaved 2 of 5 is commonly used on cartons.
+    DataMatrix - A two-dimensional symbology used to label, items and documents.
+    QRCode - A two-dimensional symbology used for tracking, marketing and items.
+    Unknown - Unknown type of lookup code
+  type: string
+  enum:
+    - Code39
+    - Code128
+    - UPC
+    - EAN
+    - DataBar
+    - ITF
+    - DataMatrix
+    - QRCode
+    - Unknown
+
+BarcodeCollection:
+  description: |
+    Collection of barcodes.
+  type: array
+  items:
+    $ref: "#/Barcode"
 
 Approval:
   description: |

@@ -132,6 +132,11 @@ DigitalReceipt:
       description: |
         Reward Coupons that are part of the Transaction.
       $ref: "reward-coupon.yaml#/RewardCouponCollection"
+    documents:
+      description: |
+        Collection of documents (recepts, invoices, etc.) associated with
+        the Transaction.
+      $ref: "document.yaml#/TransactionDocumentCollection"
     application:
       description: |
         Application that was used to create the Transaction.

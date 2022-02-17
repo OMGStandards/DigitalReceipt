@@ -1,0 +1,174 @@
+TransactionDocument:
+  description: |
+    Document that is associate with the transaction.
+    It could be a receipt created as confirmation of the transactional
+    exchange.
+  type: object
+  properties:
+    documentID:
+      description: |
+        A unique Document identifier.  This identifier is typically created |
+        within transaction.
+      type: string
+    alternativeDocumentID:
+      description: |
+        A unique identifier of the document that was provided by some other |
+        system.
+      type: string
+    sequenceNumber:
+      description: |
+        A sequential number of the Document within the Transaction.
+        It is similar to line item number within Trade and can be used to
+        reference the document.
+      type: integer
+      format: int32
+    documentNumber:
+      description: |
+        A meaningful alphanumeric value associated with the document
+        such as invoice number.
+      type: string
+    typeCode:
+      description: |
+        A code to designate the type of the Document (receipt, invoice, etc.).
+      $ref: "#/DocumentTypeCodeEnum"
+    customTypeCode:
+      description: |
+        A custom code to designate the type of the Document.
+        This property is used if typeCode is set to Custom.
+      type: string
+    businessDayDate:
+      description: |
+        System date that associated with the document.
+        It can be different from transaction business date or current
+        calendar date.
+      type: string
+      format: date
+    documentSource:
+      description: |
+        Source of the document.
+        Transaction document can be produced by different systems. This
+        property specifies the type of the system that produced the
+        document. For example, the document could be produced by fiscal
+        device, a third party service or come from another transaction.
+      $ref: "#/DocumentSourceEnum"
+    documentTarget:
+      description: |
+        Target of the document.
+        Transaction document can be produced for different entities. This
+        property specifies the type of the entity the document is produced for.
+        For example, the document could be produced for customer, store or
+        some kind of a government agency.
+      $ref: "#/DocumentTargetEnum"
+    fiscalNumber:
+      description: |
+        An alphanumeric value that is assigned to the document during
+        fiscalization process.
+      type: string
+    fiscalID:
+      description: |
+        An identifier of the document assigned and maintained by a fiscalization,
+        sub-system (device, service, etc). It is an ID within fiscal sub-system.
+        Such ID typically has no business meaning but it can be used to retrieve
+        the document.
+      type: string
+    barcodes:
+      description: |
+        Collection of barcodes associated with the document.
+      $ref: "common.yaml#/BarcodeCollection"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+    body:
+      description: |
+        The body of the Document.
+      $ref: "#/DocumentBody"
+    voidedInProcessFlag:
+      description: |
+        A flag that indicates that document was voided in process.
+        It means that document was voided before the transaction was
+        completed.
+      type: boolean
+      default: false
+  additionalProperties: false
+
+DocumentTypeCodeEnum:
+  description: |
+    Type code that indicates the business type of document.
+  type: string
+  enum:
+    - Receipt
+    - Invoice
+    - Statement
+    - Report
+    - TaxFree
+    - DepositSlip
+    - SafeReceipt
+    - Custom
+    - Unknown
+
+DocumentSourceEnum:
+  description: |
+    Type of the system that produced the document.
+  type: string
+  enum:
+    - Fiscal
+    - Service
+    - External
+    - Unknown
+
+DocumentTargetEnum:
+  description: |
+    Organization or a person for whom this document is produced
+  type: string
+  enum:
+    - Store
+    - Customer
+    - Unknown
+
+DocumentBody:
+  description: |
+    Body
+  type: object
+  properties:
+    bodyFormat:
+      description: |
+        Format of the Document's body.
+      $ref: "#/DocumentBodyFormatEnum"
+    text:
+      description: |
+        Body of the document presented as multiline text.
+      type: string
+    bodyLines:
+      description: |
+        Body of the document as array of lines.
+      $ref: "common.yaml#/StringCollection"
+    image:
+      description: |
+        Body of the document presented as an image.
+      $ref: "common.yaml#/Image"
+    markup:
+      description: |
+        Body of the document presented as a markup.
+      $ref: "common.yaml#/Markup"
+  additionalProperties: false
+
+DocumentBodyFormatEnum:
+  description: |
+    Types of supported document body formats.
+  type: string
+  enum:
+    - Text
+    - LineCollection
+    - Image
+    - Markup
+    - Unknown
+
+TransactionDocumentCollection:
+  description: |
+    Collection of transaction documents.
+  type: array
+  items:
+    $ref: "#/TransactionDocument"
