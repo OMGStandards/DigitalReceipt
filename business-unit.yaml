@@ -61,3 +61,44 @@ BusinessUnitTypeCodeEnum:
     - AdminCenter
     - Unknown
 
+LegalEntity:
+  description: |
+    An organization that has legal rights and obligations.
+    Legal entity is registered with the government and can, among other things,
+    own property, engage in business, enter into contracts and pay taxes.
+    Retail legal entity is often represented by its corporate head office.
+  type: object
+  properties:
+    legalEntityID:
+      description: |
+        A global unique identifier for the legal entity.
+      type: string
+    name:
+      description: |
+        The legal name of the Legal Entity.
+        It is name that is used on government forms and official business
+        paperwork.
+      type: string
+    tradeName:
+      description: |
+        The name business uses for advertising and trading purposes.
+        It could be a simplified version of the legal name or pseudonym
+        company uses to conduct business operations.
+        It is the common name the public sees.
+      type: string
+    governmentIssuedIDs:
+      description: |
+        A collection of identifiers issued be a government agency to Legal Entity.
+      $ref: ./GovernmentBusinessIDCollection.v1.yaml
+    address:
+      description: |
+        Business unit address.
+      $ref: ./PostalAddress.v1.yaml
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSet where each DataSet is a
+        named collection of name-value pairs.
+      $ref: ./ExtensibilityData.v1.yaml
+  additionalProperties: false
+

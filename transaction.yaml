@@ -43,6 +43,10 @@ Transaction:
         Transactions are performed within a certain business unit such as
         RetailStore, DistributionCenter or AdministrationCenter.
       $ref: "business-unit.yaml#/RetailBusinessUnit"
+    legalEntity:
+      description: |
+        Legal entity associated with the transaction.
+      $ref: "business-unit.yaml#/LegalEntity"
     clientDeviceID:
       description: |
         A unique identifier of a client device.
