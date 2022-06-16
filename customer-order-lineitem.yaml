@@ -1,0 +1,67 @@
+CustomerOrderLineItem:
+  description: |
+    A line item of the Customer Order.
+    Each Customer Order line item represents an important piece of
+    information about customer order request and agreed terms of
+    the order fulfillment such as prices of ordered items, taxes,
+    customer order level discounts, fees, etc.
+    Sum of the amounts of all order line items is equal to total
+    order amount to be paid by the customer.
+    Order line items do not represent actual movement of items
+    or transfer of ownership.
+  type: object
+  properties:
+    sequenceNumber:
+      description: |
+        A line item sequence number.  It is an identifier of
+        the line item within the Customer Order.
+      type: integer
+      format: int32
+    lineItemType:
+      description: |
+        Type of line item.
+      $ref: "#/CustomerOrderLineItemTypeEnum"
+    beginDateTime:
+      description: |
+        Datetime when line item entry began.
+      type: string
+      format: date-time
+    endDateTime:
+      description: |
+        Datetime when line item entry ended.
+      type: string
+      format: date-time
+    voidedInProcessFlag:
+      description: |
+        A flag that indicates that the line was voided inprocess.
+        It is different from cancelled order items.
+        This flag shows that this line was voided during the order
+        creation process.
+      type: boolean
+      default: false
+    voidInProcess:
+      description: |
+        Details of void operation if Line Item was voided in process.
+      $ref: "void.yaml#/Void"
+    orderItem:
+      $ref: ./CustomerOrderItemLineItem.v1.yaml
+    orderTax:
+      $ref: ./CustomerOrderTaxLineItem.v1.yaml
+    orderAmountModifier:
+      $ref: ./CustomerOrderAmountModifierLineItem.v1.yaml
+    orderFee:
+      $ref: ./CustomerOrderFeeLineItem.v1.yaml
+  additionalProperties: false
+  required:
+    - sequenceNumber
+    - lineItemType
+
+CustomerOrderLineItemTypeEnum:
+  description: |
+    Enumeration of possible types of line items.
+  type: string
+  enum:
+    - Item
+    - Tax
+    - AmountModifier
+    - Fee

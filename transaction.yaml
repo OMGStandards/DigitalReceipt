@@ -1,7 +1,5 @@
-DigitalReceipt:
+Transaction:
   description: |
-    A pure subset of Transction that contains the necessary data
-    elements for customer facing receipts and fiscal audit.
     Transaction is a self-contained unit of essential business activity.
     The activity involves important business such as financial
     and/or merchandise exchange, movement of money and/or inventory,

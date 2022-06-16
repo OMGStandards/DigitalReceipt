@@ -1,0 +1,179 @@
+CustomerOrder:
+  description: |
+    A formal request from a Customer to purchase goods and/or services from a retailer.
+    This request is based on agreed terms and conditions (prices, delivery time,
+    payments schedule, cancellation policy, etc.) Some customer orders may include
+    detail specifications of the items to be delivered.
+    Sending the order request by the Customer to the Retailer constitutes a legal
+    offer to buy goods and/or services. Accepting Customer's offer by Retailer,
+    creates a one-off contractual commitment between the Customer and Retaler.
+  type: object
+  properties:
+    customerOrderID:
+      description: |
+        A globally unique immutable identifier for the Customer Order.
+        This is typically a system generated UUID.
+        Since the order data structures may also be used for order creation
+        requests the order ID might not be available yet. That is why this
+        property is not required even though every created order must have
+        customerOrderID.
+      type: string
+    customerOrderNumber:
+      description: |
+        A customer facing alphanumeric number to identify the order.
+        Since the order data structures may also be used for order creation the
+        order number might not be available yet. That is why this property is
+        not required even though it should be assigned to the customer
+        order as part of the order creation process.
+      type: string
+    creationRequestID:
+      description: |
+        A globally unique identifier for order creation request to OMS system.
+        Typically this identifier does not have to be used for human
+        consumption but it should guaranty global uniqueness and immutability.
+        It could be UUID.
+      type: string
+    creationRequestNumber:
+      description: |
+        An identifier for order creation request that can be displayed to a customer.
+        For example, this number can be printed on the receipt for future references.
+      type: string
+    businessUnit:
+      description: |
+        Business unit associated with the order.
+        Orders may be associated with a particular business unit such as
+        RetailStore, DistributionCenter, CallCenter, etc.
+      $ref: "business-unit.yaml#/RetailBusinessUnit"
+    tenantID:
+      description: |
+        A globally unique identifier for a tenant for the Customer Order.
+        Tenant is a group of users who share a specific solution that is
+        logically isolated but physically might be integrated utilizing
+        a common infrastructure. A retail organization can have multiple
+        tenants.
+      type: string
+    timezoneOffsetInMinutes:
+      description: |
+        The time difference in minutes between UTC and timezone that is
+        considered to be local for the Customer Order. This allows to present
+        all the datetime properties in local time.  Local timezone can be
+        the location where the order was placed from or it can be timezone
+        of the OMS system.
+        For example, if the  OMS local time in EST (UTC-05) then
+        timezoneOffset is -300. In Moscow timezoneOffset equals to 180.
+        The sign of the offset is the same as defined by ISO 8601 standard.
+        So, it equals local-UTC, or the time difference in minutes between
+        the place of transaction and UTC.
+      type: integer
+      format: int32
+    orderCreationRequestDateTime:
+      description: |
+        The date and time the order request was completed at the
+        customer facing touch-point such as POS, browser, kiosk, etc.
+        This time is important since it is might be viewed by the
+        Customer as order creation datetime.
+      type: string
+      format: date-time
+    creationDateTime:
+      description: |
+        The date and time the order was created by OMS.
+      type: string
+      format: date-time
+    completionDateTime:
+      description: |
+        The date and time the order was completed.
+        The order is typically considered to be completed when all the order
+        items were have been delivered and all the accounts settled.
+      type: string
+      format: date-time
+    typeCode:
+      description: |
+        Code that designates the type of the Customer Order.
+      $ref: "#/CustomerOrderTypeCodeEnum"
+    customTypeCode:
+      description: |
+        Code that designates the custom type of the Customer Order.
+        It should only be used if typeCode is set to Custom.
+      type: string
+    currencyCode:
+      description: |
+        Currency code that is used by monetary values within Customer Order.
+        It is ISO-4217 three character code.
+      type: string
+    customer:
+      description: |
+        Customer who placed the order.
+      $ref: "./customer.yaml#/Customer"
+    lineItems:
+      description: |
+        Line items within Customer Order.
+      $ref: ./CustomerOrderLineItemCollection.v1.yaml
+    orderTenders:
+      description: |
+        Tender to be used for customer order payments.
+      $ref: ./CustomerOrderTenderCollection.v1.yaml
+    lineItemGroups:
+      description: |
+        Line item groups within Customer Order.
+      $ref: ./CustomerOrderLineItemGroupCollection.v1.yaml
+    reservations:
+      description: |
+        Inventory Reservations associated wit Customer Order.
+      $ref: ./InventoryReservationCollection.v1.yaml
+    rewardCoupons:
+      description: |
+        Reward Coupons that were submitted for redemption inside the order.
+      $ref: ./RewardCouponCollection.v1.yaml
+    documents:
+      description: |
+        Collection of documents (recepts, invoices, etc.) associated with
+        the Customer Order.
+      $ref: ./TransactionDocumentCollection.v1.yaml
+    voidedInProcessFlag:
+      description: |
+        A flag that indicates that the order was  voided during the creation process.
+        It is different from the order cancellation. The order can only be voided
+        before it was placed with an OMS system.  After the order is placed it can
+        no longer be voided but it still might be possible to cancelled it.
+      type: boolean
+      default: false
+    status:
+      description: |
+        Status of the customer order.
+      $ref: ./CustomerOrderStatusEnum.v1.yaml
+    totals:
+      description: |
+        Collection of order totals.
+      $ref: ./TotalCollection.v1.yaml
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: ./ExtensibilityData.v1.yaml
+  additionalProperties: false
+  required:
+    - typeCode
+
+CustomerOrderTypeCodeEnum:
+  description: |
+    Type of the Customer Order.
+    Regular - a type of customer order that does not have special characteristics.
+    Layaway - a type customer order usually created in a store that includes
+      reservation of items and a set of scheduled payments that should be
+      completed before the merchandise can be released to the customer.
+    Subscription - a type customer order that includes future, typically periodic,
+      delivery of items on certain terms.
+    Reservation - a type of customer order that includes reservation of merchandise
+      but does not have a strong commitment from a customer that the merchandise will 
+      indeed be purchased.  There is no pre-authorization of customer's payment card
+      and retailer may collect only very limited amount of data, just to be able to
+      identify customer at the time of pickup.
+  type: string
+  enum:
+    - Regular
+    - Subscription
+    - Layaway
+    - Reservation
+    - Custom
+    - Unknown
