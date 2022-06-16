@@ -144,7 +144,13 @@ DocumentBody:
     bodyLines:
       description: |
         Body of the document as array of lines.
-      $ref: "common.yaml#/StringCollection"
+      type: array
+      items:
+        type: string
+        xml:
+          name: bodyLine
+      xml:
+        wrapped: true
     image:
       description: |
         Body of the document presented as an image.

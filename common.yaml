@@ -424,12 +424,6 @@ ExtensibilityDataSet:
     - extensibilityProperties
   additionalProperties: false
 
-StringCollection:
-  description: |
-    Collection of strings.
-  type: array
-  items: string
-
 NameValuePairCollection:
   description: |
     Collection of extensibility properties.

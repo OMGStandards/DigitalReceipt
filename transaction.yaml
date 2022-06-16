@@ -21,7 +21,7 @@ Transaction:
         A fiscal unique identifier for the Transaction.
         This is typically either provided by a fiscal device or generated
         according to country specific fiscal rules.
-        type: string
+      type: string
     sequenceNumber:
       description: |
         A sequential counter used to identify the Transaction.
@@ -260,7 +260,6 @@ TransactionTypeCodeEnum:
     NoSale - transactions that capture openning of a cash drawer by an Operator
       outside of the context of Retail or Tender Control transactions. It typically
       happens when a customer asks to exchange banknotes with different denomiantions.
-
   type: string
   enum:
     - Retail
