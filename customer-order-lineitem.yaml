@@ -43,14 +43,14 @@ CustomerOrderLineItem:
       description: |
         Details of void operation if Line Item was voided in process.
       $ref: "void.yaml#/Void"
-    orderItem:
-      $ref: ./CustomerOrderItemLineItem.v1.yaml
-    orderTax:
-      $ref: ./CustomerOrderTaxLineItem.v1.yaml
-    orderAmountModifier:
-      $ref: ./CustomerOrderAmountModifierLineItem.v1.yaml
-    orderFee:
-      $ref: ./CustomerOrderFeeLineItem.v1.yaml
+    orderItemLineItem:
+      $ref: "#/CustomerOrderItemLineItem"
+    orderTaxLineItem:
+      $ref: "#/CustomerOrderTaxLineItem"
+    orderAmountModifierLineItem:
+      $ref: "#/CustomerOrderAmountModifierLineItem"
+    orderFeeLineItem:
+      $ref: "#/CustomerOrderFeeLineItem"
   additionalProperties: false
   required:
     - sequenceNumber
@@ -65,3 +65,107 @@ CustomerOrderLineItemTypeEnum:
     - Tax
     - AmountModifier
     - Fee
+
+CustomerOrderItemLineItem:
+  description: |
+    A Line Item that represents a order of an Item.
+  type: object
+  properties:
+    item:
+      description: |
+        Information about item within Customer Order
+      $ref: ./trade-lineitem.yaml#/TradeLineItem
+    reservationRequestID:
+      description: |
+        A globally unique identifier for inventory reservation request.
+      type: string
+    reservationFlag:
+      description: |
+        Flag that indicates that this order line item was reserved.
+      type: boolean
+      default: false
+    reservation:
+      description: |
+        Details about item reservation.
+      $ref: ./inventory-reservation.yaml#/InventoryReservation
+    status:
+      description: |
+        Status for customer order line item.
+      $ref: "#/CustomerOrderItemStatusEnum"
+    processingStatus:
+      description: |
+        Processing status for customer order line item.
+        This property can have value after line item status
+        changes to Processing.
+      $ref: "#/CustomerOrderItemProcessingStatusEnum"
+  additionalProperties: false
+  required:
+    - item
+
+CustomerOrderItemStatusEnum:
+  description: |
+    Enumeration of possible line item statuses of line items.
+  type: string
+  enum:
+    - Pending
+    - Processing
+    - OnHold
+    - Cancelled
+    - Completed
+    - Unknown
+
+CustomerOrderItemProcessingStatusEnum:
+  description: |
+    Enumeration of possible line item processing statuses.
+  type: string
+  enum:
+    - Picked
+    - Packed
+    - Shipped
+    - Delivered
+    - Unknown
+
+CustomerOrderTaxLineItem:
+  description: |
+    A Line Item that represents Tax that to be collected
+    when the Customer Order gets fulfilled.
+    It is usually for a particular Tax Authority.
+  type: object
+  properties:
+    tax:
+      description: |
+        Information about Tax within Customer Order.
+      $ref: ./tax.yaml#/Tax
+  additionalProperties: false
+  required:
+    - tax
+
+CustomerOrderAmountModifierLineItem:
+  description: |
+    A Line Item that represents Amount Modification within Customer Order.
+    Examples of amount modifiers include but not limited to discounts
+    or markdowns.
+  type: object
+  properties:
+    amountModifier:
+      description: |
+        Information about order  level amount modifier.
+      $ref: ./amountmodifier.yaml#/AmountModifier
+  additionalProperties: false
+  required:
+    - amountModifier
+
+CustomerOrderFeeLineItem:
+  description: |
+    A Line Item that represents Fee to be collected
+    when order is fulfilled.
+    These could be handling fees, tare fees, etc..
+  type: object
+  properties:
+    fee:
+      description: |
+        Fee collected within this line item.
+      $ref: ./fee.yaml#/Fee
+  additionalProperties: false
+  required:
+    - fee

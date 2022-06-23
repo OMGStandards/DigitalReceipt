@@ -1,0 +1,29 @@
+InventoryReservation:
+  description: |
+    Reservation of inventory items.
+    Inventory Reservation is typically used to allocate inventory items
+    to a customer order
+  type: object
+  properties:
+    reservationID:
+      description: |
+        A globally unique immutable identifier for the Inventory Reservation.
+        This could be a system generated UUID. The reservationID created by
+        Inventory management system.
+      type: string
+    confirmationNumber:
+      description: |
+        A user facing alphanumeric number to confirm inventory reservation.
+      type: string
+    reservationDateTime:
+      description: |
+        The date and time the inventory was reserved by the Inventory
+        management system.
+      type: string
+      format: date-time
+    expirationDateTime:
+      description: |
+        The date and time the inventory reservation expires.
+      type: string
+      format: date-time
+  additionalProperties: false
