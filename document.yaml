@@ -75,6 +75,10 @@ TransactionDocument:
       description: |
         Collection of barcodes associated with the document.
       $ref: "common.yaml#/BarcodeCollection"
+    relatedDocuments:
+      description: |
+        Collection of references to other documents associated with this document.
+      $ref: "#/DocumentLinkCollection"
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.
@@ -178,3 +182,54 @@ TransactionDocumentCollection:
   type: array
   items:
     $ref: "#/TransactionDocument"
+
+DocumentLink:
+  description: |
+    Link to a document.
+  type: object
+  properties:
+    documentID:
+      description: |
+        A unique identifier of linked document.
+      type: string
+    alternativeDocumentID:
+      description: |
+        A unique identifier of the linked document that was provided by
+        some other system.
+      type: string
+    sequenceNumber:
+      description: |
+        A sequential number of the Document within where it was created.
+      type: integer
+      format: int32
+    documentNumber:
+      description: |
+        A meaningful alphanumeric value associated with the linked document
+        such as invoice number.
+      type: string
+    documentTypeCode:
+      description: |
+        A code to designate the type of the linked document (receipt, invoice, etc.).
+      $ref: "#/DocumentTypeCodeEnum"
+    customDocumentTypeCode:
+      description: |
+        A custom code to designate the type of the Document.
+        This property is used if typeCode is set to Custom.
+      type: string
+    businessDayDate:
+      description: |
+        System date that associated with the linked document.
+      type: string
+      format: date
+    documentTransaction:
+      description: |
+        Link to the Transaction associated with the linked document.
+      $ref: ./common.yaml
+  additionalProperties: false
+
+DocumentLinkCollection:
+  description: |
+    Collection of document links.
+  type: array
+  items:
+    $ref: "#/DocumentLink" 
