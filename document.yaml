@@ -74,17 +74,21 @@ TransactionDocument:
     barcodes:
       description: |
         Collection of barcodes associated with the document.
-      $ref: "common.yaml#/BarcodeCollection"
+      $ref: common.yaml#/BarcodeCollection
     relatedDocuments:
       description: |
         Collection of references to other documents associated with this document.
       $ref: "#/DocumentLinkCollection"
+    fiscalData:
+      description: |
+        Fiscal data associated with the document
+      $ref: ./fiscal.yaml#/FiscalNameValuePairCollection
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.
         This property is an array of DataSets where each DataSet is a
         named collection of name-value pairs.
-      $ref: "common.yaml#/ExtensibilityData"
+      $ref: common.yaml#/ExtensibilityData
     body:
       description: |
         The body of the Document.

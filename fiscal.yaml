@@ -1,0 +1,60 @@
+FiscalNameValuePair:
+  description: |
+    Fiscal name-value pair property
+  type: object
+  properties:
+    name:
+      description: |
+        Name of the fiscal property.
+      $ref: "#/FiscalPropertyNameEnum"
+    localName:
+      description: |
+        Local name of fiscal property.
+        This name is defined and understood in the context of a particular locale
+        (usually a country) where the transaction takes place. It could be
+        defined in addition to generic name.  For example, generic name can be
+        Secret and local name can be PUK (PIN Unlock Key) for German TSE.
+      type: string
+    value:
+      description: |
+        Value of the property.
+      type: string
+    typeOfData:
+      description: |
+        Type of data inside the the value of the fiscal property.
+      $ref: ./common.yaml#/NameValueTypeOfDataEnum
+    base64EncodedFlag:
+      description: |
+        Flag that indicates if the data is a base64 encoded string
+      type: boolean
+  additionalProperties: false
+  required:
+    - name
+
+FiscalPropertyNameEnum:
+  description: |
+    Names of fiscal name-value properties.
+  type: string
+  enum:
+    - Logo
+    - ReceiptHeader
+    - ReceiptFooter
+    - TaxData
+    - DepartmentTaxData
+    - Date
+    - SyncRoundingStatus
+    - Timeout
+    - ClientID
+    - UserID
+    - Secret
+    - DateTime
+    - DeviceInfo
+    - Unknown
+    - Custom
+
+FiscalNameValuePairCollection:
+  description: |
+    Collection of fiscal properties.
+  type: array
+  items:
+    $ref: "#/FiscalNameValuePair"
