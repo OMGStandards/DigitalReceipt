@@ -34,21 +34,57 @@ FiscalNameValuePair:
 FiscalPropertyNameEnum:
   description: |
     Names of fiscal name-value properties.
+    These name imply what kind of data is exchanged with fiscal
+    device.
+    ReceiptHeader - Receipt header data. It might contain 
+      the information about the store, such as telephone number,
+      address and name of the store as plain text
+    ReceiptFooter - Receipt footer data. It might contain 
+        promotional messages printed usually on bottom of receipt
+    FiscalReceiptData - Receipt data that contains information to
+      be inserted in the receipt due to fiscal legislations such as
+      the fiscal logotype, date, time and serial number
+    TaxData - Tax related data
+    DepartmentTaxData - Department tax related data
+    DeviceDateTime - Device date and time 
+    FiscalCounter - Fiscal device counter
+    SyncRoundingStatus - roundig synchronization status
+    RoundingAdjustment - amount adjusted by fiscal device
+    Timeout - Fiscal device timeout
+    ClientID - Unique ID of a client connected to fiscal device
+    UserID - ID of the user required for authentication on fiscal device
+    Secret - Secret data required for controlled activity on fiscal Device
+      It could be password, PIN, etc.
+    DeviceInfo - Fiscal device information
+    ProtectionCode - Unique fiscal transaction code calculated using
+     important receipt data
+    AuthorizationCode - authorization given by government as result of fiscalization
+    HashCode - Fiscal hash code
+    FiscalMemorySerialNumber - Fiscal device memory serial number
+    LotteryCode - Lottery code provided by the customer
+    ExportData - Data exported from fiscal device
   type: string
   enum:
-    - Logo
     - ReceiptHeader
     - ReceiptFooter
+    - FiscalReceiptData
     - TaxData
     - DepartmentTaxData
-    - Date
+    - DeviceDateTime
+    - FiscalCounter
     - SyncRoundingStatus
+    - RoundingAdjustment
     - Timeout
     - ClientID
     - UserID
     - Secret
-    - DateTime
     - DeviceInfo
+    - ProtectionCode
+    - AuthorizationCode
+    - HashCode
+    - FiscalMemorySerialNumber
+    - LotteryCode
+    - ExportData
     - Unknown
     - Custom
 

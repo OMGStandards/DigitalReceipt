@@ -186,6 +186,19 @@ Transaction:
       description: |
         Digital signatures used with the transaction
       $ref: "#/DigitalSignatureCollection"
+    fiscalTypeCode:
+      description: |
+        Code that identifies grouping of transactions for fiscal purposes.
+        Typically fiscal group of transactions has its own sequence number.
+        Such sequence number and/or fiscal type code might be printed on a
+        document associated with the transaction.
+      type: string
+    fiscalTypeSequenceNumber:
+      description: |
+        Sequence number associated with the type of fiscal group of transactions
+        identified by fiscalTypeCode.
+      type: integer
+      format: int32
     stageCode:
       description: |
         Classification of transaction as stage in some business process.
