@@ -185,7 +185,7 @@ Transaction:
     digitalSignatures:
       description: |
         Digital signatures used with the transaction
-      $ref: ./DigitalSignatureCollection.v1.yaml
+      $ref: "#/DigitalSignatureCollection"
     stageCode:
       description: |
         Classification of transaction as stage in some business process.
@@ -384,4 +384,3 @@ DigitalSignatureCollection:
   type: array
   items:
     $ref: "#/DigitalSignature"
-    
