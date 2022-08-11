@@ -182,6 +182,10 @@ Transaction:
       description: |
         RetailTransaction part of this transaction.
       $ref: "retail-transaction.yaml#/RetailTransaction"
+    digitalSignatures:
+      description: |
+        Digital signatures used with the transaction
+      $ref: ./DigitalSignatureCollection.v1.yaml
     stageCode:
       description: |
         Classification of transaction as stage in some business process.
@@ -301,3 +305,83 @@ TransactionStageCodeEnum:
     - Intermediate
     - Final
     - Unknown
+
+DigitalSignature:
+  description: |
+    A digital signature is a cryptographically generated code that validates the authenticity
+    and integrity of an electronic message, document, file, or some other digital artifact.
+  type: object
+  properties:
+    controlText:
+      description: |
+        Legal text that might be required on billing documents.
+        Such text may include certification number and parts of the digital signature.
+      type: string
+    typeCode:
+      description: |
+        Type of digital signature.
+      $ref: "#/DigitalSignatureTypeEnum"
+    algorithm:
+      description: |
+        Cryptographic algorithms used to generate digital signature.
+      $ref: "#/DigitalSignatureAlgorithmEnum"
+    keyID:
+      description: |
+        Identifier of the key used for signing.
+      type: string
+    data:
+      description: |
+        Data representing a digital signature.
+      type: string
+    signedData:
+      description: |
+        Data elements that were signed by digital signature.
+        It may include properties that are not present in the current transaction
+        but still a part of the signed data set or a string representing the whole
+        signed subset of the transaction data.
+        This property can be used to reconstruct the signed document without having
+        to look outside the current transaction.
+      $ref: "common.yaml#/NameValuePairCollection"
+    firstFlag:
+      description: |
+        Flag that indicates that this signature is the first in a sequence of
+        linked signatures.
+      type: boolean
+      default: false
+  additionalProperties: false
+  required:
+    - data
+
+DigitalSignatureAlgorithmEnum:
+  description: |
+    Enumeration of different types of algorithms to create digital signature
+    RSA_SHA1 - RSA with a SHA-1 hash function
+    RSA_SHA256 - RSA with a SHA-256 hash function
+    HMAC_SHA1 - A keyed-hash message authentication code with a SHA-1 hash function
+    HMAC_SHA256 - A keyed-hash message authentication code with a SHA-256 hash function
+    Unknown
+  type: string
+  enum:
+    - RSA_SHA1
+    - RSA_SHA256
+    - HMAC_SHA1
+    - HMAC_SHA256
+    - Unknown
+
+DigitalSignatureTypeEnum:
+  description: |
+    Enumeration of different types of digital signature
+    Fiscal - Digital Signature for Fiscal regulatory requirements.
+    Unknown - Unknow type of the digital signature
+  type: string
+  enum:
+    - Fiscal
+    - Unknown
+
+DigitalSignatureCollection:
+  description: |
+    Collection of digital signatures.
+  type: array
+  items:
+    $ref: "#/DigitalSignature"
+    
