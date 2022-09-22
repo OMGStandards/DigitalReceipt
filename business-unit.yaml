@@ -86,7 +86,7 @@ LegalEntity:
         company uses to conduct business operations.
         It is the common name the public sees.
       type: string
-    governmentIssuedIDs:
+    governmentIssuedBusinessIDs:
       description: |
         A collection of identifiers issued be a government agency to Legal Entity.
       $ref: ./GovernmentBusinessIDCollection.v1.yaml
