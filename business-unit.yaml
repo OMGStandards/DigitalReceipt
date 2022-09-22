@@ -30,7 +30,7 @@ RetailBusinessUnit:
         number 10 and distribution center number 10.
       type: integer
       format: int32
-    governmentIssuedIDs:
+    governmentIssuedBussinesIDs:
       description: |
         A collection of identifiers issued be a government agency to Business Unit.
         It is usually used as tax payer idendifier.
