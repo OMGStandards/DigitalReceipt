@@ -56,10 +56,14 @@ Customer:
       description: |
         Collection of Customer's email addresses.
       $ref: "address.yaml#/ElectronicMailAddressCollection"
-    governmentIdentifications:
+    governmentIssuedPersonIDs:
       description: |
-        Collection of Customer's identifications.
-      $ref: "common.yaml#/GovernmentIdentificationCollection"
+        Collection of person's identifications.
+      $ref: "common.yaml#/GovernmentPersonIDCollection"
+     governmentIssuedBussinesIDs:
+      description: |
+        Collection of bussines's identifications.
+      $ref: "common.yaml#/GovernmentBussinesIDCollection"
     employerName:
       description: |
         Name of the company the Customer works for.
