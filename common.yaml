@@ -442,7 +442,7 @@ NameValuePair:
       type: string
     localName:
       description: |
-        Local name of  property.
+        Local name of the property.
         This name is defined and understood in the context of a particular locale
         (usually a country) where the transaction takes place. It could be
         defined in addition to generic name.
