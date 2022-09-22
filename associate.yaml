@@ -17,10 +17,10 @@ Employee:
       description: |
         Name of the Employee.
       $ref: "common.yaml#/PersonName"
-    governmentIdentifications:
+    governmentIssuedPersonIDs:
       description: |
         Collection of Employee's identifications.
-      $ref: "common.yaml#/GovernmentIdentificationCollection"
+      $ref: "common.yaml#/GovernmentPersonIDCollection"
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.
