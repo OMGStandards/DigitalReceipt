@@ -89,7 +89,7 @@ LegalEntity:
     governmentIssuedBusinessIDs:
       description: |
         A collection of identifiers issued be a government agency to Legal Entity.
-      $ref: ./GovernmentBusinessIDCollection.v1.yaml
+      $ref: "common.yaml#/GovernmentBusinessIDCollection.yaml"
     address:
       description: |
         Business unit address.
