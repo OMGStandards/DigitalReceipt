@@ -97,7 +97,7 @@ GovernmentBusinessIDCollection:
 
 GovernmentPersonID:
   description: |
-    An identification issued by a government agency.
+    An person identification issued by a government agency.
     It could be an identification document or just an identification number.
     If it is a document then that document number is the most important
     property. Many countries have a national identification number, national
