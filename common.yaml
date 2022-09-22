@@ -175,12 +175,12 @@ GovernmentPersonIDTypeEnum:
     - ResidentID
     - Custom
 
-GovernmentIdentificationCollection:
+GovernmentPersonIDCollection:
   description: |
-    Collection of government IDs.
+    Collection of person government IDs.
   type: array
   items:
-    $ref: "#/GovernmentIdentification"
+    $ref: "#/GovernmentPersonID"
 
 GovernmentIssuedDataPiece:
   description: |
