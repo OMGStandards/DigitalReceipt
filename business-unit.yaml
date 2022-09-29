@@ -30,7 +30,7 @@ RetailBusinessUnit:
         number 10 and distribution center number 10.
       type: integer
       format: int32
-    governmentIssuedIDs:
+    governmentIssuedBussinesIDs:
       description: |
         A collection of identifiers issued be a government agency to Business Unit.
         It is usually used as tax payer idendifier.
@@ -86,10 +86,10 @@ LegalEntity:
         company uses to conduct business operations.
         It is the common name the public sees.
       type: string
-    governmentIssuedIDs:
+    governmentIssuedBusinessIDs:
       description: |
         A collection of identifiers issued be a government agency to Legal Entity.
-      $ref: ./GovernmentBusinessIDCollection.v1.yaml
+      $ref: "common.yaml#/GovernmentBusinessIDCollection.yaml"
     address:
       description: |
         Business unit address.
