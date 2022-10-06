@@ -95,9 +95,9 @@ GovernmentBusinessIDCollection:
   items:
     $ref: "#/GovernmentBusinessID"
 
-GovernmentIdentification:
+GovernmentPersonID:
   description: |
-    An identification issued by a government agency.
+    An person identification issued by a government agency.
     It could be an identification document or just an identification number.
     If it is a document then that document number is the most important
     property. Many countries have a national identification number, national
@@ -115,7 +115,7 @@ GovernmentIdentification:
     typeCode:
       description: |
         A code to denote the type of the ID (passport, driving license, military, etc.).
-      $ref: "#/GovernmentIdentificationTypeEnum"
+      $ref: "#/GovernmentPersonIDTypeEnum"
     customTypeCode:
       description: |
         Custom type of identification that is not covered by GovernmentIdentificationTypeEnum.
@@ -158,7 +158,7 @@ GovernmentIdentification:
     - idNumber
   additionalProperties: false
 
-GovernmentIdentificationTypeEnum:
+GovernmentPersonIDTypeEnum:
   description: |
     Type of government identification document or identification number
   type: string
@@ -175,12 +175,12 @@ GovernmentIdentificationTypeEnum:
     - ResidentID
     - Custom
 
-GovernmentIdentificationCollection:
+GovernmentPersonIDCollection:
   description: |
-    Collection of government IDs.
+    Collection of person government IDs.
   type: array
   items:
-    $ref: "#/GovernmentIdentification"
+    $ref: "#/GovernmentPersonID"
 
 GovernmentIssuedDataPiece:
   description: |
@@ -439,6 +439,13 @@ NameValuePair:
     name:
       description: |
         Name of the property.
+      type: string
+    localName:
+      description: |
+        Local name of the property.
+        This name is defined and understood in the context of a particular locale
+        (usually a country) where the transaction takes place. It could be
+        defined in addition to generic name.
       type: string
     value:
       description: |
