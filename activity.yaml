@@ -1,0 +1,209 @@
+TransactionActivity:
+  description: |
+    Transaction activity represent some high level business
+    activity that happens within transaction.
+  type: object
+  properties:
+    activityID:
+      description: |
+        A unique identifier for activity.
+      type: string
+    activityType:
+      description: |
+        Type of transaction activity.
+      $ref: "#/ActivityTypeEnum"
+    beginDateTime:
+      description: |
+        Date and time when activity began.
+      type: string
+      format: date-time
+    endDateTime:
+      description: |
+        Date and time when activity ended.
+      type: string
+      format: date-time
+    result:
+      description: |
+        Result of the activity.
+      $ref: "#/ActivityResultEnum"
+    status:
+      description: |
+        Status of the activity.
+      $ref: "#/ActivityStatusEnum"
+    controlledOperation:
+      description: |
+        Additional control information about Activity.
+      $ref: "./common.yaml#/ControlledOperation"
+    activityFailure:
+      description: |
+        Information about error within activity.
+      $ref: ./ActivityFailure.v1.yaml
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: ./ExtensibilityData.v1.yaml
+    retryFlag:
+      description: |
+        Flag that indicates that this activity is a retry of previously failed activity.
+      type: boolean
+      default: false
+    retry:
+      description: |
+        Additional data captured if this activity is a retry of previously failed activity.
+      $ref: ./ActivityRetry.v1.yaml
+    fiscalActivity:
+      $ref: ./FiscalActivity.v1.yaml
+  additionalProperties: false
+  required:
+    - activityType
+
+TransactionActivityCollection:
+  type: array
+  items:
+    $ref: "#/TransactionActivity"
+
+ActivityTypeEnum:
+  description: |
+    Enumeration of possible types of activity.
+  type: string
+  enum:
+    - Document
+    - Operator
+    - Fiscal
+    - Loyalty
+    - Customer
+    - CustomerOrder
+    - Inventory
+    - Tax
+    - Unknown
+
+ActivityResultEnum:
+  description: |
+    Code that describes the result of the activity.
+  type: string
+  enum:
+    - Success
+    - PartialSuccess
+    - Failure
+    - Cancelled
+    - Timeout
+
+ActivityStatusEnum:
+  description: |
+    Code that describes the status of the activity.
+  type: string
+  enum:
+    - Pending
+    - InProcess
+    - Completed
+
+ActivityFailure:
+  description: |
+    Activity failure data
+  type: object
+  properties:
+    failureCode:
+      description: |
+        Code that identifies the failure
+      type: string
+    message:
+      description: |
+        Error message
+      type: string
+    httpStatusCode:
+      description: |
+        HTTP status code associated with activity error
+      type: integer
+      format: int32
+    data:
+      description: |
+        The data associated with the error.
+      $ref: "./common.yaml#/NameValuePairCollection"
+    controlledOperation:
+      description: |
+        Additional control information related to Failure.
+        Sometimes activity failure may require an acknowledgement
+        from a supervisor.
+      $ref: "./common.yaml#/ControlledOperation"
+  additionalProperties: false
+
+ActivityRetry:
+  description: |
+    Retry of previously failed activity. 
+  type: object
+  properties:
+    failedActivityID:
+      description: |
+        A unique identifier for previously failed activity.
+      type: string
+    retryCount:
+      description: |
+        Number of the retry attempts including this one.
+      type: integer
+    failedActivityTransaction:
+      description: |
+        Link to the Transaction where the failed activity took place.
+        This property is only useful if failure happened in a different
+        transaction.
+      $ref: "./common.yaml#/TransactionLink"
+  additionalProperties: false
+
+FiscalActivity:
+  description: |
+    Activity associated  with fiscal device.
+  type: object
+  properties:
+    fiscalActivityType:
+      description: |
+        Type of activity
+      $ref: "#/FiscalActivityTypeEnum"
+    fiscalActivitySubType:
+      description: |
+        Subtype of fiscal activity that is used to provide additional 
+        classification for a certain activity type.
+        For example, Setup activity could be general or only for the
+        fiscal device host such as printer.
+      type: string
+    role:
+      description: |
+        Security role associated with fiscal activity.
+      type: string
+    fiscalActivityData:
+      description: |
+        Data associated with the fiscal activity
+      $ref: ./FiscalNameValuePairCollection.v1.yaml
+  additionalProperties: false
+  required:
+    - fiscalActivityType
+
+FiscalActivityTypeEnum:
+  description: |
+    List of fiscal activity types.
+    Sync - activity that synchronizes data between clint and device
+    Setup - activity that is used to setup device and initializes
+      some data that is necessary for the device to function.
+    SelfTest - activity that performs self-test of the device.
+    SetData - activity that sets fiscal data to a certain values.
+    GetData - activity that gets fiscal data from the device.
+    Login - activity to login to the device (start session).
+    Logout - activity to logout from the device (finish session).
+    BeginTransaction - activity that registers the start of transaction.
+    EndTransaction - activity that registers the end of transaction.
+    BeginExport - activity that starts export of data.
+    EndExport - activity that ends export of data.
+  type: string
+  enum:
+    - Sync
+    - Setup
+    - SelfTest
+    - SetData
+    - GetData
+    - Login
+    - Logout
+    - BeginTransaction
+    - EndTransaction
+    - BeginExport
+    - EndExport
+    - Unknown

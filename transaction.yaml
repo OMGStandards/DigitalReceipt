@@ -171,6 +171,10 @@ Transaction:
         kind of kiosk.
       type: boolean
       default: false
+    activities:
+      description: |
+        Collection of activities that are part of transaction.
+      $ref: "./activity.yaml#/TransactionActivityCollection"
     trainingFlag:
       description: |
         A flag that indicates that the Transaction was performed in training mode.
