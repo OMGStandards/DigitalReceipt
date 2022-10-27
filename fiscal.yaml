@@ -7,6 +7,9 @@ FiscalNameValuePair:
       description: |
         Name of the fiscal property.
       $ref: "#/FiscalPropertyNameEnum"
+     customName: | 
+        Custom name of identification that is not covered by FiscalPropertyNameEnum.
+        This property should only be used if name is equal to Custom.
     localName:
       description: |
         Local name of fiscal property.
