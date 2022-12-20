@@ -67,6 +67,10 @@ TransactionDocument:
       description: |
         Collection of references to other documents associated with this document.
       $ref: "#/DocumentLinkCollection"
+    documentTransaction:
+      description: |
+        Link to the Transaction associated with the document.
+      $ref: "common.yaml#/TransactionLink"
     fiscalData:
       description: |
         Fiscal data associated with the document
