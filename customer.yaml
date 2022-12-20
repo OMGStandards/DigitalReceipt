@@ -60,10 +60,10 @@ Customer:
       description: |
         Collection of person's identifications.
       $ref: "common.yaml#/GovernmentPersonIDCollection"
-     governmentIssuedBussinesIDs:
+     governmentIssuedBusinessIDs:
       description: |
-        Collection of bussines's identifications.
-      $ref: "common.yaml#/GovernmentBussinesIDCollection"
+        Collection of business's identifications.
+      $ref: "common.yaml#/GovernmentBusinessIDCollection"
     employerName:
       description: |
         Name of the company the Customer works for.
