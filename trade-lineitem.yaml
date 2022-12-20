@@ -225,6 +225,11 @@ TenderInLineItem:
         Additional control information about tender in.
         This could be authorization for maximum amount allowed.
       $ref: "common.yaml#/ControlledOperation"
+    originalTenderFiscalData:
+      description: |
+        Link to original Tender fiscal data.
+      $ref: "fiscal.yaml#/FiscalData"
+
   required:
     - tender
   additionalProperties: false
