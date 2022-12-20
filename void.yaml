@@ -10,6 +10,10 @@ Void:
         Link to the Transaction associated with voiding operation.
         It could link to the whole Transacion or a particular Line Item.
       $ref: "common.yaml#/TransactionLink"
+    originalTransactionFiscalData:
+      description: |
+        Link to the Transaction fiscal data associated with voiding operation.
+      $ref: "fiscal.yaml#/FiscalData"
     controlledOperation:
       description: |
         Additional control information about Void.
