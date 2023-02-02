@@ -149,6 +149,10 @@ ReturnLineItem:
       description: |
         Link to original Sale line item.
       $ref: "common.yaml#/TransactionLink"
+    originalSaleFiscalData:
+      description: |
+        Link to original Sale fiscal data.
+      $ref: "fiscal.yaml#/FiscalData"
     originalOperator:
       description: |
         Operator who performed the original transaction.
@@ -221,6 +225,11 @@ TenderInLineItem:
         Additional control information about tender in.
         This could be authorization for maximum amount allowed.
       $ref: "common.yaml#/ControlledOperation"
+    originalTenderFiscalData:
+      description: |
+        Link to original Tender fiscal data.
+      $ref: "fiscal.yaml#/FiscalData"
+
   required:
     - tender
   additionalProperties: false
@@ -295,6 +304,10 @@ TaxRefundLineItem:
       description: |
         Link to original Tax line item.
       $ref: "common.yaml#/TransactionLink"
+   originalTaxFiscalData:
+      description: |
+        Link to original Tax fiscal data.
+      $ref: "fiscal.yaml#/FiscalData"
   required:
     - tax
   additionalProperties: false
@@ -334,6 +347,10 @@ FeeRefundLineItem:
       description: |
         Link to fee associated with this refund.
       $ref: "common.yaml#/TransactionLink"
+    originalFeeFiscalData:
+      description: |
+        Link to fee fiscal data associated with this refund.
+      $ref: "fiscal.yaml#/FiscalData"
   required:
     - fee
   additionalProperties: false

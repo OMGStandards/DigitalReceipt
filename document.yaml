@@ -59,18 +59,6 @@ TransactionDocument:
         For example, the document could be produced for customer, store or
         some kind of a government agency.
       $ref: "#/DocumentTargetEnum"
-    fiscalNumber:
-      description: |
-        An alphanumeric value that is assigned to the document during
-        fiscalization process.
-      type: string
-    fiscalID:
-      description: |
-        An identifier of the document assigned and maintained by a fiscalization,
-        sub-system (device, service, etc). It is an ID within fiscal sub-system.
-        Such ID typically has no business meaning but it can be used to retrieve
-        the document.
-      type: string
     barcodes:
       description: |
         Collection of barcodes associated with the document.
@@ -79,6 +67,10 @@ TransactionDocument:
       description: |
         Collection of references to other documents associated with this document.
       $ref: "#/DocumentLinkCollection"
+    documentTransaction:
+      description: |
+        Link to the Transaction associated with the document.
+      $ref: "common.yaml#/TransactionLink"
     fiscalData:
       description: |
         Fiscal data associated with the document
