@@ -363,11 +363,6 @@ TransactionLink:
         A sequential counter of line item within Transaction.
       type: integer
       format: int32
-    subItemSequenceNumber:
-      description: |
-        A sequential counter of sub-item within a line item.
-      type: integer
-      format: int32
     beginDateTime:
       description: |
         Date and time transaction started.
