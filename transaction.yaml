@@ -176,6 +176,26 @@ Transaction:
       description: |
         RetailTransaction part of this transaction.
       $ref: "retail-transaction.yaml#/RetailTransaction"
+    applicationControlTransaction:
+      description: |
+        ApplicationControlTransaction part of this transaction.
+      $ref: "application-control-transaction.yaml#/ApplicationControlTransaction"
+    operatorControlTransaction:
+      description: |
+        OperatorControlTransaction part of this transaction.
+      $ref: "operator-control-transaction.yaml#/OperatorControlTransaction"
+    businessControlTransaction:
+      description: |
+        BusinessControlTransaction part of this transaction.
+      $ref: "business-control-transaction.yaml#/BusinessControlTransaction"
+    documentControlTransaction:
+      description: |
+        DocumentControlTransaction part of this transaction.
+      $ref: "document-control-transaction.yaml#/DocumentControlTransaction"
+    financialTransaction:
+      description: |
+        Financial part of this transaction.
+      $ref: "financial-transaction.yaml#/FinancialTransaction"     
     digitalSignatures:
       description: |
         Digital signatures used with the transaction

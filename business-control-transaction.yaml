@@ -1,0 +1,43 @@
+BusinessControlTransaction:
+  description: |
+    A type of Transaction that contols business status.
+    It that tracks changes in the status of business such as
+    Start/End of business day.
+  type: object
+  properties:
+    typeCode:
+      description: |
+        A code that describes the type of the Business Control Transaction.
+      $ref: "#/BusinessControlTransactionTypeCodeEnum"
+    customTypeCode:
+      description: |
+        Type code for custom business control transaction type.
+        typeCode should be set to Custom.
+      type: string
+    controlledOperation:
+      description: |
+        Additional control information about Business Control Transaction.
+      $ref: "common.yaml#/ControlledOperation"
+  additionalProperties: false
+  required:
+    - typeCode
+
+BusinessControlTransactionTypeCodeEnum:
+  description: |
+    Type code that indicates the type of business control transaction.
+    Open - open application to do business operations
+    Close - close application, business operation no longer allowed
+    SOD - Start Of Day for busines unit
+    EOD - End Of Day for business unit
+    EOM - End Of Month for business unit
+    EOY - End of Year for business unit
+    Custom - custom business control transaction type
+  type: string
+  enum:
+    - Open
+    - Close
+    - SOD
+    - EOD
+    - EOM
+    - EOY
+    - Custom

@@ -1,0 +1,41 @@
+ApplicationControlTransaction:
+  description: |
+    A type of Transaction that records application activity.
+    It tracks changes in the status of an application that
+    generates transactions.
+  type: object
+  properties:
+    typeCode:
+      description: |
+        A code that describes the type of the Application Control Transaction.
+      $ref: "#/ApplicationControlTransactionTypeCodeEnum"
+    customTypeCode:
+      description: |
+        Type code for custom application control transaction type.
+        typeCode should be set to Custom.
+      type: string
+    controlledOperation:
+      description: |
+        Additional control information about Application Control Transaction.
+      $ref: ./ControlledOperation.v1.yaml
+  additionalProperties: false
+  required:
+    - typeCode
+
+ApplicationControlTransactionTypeCodeEnum:
+  description: |
+    Type code that indicates the type of application control transaction.
+    Launch - application got opened
+    Terminate - application got closed
+    Lock - application got locked
+    Unlock - application got unlocked
+    LogUpload - upload log
+    Custom - custom application control transaction type
+  type: string
+  enum:
+    - Launch
+    - Terminate
+    - Lock
+    - UnLock
+    - LogUpload
+    - Custom

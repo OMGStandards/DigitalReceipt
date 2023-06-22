@@ -1,0 +1,85 @@
+OperatorControlTransaction:
+  description: |
+    A type of Transaction that records non-financial activity
+    that tracks changes in the status of a point of sale terminal,
+    terminal access by retail enterprise employees and their
+    supervisors and other activities and events related to the
+    administration and management of the point of sale system.
+  type: object
+  properties:
+    typeCode:
+      description: |
+        A code that describes the type of the Control Transaction.
+        The value will be one of "login", "logout or a custom value
+      $ref: "#/OperatorControlTransactionTypeCodeEnum"
+    tillID:
+      description: |
+        An ID for the till associated with the Transaction.
+        Till is a tender repository that is assigned a unique
+        ID within a business unit (e.g. a store). It can be moved around
+        the business unit and can be inserted inside a cash drawer.
+      type: string
+    tillNumber:
+      description: |
+        A unique identifier for the till within store.
+        This is unique within business unit, meaningful number.
+      type: integer
+      format: int32
+    automaticFlag:
+      description: |
+        When true, the action was performed automatically on behalf of the operator by the system.
+      type: boolean
+      default: false
+    failedLogin:
+      description: |
+        Info about a failed login attempt
+      $ref: "#/FailedLogin"
+  additionalProperties: false
+  required:
+    - typeCode
+
+OperatorControlTransactionTypeCodeEnum:
+  description: |
+    Type code that indicates the type of operator control transaction.
+  type: string
+  enum:
+    - Login
+    - Logout
+    - ClockIn
+    - ClockOut
+    - PasswordChange
+    - FailedLogin
+    - UpdatePreferences
+    - Unknown
+
+FailedLogin:
+  description: |
+    Info captured as part of a failed login attempt.
+  type: object
+  properties:
+    requestedOperator:
+      description: |
+        The operator info used for the attempted login.
+      $ref: ./Operator.v1.yaml
+    failureReason:
+      description: |
+        The reason why the login failed, if available.  If "Custom" is used, the actual reason must be included in the
+        customFailureReason property.
+      $ref: ./LoginFailureReasonEnum.v1.yaml
+    customFailureReason:
+      description: |
+        When the The failureReason is "Custom", this is the custom reason why the login failed, if available.
+      type: string
+    attemptNumber:
+      description: |
+        The nummer of failed attempts to login with this operator's credentials, including this one.
+      type: integer
+      format: int32
+    accountLockedFlag:
+      description: |
+        A flag that indicates whether this attempt resulted in the account being locked.
+      type: boolean
+      default: false
+  additionalProperties: false
+  required:
+    - requestedOperator    

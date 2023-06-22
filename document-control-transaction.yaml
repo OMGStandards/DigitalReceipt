@@ -1,0 +1,21 @@
+DocumentControlTransaction:
+  description: |
+    A type of Transaction that records activity with documents.
+    It includes generating, printing, sending, etc. of different
+    documents such as receipts, invoices, account statements, etc.
+    This transaction type does not include document-related activities
+    that happen as part of another type of transaction. For example,
+    printing a receipt as part of a retail transaction is not a
+    document control transaction but re-printing the receipt at some
+    later point in time is.
+  type: object
+  properties:
+    relatedTransaction:
+      description: |
+        Reference to transaction related to this document transaction.
+      $ref: "common.yaml#/TransactionLink"
+    relatedFiscalData:
+      description: |
+        Fiscal data from the related transaction.
+      $ref: "fiscal.yaml#/FiscalData"
+  additionalProperties: false

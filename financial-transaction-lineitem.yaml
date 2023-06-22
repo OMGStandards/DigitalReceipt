@@ -1,0 +1,131 @@
+FinancialTransactionLineItem:
+  description: |
+    A detail line about financial transaction.
+  type: object
+  properties:
+    sequenceNumber:
+      description: |
+        A line item sequence number.  It is an identifier of
+        the line item within transaction.
+      type: integer
+      format: int32
+    lineItemType:
+      description: |
+        Type of line item.
+      $ref: "#/FinancialTransactionLineItemTypeEnum"
+    beginDateTime:
+      description: |
+        Datetime when line item entry began.
+      type: string
+      format: date-time
+    endDateTime:
+      description: |
+        Datetime when line item entry ended.
+      type: string
+      format: date-time
+    accountID:
+      description: |
+        Globaly unique account identifier.
+        This identifer of account associated with financial transaction
+        line item.  It does not have to be meaningful.  It could GUID
+      type: string
+    accountNumber:
+      description: |
+        Meaningful account identifier.
+        Account number is used on financial documents.
+      type: string
+    voidedInProcessFlag:
+      description: |
+        A flag that indicates that the line was voided in
+        process.
+      type: boolean
+      default: false
+    voidInProcess:
+      description: |
+        Details of void operation if Line Item was voided in process.
+      $ref: "void.yaml#/Void"
+    paidIn:
+      $ref: "#/PaidInLineItem"
+    paidOut:
+      $ref: "#/PaidOutLineItem"
+  additionalProperties: false
+  required:
+    - sequenceNumber
+    - lineItemType
+
+FinancialTransactionLineItemTypeEnum:
+  description: |
+    Type code that indicates the type of business control transaction.
+    PaidIn - Money added to till
+    PaidOut - Money taken from till
+  type: string
+  enum:
+    - PaidIn
+    - PaidOut
+
+PaidInLineItem:
+  description: |
+    A Line Item that represents a funds moving into the retailer's account.
+    This is not related to sales.
+    For example, a customer may turn in money found on the floor or
+    an associate may return funds previously given to make some purchases.
+  type: object
+  properties:
+    relatedPaidOut:
+      description: |
+        Link to the related financial PaidOut transaction.
+      $ref: "common.yaml#/TransactionLink"
+    paidInID:
+      description: |
+        Identifier of Paid In.
+      type: string
+    paidInName:
+      description: |
+        A name of the PaidIn.
+      type: string
+    paidInDescription:
+      description: |
+        A description of the PaidIn.
+      type: string
+    tender:
+      description: |
+        Information about Tender within Transaction.
+      $ref: "transaction-tender.yaml#/TransactionTender"
+  additionalProperties: false
+  required:
+    - tender
+
+PaidOutLineItem:
+  description: |
+    A Line Item that represents a funds moving out of the retailer's account.
+    This is not related to returns.
+    For example, money can be give to an associate to buy some supplies or
+    to pay somebody for services.
+  type: object
+  properties:
+    paidOutID:
+      description: |
+        Identifier of Paid Out.
+      type: string
+    paidOutName:
+      description: |
+        A name of the PaidOut.
+      type: string
+    paidOutDescription:
+      description: |
+        A description of the PaidOut.
+      type: string
+    tender:
+      description: |
+        Information about Tender within Transaction.
+      $ref: "transaction-tender.yaml#/TransactionTender"
+  additionalProperties: false
+  required:
+    - tender
+
+FinancialTransactionLineItemCollection:
+  type: array
+  items:
+    $ref: "#/FinancialTransactionLineItem" 
+
+
