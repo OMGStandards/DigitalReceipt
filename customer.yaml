@@ -31,7 +31,13 @@ Customer:
         A unique human-meaningful alphanumeric value to identify the |
         Customer. This number maybe used in UI and different communications.
       type: string
-    name:
+    businessName:
+      description: |
+       A business name is a legal name that is used to identify a business entity. 
+       It is the name that is registered with the government or other regulatory bodies, a
+       nd is used to conduct business transactions and enter into contracts.
+      type: string
+    personName:
       description: |
         Name of the Customer
       $ref: "common.yaml#/PersonName"
