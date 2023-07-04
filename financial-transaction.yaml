@@ -1,7 +1,7 @@
 FinancialTransaction:
   description: |
     A type of Transaction that records non-sale transfer of funds to/from retailer.
-    Financial transaction record movement of money, typically cash, in/out of
+    Financial transaction records movement of money, typically cash, in/out of
     Till inside POS associated with non-sale activities. Based on the type of
     such money transfer, it could be mapped to a financial transaction inside
     retailer's accounting system.
@@ -56,7 +56,7 @@ FinancialTransaction:
     voidInProcess:
       description: |
         Details of the Financial Transaction void in process operation.
-      $ref: ./Void.v1.yaml
+      $ref: "void.yaml#/Void"
   additionalProperties: false
 
 FinancialTransactionTypeCodeEnum:

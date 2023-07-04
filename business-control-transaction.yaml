@@ -1,7 +1,7 @@
 BusinessControlTransaction:
   description: |
-    A type of Transaction that contols business status.
-    It that tracks changes in the status of business such as
+    A type of Transaction that controls business status.
+    It tracks changes in the status of business such as
     Start/End of business day.
   type: object
   properties:
