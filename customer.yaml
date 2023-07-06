@@ -31,10 +31,10 @@ Customer:
         A unique human-meaningful alphanumeric value to identify the |
         Customer. This number maybe used in UI and different communications.
       type: string
-    name:
+    personName:
       description: |
-        Name of the Customer
-      $ref: "common.yaml#/PersonName"
+        Name of the person Customer.
+      $ref: "common.yaml#/PersonName"     
     gender:
       description: |
         Customer gender.
@@ -60,7 +60,7 @@ Customer:
       description: |
         Collection of person's identifications.
       $ref: "common.yaml#/GovernmentPersonIDCollection"
-     governmentIssuedBusinessIDs:
+    governmentIssuedBusinessIDs:
       description: |
         Collection of business's identifications.
       $ref: "common.yaml#/GovernmentBusinessIDCollection"
@@ -68,6 +68,10 @@ Customer:
       description: |
         Name of the company the Customer works for.
       type: string
+    businessName:
+      description: |
+        Name of the business Customer.
+      type: string  
     offlineFlag:
       description: |
         A flag that indicates that the customer info was captured offline from CRM.

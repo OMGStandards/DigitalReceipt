@@ -1,0 +1,116 @@
+TenderControlTransaction:
+  description: |
+    A type of Transaction that controls movement of tenders between repositories.
+    TenderControlTransaction can record movement of tender from one tender
+    repository to another as a single transaction. That would result in balance
+    changes in two differnt tender repositories.  Another option is to record movement
+    of tender from one repository to an accountable associate and then movement of tender
+    from the associate to another tender repository.  In this case every transaction
+    channges balance only in one tender repository and records the associate accountable
+    for the money.
+  type: object
+  properties:
+    typeCode:
+      description: |
+        A code that describes the type of the Tender Control Transaction.
+        This type defines types of source and target repositories.
+      $ref: "#/TenderControlTransactionTypeCodeEnum"
+    sourceRepository:
+      description: |
+        Tender repository from where tenders are taken.
+      $ref: "#/TenderRepository"
+    sourceAssociate:
+      description: |
+        Associate accountable for the funds in source repository.
+      $ref: "associate.yaml#/Associate"  
+    targetRepository:
+      description: |
+        Tender repository where tenders are put.
+      $ref: "#/TenderRepository"
+    targetAssociate:
+      description: |
+        Associate accountable for the funds in target repository.
+      $ref: "associate.yaml#/Associate"
+    lineItems:
+      description: |
+        Line items within tender control transaction.
+      $ref: "tender-control-transaction-lineitem.yaml#/TenderControlTransactionLineItemCollection"
+    voidedInProcessFlag:
+      description: |
+        A flag that indicates that the Tender Control Transaction was voided
+        in process.
+      type: boolean
+      default: false
+    voidInProcess:
+      description: |
+        Details of the Tender Control Transaction void in process operation.
+      $ref: "void.yaml#/Void"
+    controlledOperation:
+      description: |
+        Additional control information about Tender Control Transaction.
+      $ref: "common.yaml#/ControlledOperation"
+  additionalProperties: false
+  required:
+    - typeCode
+
+TenderControlTransactionTypeCodeEnum:
+  description: |
+    Type code that indicates the type of tender control transaction.
+  type: string
+  enum:
+    - BankToSafe
+    - SafeToBank
+    - SafeToTill
+    - TillToSafe
+    - SafeToAssociate
+    - AssociateToSafe
+    - TillToAssociate
+    - AssociateToTill
+    - TillToTill
+    - TillToExternal
+    - SafeToExternal
+    - ExternalToSafe
+
+TenderRepository:
+  description: |
+    Physical tender containers used in the retail enterprise.
+  type: object
+  properties:
+    repositoryID:
+      description: |
+        A unique identifier for the tender repository.
+      type: string
+    typeCode:
+      description: |
+        A code to designate the type of the tender repository.
+      $ref: "#/TenderRepositoryTypeCodeEnum"
+    name:
+      description: |
+        The name of the tender repository.
+      type: string
+    repositoryNumber:
+      description: |
+        A meaningful number assigned to tender reporsitory within Business Unit.
+        This number is typically unique within Business Unit but global uniquness
+        is not required.
+      type: integer
+      format: int32
+  additionalProperties: false
+  required:
+    - typeCode
+
+TenderRepositoryTypeCodeEnum:
+  description: |
+    Defines the type of tender repository.
+    Safe - Strong tender repository, like a metal cabinet, with a secure access.
+    Till - Portable tender repository, like a metal box or a tray, that can be inserted into a drawer.
+    Pouch - Portable tender repository, like a bag, that is used to keep tenders for transfer and storage
+      to maintain accountability.
+    External - External to Store tender repository, like a bank
+  type: string
+  enum:
+    - Safe
+    - Till
+    - Pouch
+    - External
+    - None            

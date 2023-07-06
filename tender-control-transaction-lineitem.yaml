@@ -1,0 +1,117 @@
+TenderControlTransactionLineItem:
+  description: |
+    Line item in tender control transaction that represents movement of a particular tender.
+  type: object
+  properties:
+    sequenceNumber:
+      description: |
+        A line item sequence number.  It is an identifier of
+        the line item within transaction.
+      type: integer
+      format: int32
+    beginDateTime:
+      description: |
+        Datetime when line item entry began.
+      type: string
+      format: date-time
+    endDateTime:
+      description: |
+        Datetime when line item entry ended.
+      type: string
+      format: date-time
+    tenderID:
+      description: |
+        A globally unique identifier for the Tender. It could be UUID.
+        Since the number of tenders recognized by a retail enterprise is
+        relatively small, it is common that retailer would assign an integer
+        value to be tenderID.
+      type: string
+    tenderAmount:
+      description: |
+        The monetary value of the tender moved from one tender repository
+        to another.
+      $ref: "common.yaml#/MonetaryAmount"
+    tenderAmountSource:
+      description: |
+        The monetary value of the tender in the source tender repository
+        at the end of the transaction.
+      $ref: "common.yaml#/MonetaryAmount"
+    tenderAmountTarget:
+      description: |
+        The monetary value of the tender in the target tender repository
+        at the end of the transaction.
+      $ref: "common.yaml#/MonetaryAmount"
+    suggestedTenderAmount:
+      description: |
+        The monetary value of the tender that is suggested by the system.
+        For example, the system can provide suggestion to move certain amount
+        of tender based on default float in the source or target tender
+        repositories.
+      $ref: "common.yaml#/MonetaryAmount"
+    mediaCount:
+      description: |
+        A number of tender units transfered from one tender repository
+        to another.
+      type: integer
+      format: int32
+    mediaCountSource:
+      description: |
+        A number of tender units in the source tender repository at the
+        end of the transaction.
+      type: integer
+      format: int32
+    mediaCountTarget:
+      description: |
+        A number of tender units in the target tender repository at the
+        end of the transaction.
+      type: integer
+      format: int32
+    controlPoint:
+      description: |
+        The point where tender counts are controlled. It could be source,
+        target or transfer. This value shows which of the amounts and
+        counts were actually counted by associate as part of the transfer.
+      $ref: "#/TenderControlPointEnum"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+    voidedInProcessFlag:
+      description: |
+        A flag that indicates that the line was voided in
+        process.
+      type: boolean
+      default: false
+    voidInProcess:
+      description: |
+        Details of void operation if Line Item was voided in process.
+      $ref: "void.yaml#/Void"
+  additionalProperties: false
+  required:
+    - sequenceNumber
+    - tenderID
+    - controlPoint
+
+TenderControlPointEnum:
+  description: |
+    Point where tenders are counted.
+    Source - Tender left at the sourc is counted. For example, we might
+      leave a certain amount at the till and pickup the rest
+    Transfer - Tender that is move counted.  For example, we move $200 from Till
+      to safe.
+    Target - The new amount at destination is counted. For example, we added money
+      to the till to reach default float amount.
+  type: string
+  enum:
+    - Source
+    - Transfer
+    - Target
+
+TenderControlTransactionLineItemCollection:
+  description: |
+    Collection of tender control transaction line items.
+  type: array
+  items:
+    $ref: "#/TenderControlTransactionLineItem"        

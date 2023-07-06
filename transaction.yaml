@@ -195,7 +195,11 @@ Transaction:
     financialTransaction:
       description: |
         Financial part of this transaction.
-      $ref: "financial-transaction.yaml#/FinancialTransaction"     
+      $ref: "financial-transaction.yaml#/FinancialTransaction"
+    tenderControlTransaction:
+      description: |
+        TenderControlTransaction part of this transaction.
+      $ref: "tender-control-transaction.yaml#/TenderControlTransaction"       
     digitalSignatures:
       description: |
         Digital signatures used with the transaction
@@ -258,19 +262,8 @@ TransactionTypeCodeEnum:
       Such transactions include Paid In/Out.
     Tender - transactions that record movement of tender to and from tender repositories.
       Such transactions include loans, pickups, banking, etc.
-    TenderSettlement - transactions that record settlement of tender inside repositories.
-      Such transactions include counts, comparison of actual vs expected, and reconsiliation.
-    Till - transaction that record movement of tills and their assignments.
-      Insertion of till into workstation, assigning till to an operator, etc.
-    Inventory - transactions that record movement of inventory.
-      Such transactions include receiving, shipments, return-to-vendor, etc.
-      Inventory transactions also include inventory adjustments and cycle counts.
     Document - transactions that record activities with different types
       of documents (receipts, invoices, statements, etc.).
-    CustomerService - transactions that record activities to satisfy customer requests.
-      For example, it could be balance inquiry.
-    Custom - custom transaction that are not covered by any of the well-know types.
-      If a custom transaction type is specified then customTransactionType should be set.
     Application - transactions that include application control activities.
       Such activities include application Launch, Terminanate, etc.
     Fiscal - transactions that record communications with fiscal "device".
@@ -282,22 +275,20 @@ TransactionTypeCodeEnum:
     NoSale - transactions that capture openning of a cash drawer by an Operator
       outside of the context of Retail or Tender Control transactions. It typically
       happens when a customer asks to exchange banknotes with different denomiantions.
+    Custom - custom transaction that are not covered by any of the well-know types.
+      If a custom transaction type is specified then customTransactionType should be set.  
   type: string
   enum:
     - Retail
     - Operator
     - Financial
     - Tender
-    - TenderSettlement
-    - Till
-    - Inventory
     - Document
-    - CustomerService
-    - Custom
     - Application
     - Business
     - Fiscal
     - NoSale
+    - Custom
 
 TransactionStageCodeEnum:
   description: |
