@@ -17,7 +17,7 @@ ApplicationControlTransaction:
     controlledOperation:
       description: |
         Additional control information about Application Control Transaction.
-      $ref: ./ControlledOperation.v1.yaml
+      $ref: "common.yaml#/ControlledOperation"
   additionalProperties: false
   required:
     - typeCode
