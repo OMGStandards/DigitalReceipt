@@ -1,0 +1,376 @@
+BusinessUnitSummary:
+  description: |
+    Summary of business unit activity.
+  type: object
+  properties:
+    periodType:
+      description: |
+        Type of the business period for which the summary is captured.
+      $ref: "#/SummaryPeriodTypeEnum"
+    metrics:
+      description: |
+        Store business metrics
+      $ref: "#/Metrics"
+    summaryPerWorkstation:
+      description: |
+        Summary data per workstation
+      $ref: "#/WorkstationSummaryCollection"
+  additionalProperties: false
+
+SummaryPeriodTypeEnum:
+  description: |
+    Type of the period for summary.
+    Shift - open application to do business operations
+    BusinessDay - close application, business operation no longer allowed
+  type: string
+  enum:
+    - Shift
+    - BusinessDay
+
+Metrics:
+  description: |
+    A set of quantifiable measures that is used to track and assess the
+    performance, efficiency and quality of retail operations. Metrics
+    can be captured in a certain context.  For example, they can be business
+    unit metrics or metrics for a particular workstation.
+  type: object
+  properties:
+    transactionCounts:
+      description: |
+        Set of transaction counts.
+      $ref: "#/TransactionCounts"
+    transactionCountsPerType:
+      description: |
+        Transaction Counts for different types of transactions.
+      $ref: "#/TransactionTypeCountsCollection"
+    tradeMetrics:
+      description: |
+        Counts for different types of transactions.
+      $ref: "#/TradeMetrics"
+    customMetrics:
+      description: |
+        Collection of customized metrics.
+      $ref: "#/CustomMetricGroupCollection"
+  additionalProperties: false
+
+WorkstationSummary:
+  description: |
+    Summary of workstation activity captured in some types of transacions.
+  type: object
+  properties:
+    periodType:
+      description: |
+        Type of the business period for which the summary is captured.
+      $ref: "#/SummaryPeriodTypeEnum"
+    clientDeviceID:
+      description: |
+        A unique identifier of a client device.
+      type: string
+    workstationNumber:
+      description: |
+        A unique within BusinessUnit meaningful number for workstation.
+      type: integer
+      format: int32
+    firstSequenceNumber:
+      description: |
+        The first transaction sequence number
+      type: integer
+      format: int32
+    lastSequenceNumber:
+      description: |
+        The last transaction sequence number
+      type: integer
+      format: int32
+    metrics:
+      description: |
+        Store business metrics
+      $ref: "#/Metrics"
+  additionalProperties: false
+
+WorkstationSummaryCollection:
+  description: |
+    Collection of workstation summaries.
+  type: array
+  items:
+    $ref: "#/WorkstationSummary"  
+
+TransactionCounts:
+  description: |
+    Counts of transactions.
+  type: object
+  properties:
+    transactionCount:
+      description: |
+        Count of all transactions.
+      type: integer
+      format: int32
+    suspendedTransactionCount:
+      description: |
+        Count of suspended transactions.
+      type: integer
+      format: int32
+    resumedTransactionCount:
+      description: |
+        Count of resumed transactions.
+      type: integer
+      format: int32
+    voidedInProcessTransactionCount:
+      description: |
+        Count of transactions that have been voided before completion.
+      type: integer
+      format: int32
+    postVoidedTransactionCount:
+      description: |
+        Count of transactions that post void another transaction.
+      type: integer
+      format: int32
+    erroredTransactionCount:
+      description: |
+        Count of transactions that failed to complete tue to an error.
+      type: integer
+      format: int32
+  additionalProperties: false
+
+TransactionTypeCounts:
+  description: |
+    Transction counts for different types of transaction.
+  type: object
+  properties:
+    transactionTypeCode:
+      description: |
+        Type code for the set of transaction counts.
+      $ref: "transaction.yaml#/TransactionTypeCodeEnum"
+    transactionCounts:
+      description: |
+        Set of transaction counts for the type.
+      $ref: "#/TransactionCounts"
+  additionalProperties: false
+  required:
+    - transactionTypeCode
+
+TransactionTypeCountsCollection:
+  description: |
+    Collection of transaction counts tender per transaction type.
+    Each member of the collection represents metrics per type.
+  type: array
+  items:
+    $ref: "#/TransactionTypeCounts"
+
+TradeMetrics:
+  description: |
+    A set of metrics associated with trade inside retail transaction.
+  type: object
+  properties:
+    tradeItemMetrics:
+      description: |
+        Amount and Quantity metrics for trade items.
+      $ref: "#/TradeItemMetrics"
+    tradeItemMetricsPerGroup:
+      description: |
+        Trade Item Metrics captured for different item groups.
+      $ref: "#/TradeItemGroupMetricsCollection"
+    discountAmountPerType:
+      description: |
+        Discounts for different discount types types.
+      $ref: "#/DiscountTypeAmountCollection"
+    taxAmountPerAuthorityRule:
+      description: |
+        Taxes for different types of tax rules.
+      $ref: "#/TaxAuthorityRuleAmountCollection"
+    tradeTenderMetrics:
+      description: |
+        Amount metrics for trade tenders.
+      $ref: "#/TradeTenderMetrics"
+    tradeTenderMetricsPerType:
+      description: |
+        Metrics captured for different tender types.
+      $ref: "#/TradeTenderTypeMetricsCollection"
+  additionalProperties: false
+
+TradeItemMetrics:
+  description: |
+    A set of metrics associated with trade items.
+  type: object
+  properties:
+    grossSalesAmount:
+      description: |
+        Overall sales amount, unadjusted for discounts or returns
+        from customers. Gross Sales typically do not include taxsx when
+        taxes are not included in item prices. In case of VAT tax, where
+        taxes are blended with price, Gross Sales include tax amount as well.
+      $ref: "common.yaml#/MonetaryAmount"
+    netSalesAmount:
+      description: |
+        Gross Sales amount minus amount of discounts and sales returns.
+        Net Sales typically do not include taxex when taxes are not included
+        in item prices. In case of VAT tax, where taxes are blended with
+        price, Net Sales amount include tax amount.
+      $ref: "common.yaml#/MonetaryAmount"
+    returnsAmount:
+      description: |
+        Overall amount given back to customers due to sales returns of
+        the previously sold items. Gross Sales typically do not include taxex
+        when taxes are not included in item prices. In case of VAT tax, where
+        taxes are blended with price, Gross Sales include tax amount as well.
+      $ref: "common.yaml#/MonetaryAmount"
+    netTaxAmount:
+      description: |
+        Overall amount of taxes collected from customers for all tax authorities.
+        This amount is adjusted by taxes given back to customers as part
+        of sales returns (tax refund).
+      $ref: "common.yaml#/MonetaryAmount"
+    salesQuantity:
+      description: |
+        Overall sales quantity, unadjusted returns.
+      type: integer
+      format: int32
+    netSalesQuantity:
+      description: |
+        Gross Sales qunatity minus quantity of returns.
+      type: integer
+      format: int32
+    returnsQuantity:
+      description: |
+        Quantity of returns.
+      type: integer
+      format: int32
+  additionalProperties: false
+
+TradeItemGroupMetrics:
+  description: |
+    Trade item metrics for different types of item groups.
+  type: object
+  properties:
+    merchandiseHierarchyNode:
+      description: |
+        Node of merchandise hierarcy used to scope amount and quantity metrics.
+      $ref: "transaction-item.yaml#/MerchandiseHierarchyNode"
+    itemGroup:
+      description: |
+        Item group used to scope amount and quantity metrics.
+      $ref: "transaction-item.yaml#/ItemGroup"
+    tradeItemMetrics:
+      description: |
+        Trade item metrics that correspond to the defined group
+      $ref: "#/TradeItemMetrics"
+  additionalProperties: false
+
+TradeItemGroupMetricsCollection:
+  description: |
+    Collection of trade item mentrics per item group.
+    Each member of the collection represents metrics per group.
+  type: array
+  items:
+    $ref: "#/TradeItemGroupMetrics"
+
+DiscountTypeAmount:
+  description: |
+    Discount amount for different types of discount.
+  type: object
+  properties:
+    discountType:
+      description: |
+        Discount type for which amount is captured.
+      type: string
+    discountReasonCode:
+      description: |
+        Discount reason for which amount is captured.
+      type: string
+    discountRuleID:
+      description: |
+        Discount rule ID for which metrics is captured.
+      type: string
+    discountAmount:
+      description: |
+        Amount of the discounts for that type.
+      $ref: "common.yaml#/MonetaryAmount"
+  additionalProperties: false
+
+DiscountTypeAmountCollection:
+  description: |
+    Collection of discount amounts per type.
+    Each member of the collection represents discount amount per type.
+  type: array
+  items:
+    $ref: "#/DiscountTypeAmount"
+
+TaxAuthorityRuleAmount:
+  description: |
+    Tax amount for different tax authorities/rules.
+  type: object
+  properties:
+    taxAuthorityID:
+      description: |
+        Identifier of tax authority collecting the tax.
+      type: string
+    taxRuleID:
+      description: |
+        Identifier of the rule used to calculate the tax.
+      type: string
+    taxRate:
+      description: |
+        Tax calculation rate if rule is rate-based.
+      type: string
+    taxAmount:
+      description: |
+        Amount of the tax for that taxAuthority/taxRule.
+      $ref: "common.yaml#/MonetaryAmount"
+  additionalProperties: false
+
+TaxAuthorityRuleAmountCollection:
+  description: |
+    Collection of tax amounts per tax authrity/rule.
+    Each member of the collection represents tax amount per authority/rule.
+  type: array
+  items:
+    $ref: "#/TaxAuthorityRuleAmount"
+
+TradeTenderMetrics:
+  description: |
+    A set of metrics associated with trade tenders.
+  type: object
+  properties:
+    tenderInAmount:
+      description: |
+        Tender amount received from customers.
+      $ref: "common.yaml#/MonetaryAmount"
+    tenderOutAmount:
+      description: |
+        Tender amount given to custmers.
+      $ref: "common.yaml#/MonetaryAmount"
+    netTenderAmount:
+      description: |
+        Total tender received minus tender given to customers.
+      $ref: "common.yaml#/MonetaryAmount"
+  additionalProperties: false
+
+TradeTenderTypeMetrics:
+  description: |
+    Tender metrics for different types of tender.
+  type: object
+  properties:
+    tenderType:
+      description: |
+        Tender type for which metrics are captured.
+      type: string
+    tenderSubType:
+      description: |
+        Tender sub-type for which metrics are captured.
+      type: string
+    tenderID:
+      description: |
+        TenderID for which metrics are captured.
+      type: string
+    tradeTenderMetrics:
+      description: |
+        Trade tender metrics that correspond to the defined type
+      $ref: "#/TradeTenderMetrics"
+  additionalProperties: false
+
+TradeTenderTypeMetricsCollection:
+  description: |
+    Collection of trade tender mentrics per tender type.
+    Each member of the collection represents metrics per type.
+  type: array
+  items:
+    $ref: "#/TradeTenderTypeMetrics"

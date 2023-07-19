@@ -14,6 +14,10 @@ BusinessControlTransaction:
         Type code for custom business control transaction type.
         typeCode should be set to Custom.
       type: string
+    businessUnitSummary:
+      description: |
+        Summary of business data
+      $ref: "summary.yaml#/BusinessUnitSummary"  
     controlledOperation:
       description: |
         Additional control information about Business Control Transaction.
