@@ -92,14 +92,15 @@ TenderControlTransactionLineItem:
   required:
     - sequenceNumber
     - tenderID
+    - tenderAmount
     - controlPoint
 
 TenderControlPointEnum:
   description: |
     Point where tenders are counted.
-    Source - Tender left at the sourc is counted. For example, we might
+    Source - Tender left at the source is counted. For example, we might
       leave a certain amount at the till and pickup the rest
-    Transfer - Tender that is move counted.  For example, we move $200 from Till
+    Transfer - Tender that is moved is counted.  For example, we move $200 from till
       to safe.
     Target - The new amount at destination is counted. For example, we added money
       to the till to reach default float amount.
