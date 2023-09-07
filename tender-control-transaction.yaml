@@ -3,17 +3,16 @@ TenderControlTransaction:
     A type of Transaction that controls movement of tenders between repositories.
     TenderControlTransaction can record movement of tender from one tender
     repository to another as a single transaction. That would result in balance
-    changes in two differnt tender repositories.  Another option is to record movement
+    changes in two different tender repositories.  Another option is to record movement
     of tender from one repository to an accountable associate and then movement of tender
     from the associate to another tender repository.  In this case every transaction
-    channges balance only in one tender repository and records the associate accountable
+    changes balance only in one tender repository and records the associate accountable
     for the money.
   type: object
   properties:
     typeCode:
       description: |
         A code that describes the type of the Tender Control Transaction.
-        This type defines types of source and target repositories.
       $ref: "#/TenderControlTransactionTypeCodeEnum"
     sourceRepository:
       description: |
@@ -58,8 +57,6 @@ TenderControlTransactionTypeCodeEnum:
     Type code that indicates the type of tender control transaction.
   type: string
   enum:
-    - BankToSafe
-    - SafeToBank
     - SafeToTill
     - TillToSafe
     - SafeToAssociate
@@ -91,13 +88,14 @@ TenderRepository:
     repositoryNumber:
       description: |
         A meaningful number assigned to tender reporsitory within Business Unit.
-        This number is typically unique within Business Unit but global uniquness
+        This number is typically unique within Business Unit, but global uniqueness
         is not required.
       type: integer
       format: int32
   additionalProperties: false
   required:
     - typeCode
+    - repositoryID
 
 TenderRepositoryTypeCodeEnum:
   description: |
