@@ -45,6 +45,10 @@ Trade:
       description: |
         Line items within retail transaction.
       $ref: "trade-lineitem.yaml#/TradeLineItemCollection"
+    totals:
+      description: |
+        Collection of transaction totals.
+      $ref: "totals.yaml#/TotalCollection"  
   additionalProperties: false
 
 TradeTypeEnum:

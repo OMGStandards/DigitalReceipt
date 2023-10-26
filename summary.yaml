@@ -374,3 +374,99 @@ TradeTenderTypeMetricsCollection:
   type: array
   items:
     $ref: "#/TradeTenderTypeMetrics"
+
+CustomMetricGroup:
+  description: |
+    A group of related metrics.
+  type: object
+  properties:
+    groupName:
+      description: |
+        Name for the group of related metrics.
+      type: string
+    metrics:
+      description: |
+        Collection of custom metrics
+      $ref: "#/CustomMetricCollection"
+  additionalProperties: false    
+
+CustomMetricGroupCollection:
+  description: |
+    A collection of custom metrics groups.
+  type: array
+  items:
+    $ref: "#/CustomMetricGroup"
+
+CustomMetric:
+  description: |
+    A custom metric defined by a retailer.
+  type: object
+  properties:
+    name:
+      description: |
+        Name for the custom metrics.
+      type: string
+    parameters:
+      description: |
+        Collection of parameters defining context for the metric.
+      $ref: "#/CustomMetricParameterCollection"
+    measure:
+      description: |
+        Quantitive value of the metric.
+      $ref: "#/CustomMetricMeasure"
+  additionalProperties: false
+  required:
+    - name
+    - parameters
+
+CustomMetricMeasure:
+  description: |
+    Value for the custom metric. Initially we support amounts and
+    counts but in the future we can more properties to express
+    percentages (percent) and generic decimal values (decimalValue).
+  type: object
+  properties:
+    amount:
+      description: |
+        Monetary value of custom metric.
+      $ref: "common.yaml#/MonetaryAmount"
+    count:
+      description: |
+        Integer value of custom metric representing a count.
+      type: integer
+      format: int32
+  additionalProperties: false
+
+CustomMetricParameter:
+  description: |
+    A key-value pairs to specify a parameter for custom metrics.
+    Such paremeters define context for the metric.  For example, if
+    a metric shows amount of a certain tender, the parameter can
+    specify the tender ID.
+  type: object
+  properties:
+    name:
+      description: |
+        Parameter name.
+      type: string
+    value:
+      description: |
+        Parameter value.
+      type: string
+  additionalProperties: false
+  required:
+    - name
+
+CustomMetricParameterCollection:
+  description: |
+    A collection of custom metric parameters.
+  type: array
+  items:
+    $ref: "#/CustomMetricParameter"
+
+CustomMetricCollection:
+  description: |
+    A collection of custom metric .
+  type: array
+  items:
+    $ref: "#/CustomMetric"        

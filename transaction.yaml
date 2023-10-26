@@ -140,6 +140,10 @@ Transaction:
         access a server and some functionality might not be available.
       type: boolean
       default: false
+    fiscalData:
+      description: |
+        Fiscal data for the transaction.
+      $ref: "fiscal.yaml#/FiscalData"    
     suspendedFlag:
       description: |
         A flag that indicates that the Transaction was suspended.
@@ -211,10 +215,6 @@ Transaction:
         (TillToSafe). Transaction performed in the middle of the day that
         are neither initial nor final can be classified as intermediate.
       $ref: "#/TransactionStageCodeEnum"
-    totals:
-      description: |
-        Collection of transaction totals.
-      $ref: "totals.yaml#/TotalCollection"
     suspended:
       description: |
         Data associated with suspended transaction.

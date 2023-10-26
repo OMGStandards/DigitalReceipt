@@ -64,6 +64,7 @@ TransactionTotalTypeCodeEnum:
       Fee taxes are added to taxable fees excluding tax to get actual amount
       to be included into grand total.
     Grand - grand total. The final amount after everything is added up.
+    LineItemCount - total number of line items. 
       Grand Total formula:
         Total-ExcludingTax
         +
@@ -93,6 +94,7 @@ TransactionTotalTypeCodeEnum:
     - TaxableFeesExcludingTax
     - FeesTax
     - Grand
+    - LineItemCount
     - Custom
 
 TotalCollection:

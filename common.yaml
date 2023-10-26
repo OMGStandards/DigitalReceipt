@@ -333,6 +333,10 @@ TransactionLink:
         such as register number.
       type: integer
       format: int32
+    workstationID:
+      description: |
+        A unique identifier of a workstation.
+      type: string  
     businessDayDate:
       description: |
         System date that Transaction is assigned to.  It can be diffrent
