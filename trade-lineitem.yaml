@@ -304,7 +304,7 @@ TaxRefundLineItem:
       description: |
         Link to original Tax line item.
       $ref: "common.yaml#/TransactionLink"
-   originalTaxFiscalData:
+    originalTaxFiscalData:
       description: |
         Link to original Tax fiscal data.
       $ref: "fiscal.yaml#/FiscalData"

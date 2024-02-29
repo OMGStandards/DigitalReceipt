@@ -81,10 +81,10 @@ TransactionDocument:
         This property is an array of DataSets where each DataSet is a
         named collection of name-value pairs.
       $ref: common.yaml#/ExtensibilityData
-    body:
+    presentationData:
       description: |
         The body of the Document.
-      $ref: "#/DocumentBody"
+      $ref: "#/DocumentPresentationData"
     voidedInProcessFlag:
       description: |
         A flag that indicates that document was voided in process.
@@ -128,9 +128,9 @@ DocumentTargetEnum:
     - Customer
     - Unknown
 
-DocumentBody:
+DocumentPresentationData:
   description: |
-    Body
+    Data that describes visual presentation of the document. 
   type: object
   properties:
     bodyFormat:

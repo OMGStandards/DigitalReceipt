@@ -107,28 +107,24 @@ CustomerOrder:
     lineItems:
       description: |
         Line items within Customer Order.
-      $ref: ./CustomerOrderLineItemCollection.v1.yaml
+      $ref: "./customer-order-lineitem.yaml#/CustomerOrderLineItemCollection"
     orderTenders:
       description: |
         Tender to be used for customer order payments.
-      $ref: ./CustomerOrderTenderCollection.v1.yaml
+      $ref: "./customer-orer-tender.yaml#/CustomerOrderTender"
     lineItemGroups:
       description: |
         Line item groups within Customer Order.
-      $ref: ./CustomerOrderLineItemGroupCollection.v1.yaml
-    reservations:
-      description: |
-        Inventory Reservations associated wit Customer Order.
-      $ref: ./InventoryReservationCollection.v1.yaml
+      $ref: "./customer-order-lineitem-group.yaml#/CustomerOrderLineItemGroupCollection"
     rewardCoupons:
       description: |
         Reward Coupons that were submitted for redemption inside the order.
-      $ref: ./RewardCouponCollection.v1.yaml
+      $ref: "reward-coupon.yaml#/RewardCouponCollection"
     documents:
       description: |
         Collection of documents (recepts, invoices, etc.) associated with
         the Customer Order.
-      $ref: ./TransactionDocumentCollection.v1.yaml
+      $ref: "document.yaml#/TransactionDocumentCollection"
     voidedInProcessFlag:
       description: |
         A flag that indicates that the order was  voided during the creation process.
@@ -140,17 +136,17 @@ CustomerOrder:
     status:
       description: |
         Status of the customer order.
-      $ref: ./CustomerOrderStatusEnum.v1.yaml
+      $ref: "#/CustomerOrderStatusEnum"
     totals:
       description: |
         Collection of order totals.
-      $ref: ./TotalCollection.v1.yaml
+      $ref: "totals.yaml#/TotalCollection" 
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.
         This property is an array of DataSets where each DataSet is a
         named collection of name-value pairs.
-      $ref: ./ExtensibilityData.v1.yaml
+      $ref: "common.yaml#/ExtensibilityData"
   additionalProperties: false
   required:
     - typeCode
@@ -177,3 +173,20 @@ CustomerOrderTypeCodeEnum:
     - Reservation
     - Custom
     - Unknown
+
+CustomerOrderStatusEnum:
+  description: |
+    The status of the Customer Order.
+    Pending - received but processing has not started yet
+    Processing - order goes through fulfillment process
+    OnHold - order processing is suspended
+    Cancelled - order cancelled by the Customer
+    Completed - order is fulfilled and paid for
+  type: string
+  enum:
+    - Pending
+    - Processing
+    - OnHold
+    - Cancelled
+    - Completed
+    - Unknown    

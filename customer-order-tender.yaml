@@ -1,0 +1,46 @@
+CustomerOrderTender:
+  description: |
+    Tender information used to perform payments for the order.
+    Customer order tenders do not represent payments or refunds
+    against the order. They just capture tender data so that
+    payments could be performed in the future.  They can also
+    contain pre-authorization to guarantee that the tender can
+    indeed be used to complete the order.
+    Also the tender amounts could be specified to represent
+    instructions from the customer on how much money should
+    be charged using each tender.  Actual payment/refund amount
+    will be captured inside Retail transactions where they are
+    performed.
+  type: object
+  properties:
+    sequenceNumber:
+      description: |
+        A order tender sequence number.
+        It is an identifier of the tender within the collection.
+      type: integer
+      format: int32
+    entryMethod:
+      description: |
+        The method used to enter order tender.
+      $ref: "common.yaml#/EntryMethodCodeEnum"
+    customEntryMethod:
+      description: |
+        The custom method used to enter order tender.
+      type: string
+    tender:
+      description: |
+        Information about Tender within Customer Order.
+        This tender property does not represent payment but
+        rather information that will be used to perform payments
+        as part of order fulfillment process.
+      $ref: "transaction-tender.yaml#/TransactionTender"
+  additionalProperties: false
+  required:
+    - sequenceNumber
+    - tender
+
+CustomerOrderTenderCollection:
+  type: array
+  items:
+    $ref: "#/CustomerOrderTender"
+

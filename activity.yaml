@@ -37,13 +37,13 @@ TransactionActivity:
     activityFailure:
       description: |
         Information about error within activity.
-      $ref: ./ActivityFailure.v1.yaml
+      $ref: "#/ActivityFailure"
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.
         This property is an array of DataSets where each DataSet is a
         named collection of name-value pairs.
-      $ref: ./ExtensibilityData.v1.yaml
+      $ref: "common.yaml#/ExtensibilityData"
     retryFlag:
       description: |
         Flag that indicates that this activity is a retry of previously failed activity.
@@ -52,9 +52,9 @@ TransactionActivity:
     retry:
       description: |
         Additional data captured if this activity is a retry of previously failed activity.
-      $ref: ./ActivityRetry.v1.yaml
+      $ref: "#/ActivityRetry"
     fiscalActivity:
-      $ref: ./FiscalActivity.v1.yaml
+      $ref: "#/FiscalActivity"
   additionalProperties: false
   required:
     - activityType
@@ -179,7 +179,7 @@ FiscalActivity:
     fiscalActivityData:
       description: |
         Data associated with the fiscal activity
-      $ref: ./FiscalNameValuePairCollection.v1.yaml
+      $ref: "./fiscal.yaml#/FiscalNameValuePair"
   additionalProperties: false
   required:
     - fiscalActivityType

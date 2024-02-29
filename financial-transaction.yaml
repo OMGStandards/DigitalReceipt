@@ -21,7 +21,7 @@ FinancialTransaction:
         It could be different from the performing associate.
         For example, if funds were given to a particular associate to
         make some purchase associate information can be captured here.
-      $ref: ./Associate.v1.yaml
+      $ref: "associate.yaml#/Associate"
     tillID:
       description: |
         An ID for the till associated with the financial transaction.

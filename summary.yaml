@@ -7,6 +7,20 @@ BusinessUnitSummary:
       description: |
         Type of the business period for which the summary is captured.
       $ref: "#/SummaryPeriodTypeEnum"
+    customPeriodType:
+      description: |
+        Type of custom summary period.
+      type: string    
+    periodBeginDateTime:
+      description: |
+        The date and time summary period started.
+      type: string
+      format: date-time
+    periodEndDateTime:
+      description: |
+        The date and time summary period finished.
+      type: string
+      format: date-time  
     metrics:
       description: |
         Store business metrics
@@ -26,6 +40,7 @@ SummaryPeriodTypeEnum:
   enum:
     - Shift
     - BusinessDay
+    - Custom
 
 Metrics:
   description: |
@@ -311,10 +326,18 @@ TaxAuthorityRuleAmount:
       description: |
         Tax calculation rate if rule is rate-based.
       type: string
+    taxableAmount:
+      description: |
+        The amount that is subject to the Tax for axAuthority/taxRule.
+      $ref: "common.yaml#/MonetaryAmount"  
     taxAmount:
       description: |
         Amount of the tax for that taxAuthority/taxRule.
       $ref: "common.yaml#/MonetaryAmount"
+    taxExemptionAmount:
+      description: |
+        The amount that is subject to the Tax for axAuthority/taxRule.
+      $ref: "common.yaml#/MonetaryAmount"  
   additionalProperties: false
 
 TaxAuthorityRuleAmountCollection:

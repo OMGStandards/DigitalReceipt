@@ -1,0 +1,142 @@
+CustomerOrderLineItemGroup:
+  description: |
+    Group of Customer Order line items.
+  type: object
+  properties:
+    sequenceNumber:
+      description: |
+        A group sequence number.  It is an identifier of
+        the group within the Customer Order.
+      type: integer
+      format: int32
+    groupType:
+      description: |
+        Type of customer order group.
+      $ref: "#/GroupTypeEnum"
+    subsetFlag:
+      description: |
+        Indicates that group inludes only a subset of line items.
+        If this flag is set then collection of line item numbers
+        must be specified to indicate which line numbers belong
+        to the group.
+      type: boolean
+      default: false
+    lineItemsSequenceNumbers:
+      description: |
+        Subset of line item numbers that belong to this group.
+        This collection is only used if subsetFlag is raised.
+      $ref: "./common.yaml#/SequenceNumberCollection"
+    pickupGroup:
+      allOf:
+        - $ref: ./CustomerOrderPickupGroup.v1.yaml
+    shipmentGroup:
+      allOf:
+        - $ref: ./CustomerOrderShipmentGroup.v1.yaml
+  additionalProperties: false
+  required:
+    - sequenceNumber
+    - groupType
+    - subsetFlag
+
+GroupTypeEnum:
+  description: |
+    Enumeration of possible types of group.
+  type: string
+  enum:
+    - Pickup
+    - Shipment
+    - Custom 
+
+CustomerOrderPickupGroup:
+  description: |
+    A group that represents pickup part of the Customer Order.
+  type: object
+  properties:
+    businessUnit:
+      description: |
+        Business unit for pickup group.
+      $ref: "business-unit.yaml#/RetailBusinessUnit"
+    promisedDateTime:
+      description: |
+        The date and time promised to customer that order will be ready for pikcup.
+      type: string
+      format: date-time
+    personName:
+      description: |
+        Name of a person who will pick up the order.
+      $ref: "common.yaml#/PersonName"
+    email:
+      description: |
+        Email that is used for notification that the order is ready for pickup.
+      $ref: "address.yaml#/ElectronicMailAddress"
+    phone:
+      description: |
+        Phone number that is used for notification that the order is ready for pickup.
+      $ref: "address.yaml#/TelephoneNumber"
+  additionalProperties: false
+
+CustomerOrderShipmentGroup:
+  description: |
+    A group that represents shipment part of the Customer Order.
+  type: object
+  properties:
+    address:
+      description: |
+        Ship-to address for the shipment group.
+      $ref: "address.yaml#/PostalAddressCollection"
+    carrier:
+      description: |
+        Carrier for shipping goods to the Customer
+      $ref: "#/CarrierEnum"
+    customCarrier:
+      description: |
+        Custom carrier used for shipment.
+        This property should only be used if carrier is set to Custom
+      type: string
+    serviceLevelMinimumDays:
+      description: |
+        Minimum days to deliver goods to the Customer
+      type: integer
+      format: int32
+    serviceLevelMaximumDays:
+      description: |
+        Maximum days to deliver goods to the Customer
+      type: integer
+      format: int32
+    promisedDeliveryDatetime:
+      description: |
+        Date and time the customer was promised the delivery of the goods.
+      type: string
+      format: date-time
+    personName:
+      description: |
+        Name of a person who the order will be delivered to.
+      $ref: "common.yaml#/PersonName"
+    email:
+      description: |
+        Email that is used for communications regarding the order shipment.
+      $ref: "address.yaml#/ElectronicMailAddress"
+    phone:
+      description: |
+        Phone number that is used for communications regarding the order shipment.
+      $ref: "address.yaml#/TelephoneNumber"
+  additionalProperties: false
+  required:
+    - address
+
+CarrierEnum:
+  description: |
+    Enumeration of common carrier.
+  type: string
+  enum:
+    - FedEx
+    - UPS
+    - DHL
+    - PostalService
+    - OwnFleet
+    - Custom
+
+CustomerOrderLineItemGroupCollection:
+  type: array
+  items:
+    $ref: "#/CustomerOrderLineItemGroup"               

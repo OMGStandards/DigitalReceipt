@@ -169,3 +169,11 @@ CustomerOrderFeeLineItem:
   additionalProperties: false
   required:
     - fee
+
+CustomerOrderLineItemCollection:
+  type: array
+  items:
+    $ref: "#/CustomerOrderLineItem"
+
+
+

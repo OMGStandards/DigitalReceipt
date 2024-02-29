@@ -60,12 +60,12 @@ FailedLogin:
     requestedOperator:
       description: |
         The operator info used for the attempted login.
-      $ref: ./Operator.v1.yaml
+      $ref: "associate.yaml#/Operator"
     failureReason:
       description: |
         The reason why the login failed, if available.  If "Custom" is used, the actual reason must be included in the
         customFailureReason property.
-      $ref: ./LoginFailureReasonEnum.v1.yaml
+      $ref: "#/LoginFailureReasonEnum"
     customFailureReason:
       description: |
         When the The failureReason is "Custom", this is the custom reason why the login failed, if available.
@@ -82,4 +82,24 @@ FailedLogin:
       default: false
   additionalProperties: false
   required:
-    - requestedOperator    
+    - requestedOperator
+
+LoginFailureReasonEnum:
+  description: |
+    The reason for a failure
+    InvalidUsernamePasswordCombination - The combination of the username and password were invalid
+    AccountLocked - The user account is locked
+    AccountInactive - The user account is inactive
+    PasswordExpired - The password has expired, and was not updated
+    InsufficientAuthority - user lacks the authority to login
+    Custom - A custom reason.  The text for the reason should be included in a property like customFailureReason.
+    Unknown - The reason is unknown.
+  type: string
+  enum:
+    - InvalidUsernamePasswordCombination
+    - AccountLocked
+    - AccountInactive
+    - PasswordExpired
+    - InsufficientAuthority
+    - Custom
+    - Unknown       

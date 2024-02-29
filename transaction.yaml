@@ -41,22 +41,10 @@ Transaction:
       description: |
         Legal entity associated with the transaction.
       $ref: "business-unit.yaml#/LegalEntity"
-    clientDeviceID:
+    workstation:
       description: |
-        A unique identifier of a client device.
-        This identifier is for the device that was used as an as interface
-        create this transaction.
-      type: string
-    workstationID:
-      description: |
-        A unique identifier for workstation.
-      type: string
-    workstationNumber:
-      description: |
-        A unique within BusinessUnit meaningful number for workstation.
-        It is an integer value such as register number.
-      type: integer
-      format: int32
+        Workstation used to perform the transaction.
+      $ref: "#/Workstation"    
     businessDayID:
       description: |
         Unique identifier for business date.
@@ -310,6 +298,25 @@ TransactionStageCodeEnum:
     - Intermediate
     - Final
     - Unknown
+
+Workstation:
+  properties:
+    workstationID:
+      description: |
+        A unique identifier for workstation.
+      type: string
+    clientDeviceID:
+      description: |
+        A unique identifier of a client device.
+        This identifier is for the device that was used as an as interface
+        create this transaction.
+      type: string    
+    workstationNumber:
+      description: |
+        A unique within BusinessUnit meaningful number for workstation.
+        It is an integer value such as register number.
+      type: integer
+      format: int32
 
 DigitalSignature:
   description: |

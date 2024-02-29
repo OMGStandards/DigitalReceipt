@@ -818,3 +818,9 @@ HypermediaLinkCollection:
   type: array
   items:
     $ref: "#/HypermediaLink"
+
+SequenceNumberCollection:
+  type: array
+  items:
+    type: integer
+    format: int32    
