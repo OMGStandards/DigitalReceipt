@@ -21,7 +21,7 @@ CustomerOrderLineItemGroup:
         to the group.
       type: boolean
       default: false
-    lineItemsSequenceNumbers:
+    lineItemSequenceNumbers:
       description: |
         Subset of line item numbers that belong to this group.
         This collection is only used if subsetFlag is raised.
