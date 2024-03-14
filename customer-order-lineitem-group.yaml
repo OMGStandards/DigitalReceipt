@@ -58,7 +58,7 @@ CustomerOrderPickupGroup:
       $ref: "business-unit.yaml#/RetailBusinessUnit"
     promisedDateTime:
       description: |
-        The date and time promised to customer that order will be ready for pikcup.
+        The date and time promised to customer that order will be ready for pickup.
       type: string
       format: date-time
     personName:
