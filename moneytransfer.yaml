@@ -1,0 +1,67 @@
+MoneyTransfer:
+  description: |
+    Money transfer to/from an account within the Transaction.
+    Accounts are often used to enable a business process
+    across multiple transactions. For example, a payment can be
+    performed in one transaction and captured in an account and
+    later money from that account can be used to pay for the items
+    in another transaction.  The concept of account is important
+    to enable omni-channel capabilities.
+  type: object
+  properties:
+    transferID:
+      description: |
+        A unique identifier of the transafer.
+      type: string
+    transferName:
+      description: |
+        Money transfer name.
+      type: string
+    accountID:
+      description: |
+        Globaly unique account identifier.
+        This identifer does not have to be meaningful.
+        It could GUID
+      type: string
+    accountNumber:
+      description: |
+        Meaningful account identifier.
+        Account number is used in user interface and can
+        be printed on documents.
+      type: string
+    amount:
+      description: |
+        Transfer amount.
+      $ref: "common.yaml#/MonetaryAmount"
+    customerOrderID:
+      description: |
+        Globaly unique identifier for Customer Order.
+        It is used when money is transfered to/from implicit account
+        associated with a Customer Order
+      type: string
+    customerOrderNumber:
+      description: |
+        Customer Order number.
+        It is used when money is transfered to/from implicit account
+        associated with a Customer Order
+      type: string
+    customerOrderChangeRequestID:
+      description: |
+        Globaly unique identifier for Customer Order change request.
+        It is used when money is transfered is associated with a
+        Customer Order change request.
+      type: string
+    customerOrderChangeRequestNumber:
+      description: |
+        Customer Order change request number.
+        It is used when money is transfered is associated with a
+        Customer Order change request.
+      type: string
+    alternativeOrderID:
+      description: |
+        An alternative global unique identifier for the Customer Order.  
+        It could be an identifier from the third party system that is  
+        used for mapping or just an alternative way to identify the order  
+        such as order creation request ID.
+      type: string
+  additionalProperties: false

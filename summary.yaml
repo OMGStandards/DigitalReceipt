@@ -336,8 +336,9 @@ TaxAuthorityRuleAmount:
       $ref: "common.yaml#/MonetaryAmount"
     taxExemptionAmount:
       description: |
-        The amount that is subject to the Tax for axAuthority/taxRule.
-      $ref: "common.yaml#/MonetaryAmount"  
+        The amount that is deducted from sale amount, thereby reducing
+        the taxible amount
+      $ref: "common.yaml#/MonetaryAmount"
   additionalProperties: false
 
 TaxAuthorityRuleAmountCollection:

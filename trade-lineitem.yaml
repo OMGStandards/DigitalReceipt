@@ -89,6 +89,14 @@ TradeLineItem:
       $ref: "#/FeeLineItem"
     feeRefundReversalLineItem:
       $ref: "#/FeeRefundLineItem"
+    transferToAccountLineItem:
+      $ref: ./TransferToAccountLineItem
+    transferFromAccountLineItem:
+      $ref: ./TransferFromAccountLineItem
+    transferToAccountReversalLineItem:
+      $ref: ./TransferToAccountLineItem
+    transferFromAccountReversalLineItem:
+      $ref: ./TransferFromAccountLineItem 
   required:
     - sequenceNumber
     - lineItemType
@@ -369,3 +377,41 @@ AmountModifierLineItem:
   required:
     - amountModifier
   additionalProperties: false
+
+TransferFromAccountLineItem:
+  description: |
+    A Line Item that represents money transfer from an account to Transaction.
+    Financial impact of Transfer from Account is the same as adding
+    money to the Transaction.
+  type: object
+  properties:
+    moneyTransfer:
+      description: |
+        Money transfer from an account.
+      $ref: "moneytransfer.yaml#/MoneyTransfer"
+    controlledOperation:
+      description: |
+        Additional control information about money transfer.
+      $ref: "common.yaml#/ControlledOperation"
+  additionalProperties: false
+  required:
+    - moneyTransfer  
+
+TransferToAccountLineItem:
+  description: |
+    A Line Item that represents money transfer to an account from Transaction.
+    Financial impact of Transfer To Account is the same as subtracting
+    money from the Transaction.
+  type: object
+  properties:
+    moneyTransfer:
+      description: |
+        Money transfer to an account.
+      $ref: "moneytransfer.yaml#/MoneyTransfer"
+    controlledOperation:
+      description: |
+        Additional control information about money transfer.
+      $ref: "common.yaml#/ControlledOperation"
+  additionalProperties: false
+  required:
+    - moneyTransfer
