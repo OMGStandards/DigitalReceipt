@@ -111,7 +111,7 @@ CustomerOrder:
     orderTenders:
       description: |
         Tender to be used for customer order payments.
-      $ref: "./customer-orer-tender.yaml#/CustomerOrderTender"
+      $ref: "./customer-order-tender.yaml#/CustomerOrderTender"
     lineItemGroups:
       description: |
         Line item groups within Customer Order.
