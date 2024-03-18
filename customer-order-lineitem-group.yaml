@@ -21,17 +21,17 @@ CustomerOrderLineItemGroup:
         to the group.
       type: boolean
       default: false
-    lineItemsSequenceNumbers:
+    lineItemSequenceNumbers:
       description: |
         Subset of line item numbers that belong to this group.
         This collection is only used if subsetFlag is raised.
       $ref: "./common.yaml#/SequenceNumberCollection"
     pickupGroup:
       allOf:
-        - $ref: ./CustomerOrderPickupGroup.v1.yaml
+        - $ref: "#/CustomerOrderPickupGroup"
     shipmentGroup:
       allOf:
-        - $ref: ./CustomerOrderShipmentGroup.v1.yaml
+        - $ref: "#/CustomerOrderShipmentGroup"
   additionalProperties: false
   required:
     - sequenceNumber
@@ -58,7 +58,7 @@ CustomerOrderPickupGroup:
       $ref: "business-unit.yaml#/RetailBusinessUnit"
     promisedDateTime:
       description: |
-        The date and time promised to customer that order will be ready for pikcup.
+        The date and time promised to customer that order will be ready for pickup.
       type: string
       format: date-time
     personName:
