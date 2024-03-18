@@ -90,13 +90,13 @@ TradeLineItem:
     feeRefundReversalLineItem:
       $ref: "#/FeeRefundLineItem"
     transferToAccountLineItem:
-      $ref: ./TransferToAccountLineItem
+      $ref: "#/TransferToAccountLineItem"
     transferFromAccountLineItem:
-      $ref: ./TransferFromAccountLineItem
+      $ref: "#/TransferFromAccountLineItem"
     transferToAccountReversalLineItem:
-      $ref: ./TransferToAccountLineItem
+      $ref: "#/TransferToAccountLineItem"
     transferFromAccountReversalLineItem:
-      $ref: ./TransferFromAccountLineItem 
+      $ref: "#/TransferFromAccountLineItem"
   required:
     - sequenceNumber
     - lineItemType

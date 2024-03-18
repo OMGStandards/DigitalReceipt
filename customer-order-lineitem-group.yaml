@@ -28,10 +28,10 @@ CustomerOrderLineItemGroup:
       $ref: "./common.yaml#/SequenceNumberCollection"
     pickupGroup:
       allOf:
-        - $ref: #/CustomerOrderPickupGroup
+        - $ref: "#/CustomerOrderPickupGroup"
     shipmentGroup:
       allOf:
-        - $ref: #/CustomerOrderShipmentGroup
+        - $ref: "#/CustomerOrderShipmentGroup"
   additionalProperties: false
   required:
     - sequenceNumber
