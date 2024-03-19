@@ -45,7 +45,7 @@ RewardCoupon:
       format: date
     customer:
       description: |
-        A customer associaed with the coupon.
+        A customer associated with the coupon.
       $ref: "customer.yaml#/Customer"
     status:
       description: |
