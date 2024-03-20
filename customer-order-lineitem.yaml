@@ -74,7 +74,7 @@ CustomerOrderItemLineItem:
     item:
       description: |
         Information about item within Customer Order
-      $ref: ./trade-lineitem.yaml#/TradeLineItem
+      $ref: ./transaction-item.yaml#/TransactionItem
     reservationRequestID:
       description: |
         A globally unique identifier for inventory reservation request.
