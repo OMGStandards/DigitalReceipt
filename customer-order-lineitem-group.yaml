@@ -83,7 +83,7 @@ CustomerOrderShipmentGroup:
     address:
       description: |
         Ship-to address for the shipment group.
-      $ref: "address.yaml#/PostalAddressCollection"
+      $ref: "address.yaml#/PostalAddress"
     carrier:
       description: |
         Carrier for shipping goods to the Customer
