@@ -68,7 +68,7 @@ CustomerOrderLineItemTypeEnum:
 
 CustomerOrderItemLineItem:
   description: |
-    A Line Item that represents a order of an Item.
+    A Line Item that represents an order of an Item.
   type: object
   properties:
     item:
@@ -127,7 +127,7 @@ CustomerOrderItemProcessingStatusEnum:
 
 CustomerOrderTaxLineItem:
   description: |
-    A Line Item that represents Tax that to be collected
+    A Line Item that represents Tax to be collected
     when the Customer Order gets fulfilled.
     It is usually for a particular Tax Authority.
   type: object
@@ -143,7 +143,7 @@ CustomerOrderTaxLineItem:
 CustomerOrderAmountModifierLineItem:
   description: |
     A Line Item that represents Amount Modification within Customer Order.
-    Examples of amount modifiers include but not limited to discounts
+    Examples of amount modifiers include but are not limited to discounts
     or markdowns.
   type: object
   properties:
