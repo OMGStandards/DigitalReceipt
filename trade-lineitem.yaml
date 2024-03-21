@@ -366,13 +366,13 @@ FeeRefundLineItem:
 AmountModifierLineItem:
   description: |
     A Line Item that represents transaction level Amount Modifier.
-    Examples of amount modifiers include but not limited to discounts
+    Examples of amount modifiers include but are not limited to discounts
     or markdowns.
   type: object
   properties:
     amountModifier:
       description: |
-        Information about transaction  level amount modifier.
+        Information about transaction level amount modifier.
       $ref: "amountmodifier.yaml#/AmountModifier"
   required:
     - amountModifier
