@@ -1,0 +1,59 @@
+MonetaryDonation:
+  description: |
+    Money that is given to as a gift without expecting anything in return.
+    It is a form of financial support provided willingly and voluntarily. 
+    Monetary donations can be made for various purposes, including
+    charitable, philanthropic, humanitarian, religious, educational, or
+    social causes.
+  type: object
+  properties:
+    donationID:
+      description: Unique identifier of the monetary donation.
+        This identifier is used to track donations by the system.
+      type: string
+    alternativeDonationID:
+      description: |
+        A alternative unique identifier for the donation.
+        It could item identifier in another system.
+      type: string
+    amount:
+      description: |
+        The donation amount.
+      $ref: "common.yaml#/MonetaryAmount"
+    matchingAmount:
+      description: |
+        Matching amount for the donation provided by retailer.
+      $ref: "common.yaml#/MonetaryAmount"
+    charity:
+      description: |
+        The charity that is beneficiary of the Donation.
+      $ref: "#/Charity"
+  additionalProperties: false
+  required:
+    - amount
+
+Charity:
+  description: |
+    An organization set up for charitable purposes.
+    It performs educational, humanitarian, religious and other activities serving
+    public interests and promoting common good.
+  type: object
+  properties:
+    charityID:
+      description: |
+        A global unique identifier for the Charity.
+      type: string
+    name:
+      description: |
+        Name of the Charity.
+      type: string
+    description:
+      description: |
+        Description of the Charity.
+      type: string
+    governmentIssuedIDs:
+      description: |
+        A collection of identifiers issued by a government agency to charity.
+        These could be registration with tax authorities and/or registration.
+      $ref: "common.yaml#/GovernmentBusinessIDCollection"
+  additionalProperties: false    

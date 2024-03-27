@@ -1,0 +1,42 @@
+Tip:
+  description: |
+    Money left by a customer as a gratuity to a service associate in 
+    addition to the regular amount.
+    Unlike a commission, tipping is typically irreversable.
+    Tips are optional, descretionary payments.  They are not required
+    and considered as non-compulsary, additional payments.
+    Service fee or automatic gratuity, on the other hand, is compulsary.
+    Unlike tips, automatic gratuity funds are considered employer funds
+    and are not specifically designated as the property of service associates.
+    However, it is common for an employer to share part of automatic gratuity
+    with their employees.        
+  type: object
+  properties:
+    amount:
+      description: |
+        The tip amount.
+      $ref: "common.yaml#/MonetaryAmount"
+    taxes:
+      description: |
+        Collection of taxes associated with the tip.
+        Although tips are not a part of taxable price for sales tax purposes in 
+        most jurisdictions especially when the money goes directly to the service 
+        associate, in some jurisdictions depending on cercumstances fees can be a
+        subject to taxation.
+      $ref: "tax.yaml#/TaxCollection"
+    rate:
+      description: |
+        If tip is rate based this column shows the rate that was used to calculate
+        the tip amount.
+      $ref: "common.yaml#/DecimalString"
+    tenderSequenceNumber:
+      description: |
+        Tender line item sequence number that was used to pay the tip.
+        Tip amount is typically a part of the amount in a tender line item.  
+      type: integer
+      format: int32   
+  additionalProperties: false
+  required:
+    - amount
+
+

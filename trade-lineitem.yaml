@@ -97,6 +97,14 @@ TradeLineItem:
       $ref: "#/TransferToAccountLineItem"
     transferFromAccountReversalLineItem:
       $ref: "#/TransferFromAccountLineItem"
+    tipLineItem:
+      $ref: "#/TipLineItem"
+    tipReversalLineItem:
+      $ref: "#/TipLineItem"
+    CharitableContributionLineItem:
+      $ref: "#/CharitableContributionLineItem"
+    CharitableContributionReversalLineItem:
+      $ref: "#/CharitableContributionLineItem"       
   required:
     - sequenceNumber
     - lineItemType
@@ -121,6 +129,10 @@ LineItemTypeEnum:
     - TaxRefund
     - Fee
     - FeeRefund
+    - TransferToAccount
+    - TransferFromAccount
+    - Tip
+    - CharitableContribution
     - SaleReversal
     - ReturnReversal
     - TenderInReversal
@@ -130,6 +142,10 @@ LineItemTypeEnum:
     - TaxRefundReversal
     - FeeReversal
     - FeeRefundReversal
+    - TransferToAccountReversal
+    - TransferFromAccountReversal
+    - TipReversal
+    - CharitableContributionReversal
 
 SaleLineItem:
   description: |
@@ -415,3 +431,31 @@ TransferToAccountLineItem:
   additionalProperties: false
   required:
     - moneyTransfer
+
+TipLineItem:
+  description: |
+    A Line Item that represents tip paid as gratuity.
+  type: object
+  properties:
+    tip:
+      description: |
+        Tip.
+      $ref: "moneytransfer.yaml#/MoneyTransfer"
+  additionalProperties: false
+  required:
+    - tip
+
+CharitableContributionLineItem:
+  description: |
+    A Line Item that represents contribution to a charity
+    in a form of monetary donoation.
+  type: object
+  properties:
+    donation:
+      description: |
+        Monetary donation.
+      $ref: "donation.yaml#/MonetaryDonation"
+  additionalProperties: false
+  required:
+    - donation
+        
