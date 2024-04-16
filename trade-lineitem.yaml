@@ -440,7 +440,7 @@ TipLineItem:
     tip:
       description: |
         Tip.
-      $ref: "moneytransfer.yaml#/MoneyTransfer"
+      $ref: "tip.yaml#/Tip"
   additionalProperties: false
   required:
     - tip
@@ -458,4 +458,3 @@ CharitableContributionLineItem:
   additionalProperties: false
   required:
     - donation
-        

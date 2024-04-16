@@ -220,7 +220,7 @@ DocumentLink:
     documentTransaction:
       description: |
         Link to the Transaction associated with the linked document.
-      $ref: ./common.yaml
+      $ref: "common.yaml#/TransactionLink"
   additionalProperties: false
 
 DocumentLinkCollection:
