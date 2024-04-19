@@ -122,7 +122,7 @@ CustomerOrder:
       $ref: "reward-coupon.yaml#/RewardCouponCollection"
     documents:
       description: |
-        Collection of documents (recepts, invoices, etc.) associated with
+        Collection of documents (receipts, invoices, etc.) associated with
         the Customer Order.
       $ref: "document.yaml#/TransactionDocumentCollection"
     voidedInProcessFlag:
