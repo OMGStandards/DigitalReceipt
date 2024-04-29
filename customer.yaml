@@ -60,30 +60,14 @@ Customer:
       description: |
         Collection of person's identifications.
       $ref: "common.yaml#/GovernmentPersonIDCollection"
-    governmentIssuedBusinessIDs:
-      description: |
-        Collection of business's identifications.
-      $ref: "common.yaml#/GovernmentBusinessIDCollection"
     employerName:
       description: |
         Name of the company the Customer works for.
       type: string
-    businessName:
+    organization:
       description: |
-        Name of the business Customer.
-      type: string  
-    offlineFlag:
-      description: |
-        A flag that indicates that the customer info was captured offline from CRM.
-        Typically the system is considered offline if the workstation cannot access or
-        had a problem while accessing the CRM system.
-      type: boolean
-      default: false
-    customerActionCode:
-      description: |
-        Code describes what type of action was perfomed on the Customer data.
-      $ref: "#/CustomerActionCodeEnum"
-      default: None
+        Data specific for a customer of type Organization.
+      $ref: "#/OrganizationCustomer"   
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.
@@ -91,17 +75,6 @@ Customer:
         named collection of name-value pairs.
       $ref: "common.yaml#/ExtensibilityData"
   additionalProperties: false
-
-CustomerActionCodeEnum:
-  description: |
-    Defines the type of action performed on Customer data.
-  type: string
-  enum:
-    - Added
-    - Updated
-    - Deleted
-    - None
-    - Unknown
 
 CustomerOptIn:
   description: |
@@ -144,7 +117,37 @@ CustomerTypeCodeEnum:
   type: string
   enum:
     - Person
-    - Business
+    - Organization
     - Household
     - Custom
 
+OrganizationCustomer:
+  description: |
+    Organization specific customer data.
+  type: object
+  properties:
+    name:
+      description: |
+        Organization name
+      type: string
+    typeCode:
+      description: |
+        A code to designate the type of the Organization.
+      $ref: "#/OrganizationTypeCodeEnum"
+    governmentIssuedBusinessIDs:
+      description: |
+        Collection of business's identifications.
+      $ref: "common.yaml#/GovernmentBusinessIDCollection"
+  additionalProperties: false
+
+OrganizationTypeCodeEnum:
+  description: |
+    Type of organization.
+  type: string
+  enum:
+    - Business
+    - Government
+    - Nonprofit
+    - Educational
+    - Healthcare
+    - Unknown
