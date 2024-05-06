@@ -160,7 +160,7 @@ ActivityRetry:
 
 FiscalActivity:
   description: |
-    Activity associated  with fiscal device.
+    Activity associated with fiscal device.
   type: object
   properties:
     fiscalActivityType:

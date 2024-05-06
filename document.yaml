@@ -1,6 +1,6 @@
 TransactionDocument:
   description: |
-    Document that is associate with the transaction.
+    Document that is associated with the transaction.
     It could be a receipt created as confirmation of the transactional
     exchange.
   type: object
