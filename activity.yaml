@@ -55,6 +55,8 @@ TransactionActivity:
       $ref: "#/ActivityRetry"
     fiscalActivity:
       $ref: "#/FiscalActivity"
+    customerActivity:
+      $ref: "#/CustomerActivity"  
   additionalProperties: false
   required:
     - activityType
@@ -213,3 +215,30 @@ FiscalActivityTypeEnum:
     - BeginExport
     - EndExport
     - Unknown
+
+CustomerActivity:
+description: |
+  Activity associated with Customer.
+type: object
+properties:
+  customerActivityType:
+    description: |
+      Type of customer activity
+    $ref: "#/CustomerActivityTypeEnum"
+  customer:
+    description: |
+      Customer associated with the activity.
+    $ref: "customer.yaml#/Customer"
+additionalProperties: false
+required:
+  - customerActivityType 
+
+CustomerActivityTypeEnum:
+  description: |
+    List of customer service activity types
+  type: string
+  enum:
+    - CreateCustomer
+    - UpdateCustomer
+    - ReadCustomer
+    - Unknown    
