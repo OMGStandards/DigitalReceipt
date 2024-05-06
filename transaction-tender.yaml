@@ -54,7 +54,7 @@ TransactionTender:
       default: false
     foreignCurrency:
       description: |
-        Details about foreign currency, it the Tender is not in |
+        Details about foreign currency, if the Tender is not in |
         default currency specified in the Transaction header.
       $ref: "#/ForeignCurrency"
     fiscalTenderID:
@@ -105,7 +105,7 @@ ForeignCurrency:
   description: |
     Provides details about the foreign currency.
     It is used to capture information about foreign currency that is
-    different from the default currency specified in the Transacion header.
+    different from the default currency specified in the Transaction header.
     For example, if US Dollar is the default currency and Japanese Yens
     were used in the transaction all monetary amounts will
     be converted to US Dollars but Yens will be booked using foreign
