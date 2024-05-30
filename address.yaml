@@ -66,7 +66,7 @@ PostalAddress:
         A short alphabetic geographical code developed to represent
         countries. It could be two-letter (ISO 3166-1) or three-letter
         (ISO 31661-1)
-      type: string
+      $ref: "#/CountryCode"
     countryName:
       description: |
         Name of the country.

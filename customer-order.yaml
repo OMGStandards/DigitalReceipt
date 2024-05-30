@@ -111,7 +111,7 @@ CustomerOrder:
     orderTenders:
       description: |
         Tender to be used for customer order payments.
-      $ref: "./customer-order-tender.yaml#/CustomerOrderTender"
+      $ref: "./customer-order-tender.yaml#/CustomerOrderTenderCollection"
     lineItemGroups:
       description: |
         Line item groups within Customer Order.
@@ -122,7 +122,7 @@ CustomerOrder:
       $ref: "reward-coupon.yaml#/RewardCouponCollection"
     documents:
       description: |
-        Collection of documents (recepts, invoices, etc.) associated with
+        Collection of documents (receipts, invoices, etc.) associated with
         the Customer Order.
       $ref: "document.yaml#/TransactionDocumentCollection"
     voidedInProcessFlag:

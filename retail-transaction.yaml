@@ -5,7 +5,7 @@ RetailTransaction:
     between the retail enterprise and a CUSTOMER involving the
     exchange in ownership and/or accountability for merchandise
     and/or TENDER or involving the exchange of tender for
-    services. It also includes creation and modificaiton of
+    services. It also includes creation and modification of
     customer orders.
   type: object
   properties:
