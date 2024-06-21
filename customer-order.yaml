@@ -189,4 +189,69 @@ CustomerOrderStatusEnum:
     - OnHold
     - Cancelled
     - Completed
-    - Unknown    
+    - Unknown
+
+CustomerOrderLink:
+  description: |
+    Link to Customer Order and optionally Line Item.
+  type: object
+  properties:
+    customerOrderID:
+      description: |
+        A globally unique immutable identifier for the Customer Order.
+        This could be a system generated UUID.
+      type: string
+    alternativeOrderID:
+      description: |
+        An alternative global unique identifier for the Customer Order.
+        It could be an identifier from the third party system that is
+        used for mapping or just an alternative way to identify the order
+        such as order creation request ID.
+      type: string
+    businessUnit:
+      description: |
+        Retailer's business unit such as RetailStore, DistributionCenter
+        or AdministrationCenter associated with the Customer Order.
+      $ref: "business-unit.yaml#/RetailBusinessUnit"
+    businessDayDate:
+      description: |
+        System date when Customer Order was created.
+      type: string
+      format: date
+    customerOrderNumber:
+      description: |
+        Alphanumeric number assigned to customer order.
+      type: string
+    customerOrderDateTime:
+      description: |
+        Date and time customer order was created.
+      type: string
+      format: date-time
+    timezoneOffsetInMinutes:
+      description: |
+        The time difference in minutes between UTC and local time for the order.
+        For example, If the  order local time is EST (UTC-05) then
+        timezoneOffset is -300. In Moscow timezoneOffset equals to 180.
+        The sign of the offset is the same as defined by ISO 8601 standard.
+        So, it equals local-UTC, or the time difference in minutes between
+        the order local time and UTC.
+      type: integer
+      format: int32
+    lineItemSequenceNumber:
+      description: |
+        A sequential counter of line item within CustomerOrder.
+        This property is used to reference a particular line item
+        within the customer order.
+      type: integer
+      format: int32
+    creationRequestID:
+      description: |
+        A globally unique identifier for order creation request to OMS system.
+        Typically this identifier does not have to be used for human
+        consumption but it should guaranty global uniqueness and immutability.
+        It could be UUID.
+        Request identifier is necessary within order link because order
+        reference might be necessary before the order was created within
+        OMS and therefor order number/id is not yet available.  
+      type: string  
+  additionalProperties: false        

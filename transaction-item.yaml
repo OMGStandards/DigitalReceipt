@@ -146,6 +146,14 @@ TransactionItem:
       description: |
         Salespeople associated with Line Item
       $ref: "associate.yaml#/SalespersonCollection"
+    relatedCustomerOrder:
+      description: |
+        Customer order related to this transaction item.
+      $ref: "customer-order.yaml#/CustomerOrderLink"
+    itemGroups:
+      description: |
+        Groups that item is associated with.
+      $ref: "#/ItemGroupCollection"
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.
