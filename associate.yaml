@@ -31,7 +31,7 @@ Employee:
 
 Operator:
   description: |
-    An individual or organization that operates a system, equipment or a machines.
+    An individual or organization that operates a system, equipment or a machine.
   type: object
   properties:
     operatorID:
