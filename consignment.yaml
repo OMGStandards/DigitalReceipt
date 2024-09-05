@@ -1,0 +1,29 @@
+Consignment:
+  description: |
+    A business arrangement where a retailer sells items that are 
+    owned by another party (consignor). 
+  type: object
+  properties:
+    consignor:
+      description: |
+        Owner of items being sold. 
+      $ref: "business-unit.yaml#/LegalEntity"
+    alternativeDonationID:
+      description: |
+        A alternative unique identifier for the donation.
+        It could item identifier in another system.
+      type: string
+    accountID:
+      description: |
+        Globaly unique account identifier.
+        This identifer does not have to be meaningful.
+        It could GUID
+      type: string
+    accountNumber:
+      description: |
+        Meaningful account identifier.
+        Account number is used in user interface and can
+        be printed on documents.
+      type: string
+  additionalProperties: false
+

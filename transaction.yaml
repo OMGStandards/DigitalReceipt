@@ -157,6 +157,12 @@ Transaction:
       description: |
         Collection of activities that are part of transaction.
       $ref: "./activity.yaml#/TransactionActivityCollection"
+    relatedTransactions:
+      description: |
+        Collection of transactions that are related to this transaction.
+        Since this is a generice collection the semantics of the relationship
+        should be indicated by the linkTypeCode property.
+      $ref: "./common.yaml#/TransactionLinkCollection"  
     trainingFlag:
       description: |
         A flag that indicates that the Transaction was performed in training mode.
