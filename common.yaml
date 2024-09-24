@@ -383,6 +383,10 @@ TransactionLink:
         the place of transaction and UTC.
       type: integer
       format: int32
+    fiscal:
+      description: |
+        Link to another transaction based on fiscal data.
+      $ref: "fiscal.yaml#/FiscalTransactionLink"    
     linkTypeCode:
       description: |
         Type of ransaction link. Often that type is obvious from the location of the link,

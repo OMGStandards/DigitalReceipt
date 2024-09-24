@@ -71,10 +71,6 @@ TransactionDocument:
       description: |
         Link to the Transaction associated with the document.
       $ref: "common.yaml#/TransactionLink"
-    fiscalData:
-      description: |
-        Fiscal data associated with the document
-      $ref: ./fiscal.yaml#/FiscalNameValuePairCollection
     extensibilityData:
       description: |
         Data that provides extensibility to the defined data structure.

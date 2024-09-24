@@ -150,12 +150,6 @@ ActivityRetry:
         This property is only useful if failure happened in a different
         transaction.
       $ref: "./common.yaml#/TransactionLink"
-    failedActivityFiscalData:
-      description: |
-        Link to the Fiscal data of transaction where the failed activity took place.
-        This property is only useful if failure happened in a different
-        transaction.
-      $ref: "fiscal.yaml#/FiscalData"
   additionalProperties: false
 
 FiscalActivity:

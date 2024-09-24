@@ -13,9 +13,5 @@ DocumentControlTransaction:
     relatedTransaction:
       description: |
         Reference to transaction related to this document transaction.
-      $ref: "common.yaml#/TransactionLink"
-    relatedFiscalData:
-      description: |
-        Fiscal data from the related transaction.
-      $ref: "fiscal.yaml#/FiscalData"
+      $ref: "common.yaml#/TransactionLink"    
   additionalProperties: false
