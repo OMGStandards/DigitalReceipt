@@ -1,7 +1,7 @@
 Fee:
   description: |
     Data about fee collected as part of the Transaction.
-    There two major types of fees. Sometimes a fee is defined as a price for
+    There are two major types of fees. Sometimes a fee is defined as a price for
     a specific service.  In this case, fees behave similar to non-merchandise
     service items. Such fees can have discounts and they are often taxable.
     They can be considered as part of the net sales. On the other hand,
