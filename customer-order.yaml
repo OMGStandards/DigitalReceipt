@@ -40,8 +40,8 @@ CustomerOrder:
       type: string
     businessUnit:
       description: |
-        Business unit associated with the order.
-        Orders may be associated with a particular business unit such as
+        Business unit where the order was created.
+        Orders may be created at a particular business unit such as
         RetailStore, DistributionCenter, CallCenter, etc.
       $ref: "business-unit.yaml#/RetailBusinessUnit"
     tenantID:
