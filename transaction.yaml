@@ -339,10 +339,14 @@ DigitalSignature:
       description: |
         Type of digital signature.
       $ref: "#/DigitalSignatureTypeEnum"
-    algorithm:
+    algorithmTypeCode:
       description: |
-        Cryptographic algorithms used to generate digital signature.
+        Cryptographic algorithm used to generate digital signature.
       $ref: "#/DigitalSignatureAlgorithmEnum"
+    customAlgorithmTypeCode:
+      description: |
+        Custom cryptographic algorithm used to generate digital signature.
+      type: string
     keyID:
       description: |
         Identifier of the key used for signing.
