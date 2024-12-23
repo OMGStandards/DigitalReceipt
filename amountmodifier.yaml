@@ -10,7 +10,7 @@ AmountModificationRule:
       type: string
     amountModificationTypeCode:
       description: |
-        The type of amount modifiction.
+        The type of amount modification.
         It can be percentage or amount off, or replacing the whole
         amount with a new value
       $ref: "#/AmountModificationTypeCodeEnum"
@@ -140,7 +140,7 @@ AmountModifier:
         An index associated with a particlar transaction or group level rule.
         Such index allows to pull together all modification related to the
         same application of a particular rule. It is necessary since
-        all the amount modifiers prorated to line item level.
+        all the amount modifiers are prorated to line item level.
       type: integer
       format: int32
     amountModificationRule:
