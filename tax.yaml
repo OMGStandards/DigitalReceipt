@@ -126,7 +126,7 @@ TaxExemption:
       $ref: "common.yaml#/MonetaryAmount"
     preExemptAmount:
       description: |
-        The tax amount that woudl be collected if there were no tax exemption.
+        The tax amount that would be collected if there were no tax exemption.
       $ref: "common.yaml#/MonetaryAmount"
     preExemptRate:
       description: |
