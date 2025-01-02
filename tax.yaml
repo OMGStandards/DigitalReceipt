@@ -134,7 +134,7 @@ TaxExemption:
       $ref: "common.yaml#/DecimalString"
     itemLevelFlag:
       description: |
-        Flag that indicates that Tax Execmpt was applied at the
+        Flag that indicates that Tax Exempt was applied at the
         item level. If this flag is set to false or omitted then
         Tax exemption took place at the transaction level.
       type: boolean
