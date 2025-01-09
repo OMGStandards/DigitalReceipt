@@ -207,7 +207,7 @@ ItemLookupCode:
 ItemTypeEnum:
   description: |
     Type of item used in the transaction.
-    Stock - tangible item (typiclally merchandise) that can be stocked by the retailer.
+    Stock - tangible item (typically merchandise) that can be stocked by the retailer.
     Service - intangible non-merchandise items that represents services, sold by retailer.
       For example, alterations, furnuture treatment, warranties, etc.
     Digital - non-merchandise intagible items that are stored and delivered in electronic format.
@@ -271,8 +271,8 @@ MerchandiseHierarchy:
   description: |
     Collection of nodes that can be used to form merchandise hierarchy.
     Nodes belong to one of the well-known merchandise hierarchy levels
-    defined by HierarchyLevelsEnum. This structure does not campture
-    acutual merchandise hierarchy. If a node belongs one of the well-known
+    defined by HierarchyLevelsEnum. This structure does not capture
+    actual merchandise hierarchy. If a node belongs one of the well-known
     merchandise hierarchy levels it is captured here but it may or
     may not be a node of the actual merchandise hierarchy used by a
     particular retailer.
@@ -285,20 +285,20 @@ MerchandiseHierarchyNode:
     Node that belongs to one of the well-known merchandise hierarchy levels.
     These levels are defined by HierarchyLevelsEnum.
     It is important to note that just because the node belongs to merchandise
-    hierarchy level does not meant that it will be a part of merchindise
+    hierarchy level does not mean that it will be a part of merchandise
     hierarchy used by a particular customer. Merchandise hierarchy is not
-    defined inside retail transaction. Only node that potentially can be used
-    to form merhandise hierarchy are captured.
+    defined inside retail transaction. Only nodes that potentially can be used
+    to form merchandise hierarchy are captured.
   type: object
   properties:
     level:
       description: |
-        The level of merchindise hierarchy to which the node belongs.
+        The level of merchandise hierarchy to which the node belongs.
       $ref: "#/HierarchyLevelEnum"
     customLevel:
       description: |
         Custom level of merchandise hierarchy.
-        This property can only be defined if nodeLevel is set to Custom.
+        This property can only be defined if level is set to Custom.
       type: string
     nodeID:
       description: |
@@ -314,13 +314,13 @@ MerchandiseHierarchyNode:
       type: string
     nodeNumber:
       description: |
-        Meaningful numeric indentifier for hierarchy node.
+        Meaningful numeric identifier for hierarchy node.
         For example, it could be numeric department number.
       type: integer
       format: int32
     nodeCode:
       description: |
-        Meaningful alphanumeric indentifier for hierarchy node.
+        Meaningful alphanumeric identifier for hierarchy node.
         For example, it could be code like B25.
       type: string
   required:
