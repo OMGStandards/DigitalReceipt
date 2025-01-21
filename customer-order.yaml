@@ -127,10 +127,10 @@ CustomerOrder:
       $ref: "document.yaml#/TransactionDocumentCollection"
     voidedInProcessFlag:
       description: |
-        A flag that indicates that the order was  voided during the creation process.
+        A flag that indicates that the order was voided during the creation process.
         It is different from the order cancellation. The order can only be voided
         before it was placed with an OMS system.  After the order is placed it can
-        no longer be voided but it still might be possible to cancelled it.
+        no longer be voided, but it still might be possible to cancel it.
       type: boolean
       default: false
     status:
@@ -252,6 +252,6 @@ CustomerOrderLink:
         It could be UUID.
         Request identifier is necessary within order link because order
         reference might be necessary before the order was created within
-        OMS and therefor order number/id is not yet available.  
+        OMS and therefore order number/id is not yet available.  
       type: string  
   additionalProperties: false        
