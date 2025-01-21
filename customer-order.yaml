@@ -59,7 +59,7 @@ CustomerOrder:
         all the datetime properties in local time.  Local timezone can be
         the location where the order was placed from or it can be timezone
         of the OMS system.
-        For example, if the  OMS local time in EST (UTC-05) then
+        For example, if the OMS local time is EST (UTC-05) then
         timezoneOffset is -300. In Moscow timezoneOffset equals to 180.
         The sign of the offset is the same as defined by ISO 8601 standard.
         So, it equals local-UTC, or the time difference in minutes between
