@@ -44,7 +44,7 @@ TransactionTender:
       description: |
         Alphanumeric number that can be used to reference external tendering.
         If payment/refund was performed by some kind of external system, like
-        for non-itegrated tenders, then this number can be captured for reference.
+        for non-integrated tenders, then this number can be captured for reference.
       type: string
     giftFlag:
       description: |

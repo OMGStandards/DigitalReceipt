@@ -29,7 +29,7 @@ RewardCoupon:
       description: |
         Sequence number of the coupon within transaction.
         When coupon is added to or generated within transaction
-        it can be assigend a sequence number that is unique
+        it can be assigned a sequence number that is unique
         per transaction.
       type: integer
       format: int32
@@ -53,7 +53,7 @@ RewardCoupon:
       $ref: "#/RewardCouponStatusEnum"
     generatedFlag:
       description: |
-        Flag that indicates that coupond was generated within Transaction.
+        Flag that indicates that coupon was generated within Transaction.
       type: boolean
       default: false
     generatedCouponScope:
@@ -65,7 +65,7 @@ RewardCoupon:
 
 RewardCouponStatusEnum:
   description: |
-    Types of supported document body formats.
+    Supported reward coupon statuses.
   type: string
   enum:
     - Added

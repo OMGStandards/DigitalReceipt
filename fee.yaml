@@ -1,14 +1,22 @@
 Fee:
   description: |
-    Data about fee collected as part of the Transaction.
-    There are two major types of fees. Sometimes a fee is defined as a price for
-    a specific service.  In this case, fees behave similar to non-merchandise
-    service items. Such fees can have discounts and they are often taxable.
-    They can be considered as part of the net sales. On the other hand,
-    fees can also behave as regulatory payments to a government authority,
-    for example, bag fees or electronic waste recycling fees. This type of
-    fee is similar to taxes. Such fees are not part of the net sales.
-    Also, regulatory fees are typically not taxable.
+    Data about fee collected as part of the Transaction. 
+    There are three major types of fees.
+    Retailer service fee: 
+    - The fee is defined as a price for a specific service or convenience the retailer provides. The collected money is kept by the retailer in order to cover his costs, generate profit, or improve customer service. 
+    -	Such fee can be discountable; and often it is subject to taxation. 
+    - The fee can be considered as part of the net sales. 
+    -	Examples: fee for pizza delivery, membership fee
+    Governmental regulatory or service fee:
+    - The retailer is required by law to collect the fee on behalf of the government. Term “levy” may be used for this kind of fee. The full amount of collected money is remitted to the government.
+    - Usually, such fee is not taxable and not discountable.
+    - Such fee is not part of the net sales.
+    - Examples: bag fee, electronic waste recycling fee
+    Third-party fee:
+    - The fee is collected by the retailer in order to compensate third-party services.
+    - Such fee might or might not be taxable and discountable, depending on the fee type and local rules.
+    - Such fee is not part of the net sales.
+    - Examples: shipping fee for concrete carrier, PIF (public improvement fee), credit card surcharge
   type: object
   properties:
     feeID:
@@ -27,7 +35,7 @@ Fee:
     alternativeFeeID:
       description: |
         A alternative unique identifier for the Fee.
-        It could item identifier in a third party system.
+        It could be an item identifier in a third party system.
       type: string
     feeType:
       description: |

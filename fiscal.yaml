@@ -30,7 +30,7 @@ FiscalData:
       type: string
     fiscalBarcode:
       description: |
-        Barcode defined by a tax authority, usually a QR code which is used for fiscal receipt verificataion.
+        Barcode defined by a tax authority, usually a QR code which is used for fiscal receipt verification.
       $ref: "common.yaml#/Barcode"
     manualDocumentNumber:  
       description: |
@@ -39,9 +39,9 @@ FiscalData:
       type: string
     notFiscalizedByDeviceFlag:
       description: |
-        A flag indicating that the transaction was not  fisclalized successfuly
+        A flag indicating that the transaction was not fiscalized successfully
         by a fiscal device. In some countries it's possible to issue 
-        fiscal receipts which are  not fiscalized by the device. 
+        fiscal receipts which are not fiscalized by the device. 
         These receipts usually require specific post-processing.
       type: boolean
       default: false
