@@ -1,8 +1,9 @@
 RewardCoupon:
   description: |
-    A ticket, document or electronic code that can be redeemed for a
-    financial reward when purchasing item(s) from retailer. It is
-    different from Tender Coupons that are applied after Retail Transaction
+    A document or electronic code acting as trigger for granting the customer a reward 
+    like a monetary discount, free item(s), or loyalty points when purchasing item(s) 
+    from the retailer. 
+    It is different from Tender Coupons that are applied after Retail Transaction
     has been totaled (including taxes) and are considered tenders.
   type: object
   properties:
