@@ -15,7 +15,7 @@ RewardCoupon:
       description: |
         A meaningful alphanumeric value or a code that is used for
         identification of the Reward Coupon. It can be printed on the
-        face of the ticket or document.
+        face of the document.
       type: string
     typeCode:
       description: |
