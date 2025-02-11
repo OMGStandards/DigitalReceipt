@@ -326,8 +326,16 @@ Workstation:
 
 DigitalSignature:
   description: |
-    A digital signature is a cryptographically generated code that validates the authenticity
-    and integrity of an electronic message, document, file, or some other digital artifact.
+    A digital signature is the result of a cryptographic transformation of data that, 
+    when properly implemented, provides a mechanism for verifying origin authentication, 
+    data integrity, and signatory non-repudiation.
+    A digital signature is represented in a computer as a string of bits and computed using 
+    a set of rules and parameters that allow the identity of the signatory and the integrity 
+    of the data to be verified.
+    The digital signature or parts of it may be required to be displayed on the receipt.
+    A fiscal signature is a digital signature. It is not a subclass of DigitalSignature 
+    as it has no further specific properties.
+
   type: object
   properties:
     controlText:
@@ -342,6 +350,10 @@ DigitalSignature:
     algorithmTypeCode:
       description: |
         Cryptographic algorithm used to generate digital signature.
+        A digital signature algorithm includes a signature generation process and 
+        a signature verification process. 
+        A signatory uses the generation process to generate a digital signature on data; 
+        a verifier uses the verification process to verify the authenticity of the signature.
       $ref: "#/DigitalSignatureAlgorithmEnum"
     customAlgorithmTypeCode:
       description: |
