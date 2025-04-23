@@ -8,7 +8,7 @@ InventoryReservation:
     reservationID:
       description: |
         A globally unique immutable identifier for the Inventory Reservation.
-        This could be a system generated UUID. The reservationID created by
+        This could be a system generated UUID. The reservationID is created by
         Inventory management system.
       type: string
     confirmationNumber:

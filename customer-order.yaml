@@ -133,6 +133,10 @@ CustomerOrder:
         no longer be voided, but it still might be possible to cancel it.
       type: boolean
       default: false
+    voidInProcess:
+      description: |
+        Details of the Customer Order void in process operation.
+      $ref: "void.yaml#/Void"
     status:
       description: |
         Status of the customer order.

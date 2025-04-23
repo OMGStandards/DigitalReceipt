@@ -22,12 +22,6 @@ AmountModificationRule:
       description: |
         Percent value of the modification if rule type is PercentOff.
       $ref: "common.yaml#/DecimalString"
-    manualFlag:
-      description: |
-        A flag that indicates that amount modification was triggered by
-        manual actions of the Operator.
-      type: boolean
-      default: false
     employeeFlag:
       description: |
         A flag that indicates that amount modification was triggered by some
@@ -98,10 +92,12 @@ AmountModificationTriggerTypeEnum:
     Triggers can be of the following types:
     Coupon - amount modification was triggered by applying a coupon.
     AutoCoupon - amount modification was triggered by auto-coupon.
+    Manual - amount modification was triggered manually.
   type: string
   enum:
     - Coupon
     - AutoCoupon
+    - Manual
 
 AmountModifier:
   description: |

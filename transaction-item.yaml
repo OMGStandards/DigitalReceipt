@@ -28,7 +28,7 @@ TransactionItem:
     alternativeItemID:
       description: |
         A alternative unique identifier for the Item.
-        It could be an item identifier in a third party system.
+        It could be item identifier in a third party system.
       type: string
     description:
       description: |
@@ -272,7 +272,7 @@ MerchandiseHierarchy:
     Collection of nodes that can be used to form merchandise hierarchy.
     Nodes belong to one of the well-known merchandise hierarchy levels
     defined by HierarchyLevelsEnum. This structure does not capture
-    actual merchandise hierarchy. If a node belongs one of the well-known
+    actual merchandise hierarchy. If a node belongs to one of the well-known
     merchandise hierarchy levels it is captured here but it may or
     may not be a node of the actual merchandise hierarchy used by a
     particular retailer.

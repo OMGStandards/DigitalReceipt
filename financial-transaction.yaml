@@ -11,7 +11,7 @@ FinancialTransaction:
     typeCode:
       description: |
         A code that describes the type of the Financial Transaction.
-        This type describes the transfer of funds. For exmple it could be
+        This type describes the transfer of funds. For example it could be
         PaidOut to buy some stationery or collecting donations as part of
         a fundraiser.
       $ref: "#/FinancialTransactionTypeCodeEnum"
@@ -27,7 +27,7 @@ FinancialTransaction:
         An ID for the till associated with the financial transaction.
         Till is a tender repository that is assigned a unique
         ID within a business unit (e.g. a store). It can be moved around
-        the business unit and can be inserted inside a cash drawer.
+        the business unit and can be inserted into a cash drawer.
       type: string
     tillNumber:
       description: |

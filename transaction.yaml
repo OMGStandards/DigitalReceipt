@@ -100,7 +100,7 @@ Transaction:
         Code of the country that has jurisdiction over the transaction.
         That could be important for interpretation of some data,
         especially related to tax and fiscal regulations.
-        It is one or more ISO-3166-1 character code representatioins. Alpha3
+        It is one or more ISO-3166-1 character code representations. Alpha3
         is the preferred representation since it provides the best balance
         between the readability and the compactness.
       $ref: "address.yaml#/CountryCode"
@@ -245,31 +245,31 @@ TransactionTypeCodeEnum:
   description: |
     Code that designates the type of the Transaction.
     Transaction can be of the following types:
-    Retail - trasaction that includes main retail activities.
-      Such acctivities deal with exchnge of goods and services for tender:
+    Retail - transaction that includes main retail activities.
+      Such acctivities deal with exchange of goods and services for tender:
       sales, returns, customer orders, creation and modification of customer
       records, enrollment in loyalty programs, etc.
-    Operator - transactions that included operator control activities.
+    Operator - transaction that includes operator control activities.
       Such activities include logins, logouts, changing passwords,
       employee clock-in/outs, etc.
-    Financial - transaction that record transfer of funds to/from retailer's accounts
+    Financial - transaction that record transfer of funds to/from retailer's accounts.
       Such transactions include Paid In/Out.
-    Tender - transactions that record movement of tender to and from tender repositories.
+    Tender - transaction that records movement of tender to and from tender repositories.
       Such transactions include loans, pickups, banking, etc.
-    Document - transactions that record activities with different types
+    Document - transaction that records activities with different types
       of documents (receipts, invoices, statements, etc.).
-    Application - transactions that include application control activities.
+    Application - transaction that includes application control activities.
       Such activities include application Launch, Terminanate, etc.
-    Fiscal - transactions that record communications with fiscal "device".
+    Fiscal - transaction that records communications with fiscal "device".
       Such communications might include data sync and other exchanges of
       information that happen outside the context of retail, tender control
       or other transaction types that might include fiscal activities.
-    Business - transactions that included business control activities.
+    Business - transaction that includes business control activities.
       Such activities SOD/EOD, Open/Close register, etc.
-    NoSale - transactions that capture openning of a cash drawer by an Operator
+    NoSale - transaction that captures openning of a cash drawer by an Operator
       outside of the context of Retail or Tender Control transactions. It typically
       happens when a customer asks to exchange banknotes with different denomiantions.
-    Custom - custom transaction that are not covered by any of the well-know types.
+    Custom - custom transaction that is not covered by any of the well-know types.
       If a custom transaction type is specified then customTransactionType should be set.  
   type: string
   enum:
@@ -295,7 +295,7 @@ TransactionStageCodeEnum:
       tenders usually around EOD.
     Intermediate - transaction that are neither Initial nor Final.
       They typically take place in the middle of the business day.
-      For example, intermediate till count can be perfomed
+      For example, intermediate till count can be performed
       in the middle of the day. Vast majority of transactions belong to
       this stage.
   type: string
