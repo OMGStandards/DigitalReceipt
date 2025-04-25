@@ -45,12 +45,14 @@ FiscalData:
         These receipts usually require specific post-processing.
       type: boolean
       default: false
-    fiscalTransactionCategoryCode:
+    fiscalTransactionTypeCode:
       description: |
-        A code representing the fiscal transaction category.
-        Typically, such category has its own sequence number.
-        Such sequence number and/or fiscal category code might be on a
-        document associated with the transaction.
+        A code representing the type of the transaction for fiscal purposes.
+        It is used for differentiating transactions into specific fiscal transaction categories as defined by regulatory fiscal authorities.
+        Each fiscal transaction category may require its own numbering sequence or other specific handling.
+        The fiscal transaction category or specific information related to this may appear on a document associated with the transaction.
+        Such categorized sequential tracking ensures data integrity and supports audit trails to satisfy legal requirements and 
+        provide fiscal transaction traceability.
       type: string
     fiscalTransactionSequenceNumber:
       description: |
@@ -209,10 +211,7 @@ FiscalTransactionLink:
         according to a country's specific fiscal rules.
     fiscalTransactionTypeCode:
       description: |
-        A code that identifies grouping of transactions for fiscal purposes.
-        Typically a group of fiscal transactions has its own sequence number.
-        Such sequence number and/or fiscal type code might be on a
-        document associated with the transaction.
+        A code representing the type of the transaction for fiscal purposes.      
       type: string
     fiscalTransactionSequenceNumber:
       description: |
