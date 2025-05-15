@@ -27,8 +27,8 @@ TransactionItem:
       type: string
     alternativeItemID:
       description: |
-        A alternative unique identifier for the Item.
-        It could be item identifier in a third party system.
+        An alternative unique identifier for the Item.
+        It could be an item identifier in a third party system.
       type: string
     description:
       description: |
