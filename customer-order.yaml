@@ -125,7 +125,7 @@ CustomerOrder:
         Collection of documents (receipts, invoices, etc.) associated with
         the Customer Order.
       $ref: "document.yaml#/TransactionDocumentCollection"
-    voidedInProcessFlag:
+    voidedInCreationProcessFlag:
       description: |
         A flag that indicates that the order was voided during the creation process.
         It is different from the order cancellation. The order can only be voided
@@ -133,9 +133,9 @@ CustomerOrder:
         no longer be voided, but it still might be possible to cancel it.
       type: boolean
       default: false
-    voidInProcess:
+    voidInCreationProcess:
       description: |
-        Details of the Customer Order void in process operation.
+        Details of the Customer Order void in creation process operation.
       $ref: "void.yaml#/Void"
     status:
       description: |
