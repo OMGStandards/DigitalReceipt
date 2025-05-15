@@ -266,7 +266,7 @@ TransactionTypeCodeEnum:
       or other transaction types that might include fiscal activities.
     Business - transaction that includes business control activities.
       Such activities SOD/EOD, Open/Close register, etc.
-    NoSale - transaction that captures openning of a cash drawer by an Operator
+    NoSale - transaction that captures opening of a cash drawer by an Operator
       outside of the context of Retail or Tender Control transactions. It typically
       happens when a customer asks to exchange banknotes with different denomiantions.
     Custom - custom transaction that is not covered by any of the well-know types.
