@@ -92,11 +92,13 @@ AmountModificationTriggerTypeEnum:
     Triggers can be of the following types:
     Coupon - amount modification was triggered by applying a coupon.
     AutoCoupon - amount modification was triggered by auto-coupon.
+    Automatic - amount modification was triggered automatically.
     Manual - amount modification was triggered manually.
   type: string
   enum:
     - Coupon
     - AutoCoupon
+    - Automatic
     - Manual
 
 AmountModifier:
