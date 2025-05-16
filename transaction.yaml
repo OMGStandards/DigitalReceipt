@@ -373,8 +373,6 @@ DigitalSignature:
         It may include properties that are not present in the current transaction
         but still a part of the signed data set or a string representing the whole
         signed subset of the transaction data.
-        This property can be used to reconstruct the signed document without having
-        to look outside the current transaction.
       $ref: "common.yaml#/NameValuePairCollection"
     firstFlag:
       description: |
