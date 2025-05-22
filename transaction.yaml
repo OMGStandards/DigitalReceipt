@@ -100,7 +100,7 @@ Transaction:
         Code of the country that has jurisdiction over the transaction.
         That could be important for interpretation of some data,
         especially related to tax and fiscal regulations.
-        It is one or more ISO-3166-1 character code representatioins. Alpha3
+        It is one or more ISO-3166-1 character code representations. Alpha3
         is the preferred representation since it provides the best balance
         between the readability and the compactness.
       $ref: "address.yaml#/CountryCode"
@@ -245,31 +245,31 @@ TransactionTypeCodeEnum:
   description: |
     Code that designates the type of the Transaction.
     Transaction can be of the following types:
-    Retail - trasaction that includes main retail activities.
-      Such acctivities deal with exchnge of goods and services for tender:
+    Retail - transaction that includes main retail activities.
+      Such acctivities deal with exchange of goods and services for tender:
       sales, returns, customer orders, creation and modification of customer
       records, enrollment in loyalty programs, etc.
-    Operator - transactions that included operator control activities.
+    Operator - transaction that includes operator control activities.
       Such activities include logins, logouts, changing passwords,
       employee clock-in/outs, etc.
-    Financial - transaction that record transfer of funds to/from retailer's accounts
+    Financial - transaction that record transfer of funds to/from retailer's accounts.
       Such transactions include Paid In/Out.
-    Tender - transactions that record movement of tender to and from tender repositories.
+    Tender - transaction that records movement of tender to and from tender repositories.
       Such transactions include loans, pickups, banking, etc.
-    Document - transactions that record activities with different types
+    Document - transaction that records activities with different types
       of documents (receipts, invoices, statements, etc.).
-    Application - transactions that include application control activities.
+    Application - transaction that includes application control activities.
       Such activities include application Launch, Terminanate, etc.
-    Fiscal - transactions that record communications with fiscal "device".
+    Fiscal - transaction that records communications with fiscal "device".
       Such communications might include data sync and other exchanges of
       information that happen outside the context of retail, tender control
       or other transaction types that might include fiscal activities.
-    Business - transactions that included business control activities.
+    Business - transaction that includes business control activities.
       Such activities SOD/EOD, Open/Close register, etc.
-    NoSale - transactions that capture openning of a cash drawer by an Operator
+    NoSale - transaction that captures opening of a cash drawer by an Operator
       outside of the context of Retail or Tender Control transactions. It typically
       happens when a customer asks to exchange banknotes with different denomiantions.
-    Custom - custom transaction that are not covered by any of the well-know types.
+    Custom - custom transaction that is not covered by any of the well-know types.
       If a custom transaction type is specified then customTransactionType should be set.  
   type: string
   enum:
@@ -295,7 +295,7 @@ TransactionStageCodeEnum:
       tenders usually around EOD.
     Intermediate - transaction that are neither Initial nor Final.
       They typically take place in the middle of the business day.
-      For example, intermediate till count can be perfomed
+      For example, intermediate till count can be performed
       in the middle of the day. Vast majority of transactions belong to
       this stage.
   type: string
@@ -326,8 +326,16 @@ Workstation:
 
 DigitalSignature:
   description: |
-    A digital signature is a cryptographically generated code that validates the authenticity
-    and integrity of an electronic message, document, file, or some other digital artifact.
+    A digital signature is the result of a cryptographic transformation of data that, 
+    when properly implemented, provides a mechanism for verifying origin authentication, 
+    data integrity, and signatory non-repudiation.
+    A digital signature is represented in a computer as a string of bits and computed using 
+    a set of rules and parameters that allow the identity of the signatory and the integrity 
+    of the data to be verified.
+    The digital signature or parts of it may be required to be displayed on the receipt.
+    A fiscal signature is a digital signature. It is not a subclass of DigitalSignature 
+    as it has no further specific properties.
+
   type: object
   properties:
     controlText:
@@ -342,6 +350,10 @@ DigitalSignature:
     algorithmTypeCode:
       description: |
         Cryptographic algorithm used to generate digital signature.
+        A digital signature algorithm includes a signature generation process and 
+        a signature verification process. 
+        A signatory uses the generation process to generate a digital signature on data; 
+        a verifier uses the verification process to verify the authenticity of the signature.
       $ref: "#/DigitalSignatureAlgorithmEnum"
     customAlgorithmTypeCode:
       description: |
@@ -361,8 +373,6 @@ DigitalSignature:
         It may include properties that are not present in the current transaction
         but still a part of the signed data set or a string representing the whole
         signed subset of the transaction data.
-        This property can be used to reconstruct the signed document without having
-        to look outside the current transaction.
       $ref: "common.yaml#/NameValuePairCollection"
     firstFlag:
       description: |

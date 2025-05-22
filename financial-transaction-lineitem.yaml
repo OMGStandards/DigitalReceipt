@@ -55,7 +55,7 @@ FinancialTransactionLineItem:
 
 FinancialTransactionLineItemTypeEnum:
   description: |
-    Type code that indicates the type of business control transaction.
+    Type code that indicates the type of financial transaction line item.
     PaidIn - Money added to till
     PaidOut - Money taken from till
   type: string

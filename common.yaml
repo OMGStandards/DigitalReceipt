@@ -637,9 +637,10 @@ MeasuredQuantity:
 
 Barcode:
   description: |
-    A method of representing data in a visual, machine-readable form.
+    A symbol that encodes data into a machine-readable pattern of adjacent, varying width, parallel, 
+    rectangular or square dark and light spaces.
     Initially, barcodes represented data by varying the widths and spacings
-    of parallel lines (1D barcodes). They are read by special devices like
+    of parallel lines (1D barcodes). They are read by special devices 
     called barcode scanners. 
     Later, two-dimensional (2D) variants were developed that using rectangles,
     dots, hexagons and other patterns.  They are read by optical scanners,

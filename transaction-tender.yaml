@@ -15,6 +15,11 @@ TransactionTender:
         A code that indicates type of the Tender.
         The value will be one of values defined by TenderTypeEnum.
       $ref: "#/TenderTypeEnum"
+    customTypeCode:
+      description: |
+        Code that designates the custom type of the Tender.
+        It should only be used if typeCode is set to Custom.
+      type: string
     tenderName:
       description: |
         A name for the the Tender.
@@ -83,6 +88,7 @@ TransactionTender:
       $ref: "common.yaml#/ExtensibilityData"
   required:
     - typeCode
+    - amount
   additionalProperties: false
 
 TenderTypeEnum:
@@ -120,18 +126,18 @@ ForeignCurrency:
     exchangeRate:
       description: |
         Exchange rate used to convert foreign currency to default
-        currency. The rates is presented using direct quotation.
+        currency. The rate is presented using direct quotation.
         It means that default currency is used as the price currency
         and foreign currency is used as unit currency. For example,
         if Store uses EUR as default currency a customer pays in USD
-        then EUR 0.9009 = USD 1.00.  So, exchange rates shows the
+        then EUR 0.9009 = USD 1.00.  So, exchange rate shows the
         price of default currency in terms of foreign currency.
-      type: string
+      $ref: "common.yaml#/DecimalString"
     currencyConvertionFee:
       description: |
         The amount charged to make the conversion from the foreign currency
         to the default currency.
-      type: string
+      $ref: "common.yaml#/MonetaryAmount"
   required:
     - amount
   additionalProperties: false
