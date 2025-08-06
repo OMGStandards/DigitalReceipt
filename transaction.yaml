@@ -104,14 +104,6 @@ Transaction:
         is the preferred representation since it provides the best balance
         between the readability and the compactness.
       $ref: "address.yaml#/CountryCode"
-    customer:
-      description: |
-        Customer that participates in the Transaction.
-      $ref: "customer.yaml#/Customer"
-    rewardCoupons:
-      description: |
-        Reward Coupons that are part of the Transaction.
-      $ref: "reward-coupon.yaml#/RewardCouponCollection"
     documents:
       description: |
         Collection of documents (recepts, invoices, etc.) associated with
@@ -146,13 +138,6 @@ Transaction:
         starting point for this Transaction.
       type: boolean
       default: false
-    selfServiceFlag:
-      description: |
-        A flag that indicates that this is a self-service Transaction.
-        It typically means it was created at self-service checkout or some
-        kind of kiosk.
-      type: boolean
-      default: false
     activities:
       description: |
         Collection of activities that are part of transaction.
@@ -160,7 +145,7 @@ Transaction:
     relatedTransactions:
       description: |
         Collection of transactions that are related to this transaction.
-        Since this is a generice collection the semantics of the relationship
+        Since this is a generic collection the semantics of the relationship
         should be indicated by the linkTypeCode property.
       $ref: "./common.yaml#/TransactionLinkCollection"  
     trainingFlag:

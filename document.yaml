@@ -216,7 +216,7 @@ DocumentLink:
     documentTransaction:
       description: |
         Link to the Transaction associated with the linked document.
-      $ref: "common.yaml#/TransactionLink"
+      $ref: "common.yaml#/TypedTransactionLink"
   additionalProperties: false
 
 DocumentLinkCollection:

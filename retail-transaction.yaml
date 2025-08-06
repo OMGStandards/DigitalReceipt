@@ -34,6 +34,10 @@ RetailTransaction:
         This property should only be used if sales people are not
         specified per line item .
       $ref: "associate.yaml#/SalespersonCollection"
+    customer:
+      description: |
+        Customer that participates in the Transaction.
+      $ref: "customer.yaml#/Customer"
     employeeCustomer:
       description: |
         If customer is an employee then employee data may be captured
@@ -43,6 +47,13 @@ RetailTransaction:
       description: |
         Collection of reward coupons associated with the retail transaction.
       $ref: "reward-coupon.yaml#/RewardCouponCollection"
+    selfServiceFlag:
+      description: |
+        A flag that indicates that this is a self-service retail transaction.
+        It typically means it was created at self-service checkout or some
+        kind of kiosk.
+      type: boolean
+      default: false
   additionalProperties: false
 
 RetailTransactionTypeCodeEnum:
