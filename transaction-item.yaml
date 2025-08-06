@@ -207,14 +207,14 @@ ItemLookupCode:
 ItemTypeEnum:
   description: |
     Type of item used in the transaction.
-    Stock - tangible item (typically merchandise) that can be stocked by the retailer.
+    Stock - tangible items (typically merchandise) that can be stocked by the retailer.
     Service - intangible non-merchandise items that represents services, sold by retailer.
-      For example, alterations, furnuture treatment, warranties, etc.
-    Digital - non-merchandise intagible items that are stored and delivered in electronic format.
+      For example, alterations, furniture treatment, warranties, etc.
+    Digital - non-merchandise intangible items that are stored and delivered in electronic format.
       For example, eBooks, music, etc.
     Liability - non-merchandise items sales of which represent retailer's liabilities.
       Sale of such items if booked as liability rather than revenue.
-      For example, gift cards, gift vouchers, etc.
+      For example, gift cards, gift vouchers.
   type: string
   enum:
     - Stock

@@ -19,7 +19,7 @@ MonetaryTotal:
       $ref: "#/TransactionTotalTypeCodeEnum"
     customTypeCode:
       description: |
-        Custom code that identifies the type the Total.
+        Custom code that identifies the type of the Total.
         It can only be used if totalTypeCode is set to Custom.
       type: string
     beforeVoidedFlag:

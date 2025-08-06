@@ -387,10 +387,16 @@ TransactionLink:
       description: |
         Link to another transaction based on fiscal data.
       $ref: "fiscal.yaml#/FiscalTransactionLink"    
+TypedTransactionLink:
+  description: |
+    Link to another transaction and optionally line item, including a link type code.
+    This shall be used when transaction link type is not obvious from the location of the link.
+  type: object
+  properties:
+    $ref: "#/TransactionLink"
     linkTypeCode:
       description: |
-        Type of ransaction link. Often that type is obvious from the location of the link,
-        but when it becomes ambiguous, this property can be set to differentiate.
+        Type of transaction link.
       $ref: "#/TransactionLinkTypeCodeEnum"
     customLinkTypeCode:
       description: |
@@ -412,7 +418,7 @@ TransactionLinkCollection:
     Collection of transaction links.
   type: array
   items:
-    $ref: "#/TransactionLink"      
+    $ref: "#/TypedTransactionLink"
 
 ExtensibilityData:
   description: |

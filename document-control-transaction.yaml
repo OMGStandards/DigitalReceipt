@@ -10,8 +10,17 @@ DocumentControlTransaction:
     later point in time is.
   type: object
   properties:
-    relatedTransaction:
+    typeCode:
       description: |
-        Reference to transaction related to this document transaction.
-      $ref: "common.yaml#/TransactionLink"    
+        Type of document control transaction.
+      $ref: "#/DocumentControlTransactionTypeCodeEnum"
+    customTypeCode:
+      description: |
+        Custom type code that can be set when typeCode equals Custom.
+      type: string    
   additionalProperties: false
+
+DocumentControlTransactionTypeCodeEnum:
+  type: string
+  enum:
+    - Custom

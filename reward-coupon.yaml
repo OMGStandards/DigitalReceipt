@@ -21,6 +21,11 @@ RewardCoupon:
       description: |
         A code to designate the type of the Reward Coupon
         discount, rebate, points, etc.).
+      $ref: "#/RewardCouponTypeEnum"
+    customTypeCode:
+      description: |
+        Custom code that identifies the type of the Reward Coupon.
+        It can only be used if typeCode is set to Custom.
       type: string
     discountReferenceCode:
       description: |
@@ -63,6 +68,16 @@ RewardCoupon:
         the current transaction, outside of the current transaction, or both.
       $ref: "#/GeneratedCouponScopeEnum"
   additionalProperties: false
+
+RewardCouponTypeEnum:
+  description: |
+    Supported reward coupon types.
+  type: string
+  enum:
+    - Discount
+    - Rebate
+    - Points
+    - Custom
 
 RewardCouponStatusEnum:
   description: |

@@ -18,6 +18,13 @@ CustomerOrder:
         property is not required even though every created order must have
         customerOrderID.
       type: string
+    alternativeOrderID:
+      description: |
+        An alternative global unique identifier for the Customer Order.
+        It could be an identifier from the third party system that is
+        used for mapping or just an alternative way to identify the order
+        such as order creation request ID.
+      type: string
     customerOrderNumber:
       description: |
         A customer facing alphanumeric number to identify the order.
@@ -217,11 +224,6 @@ CustomerOrderLink:
         Retailer's business unit such as RetailStore, DistributionCenter
         or AdministrationCenter associated with the Customer Order.
       $ref: "business-unit.yaml#/RetailBusinessUnit"
-    businessDayDate:
-      description: |
-        System date when Customer Order was created.
-      type: string
-      format: date
     customerOrderNumber:
       description: |
         Alphanumeric number assigned to customer order.

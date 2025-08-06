@@ -236,3 +236,30 @@ CustomerActivityTypeEnum:
     - UpdateCustomer
     - ReadCustomer
     - Unknown    
+
+DocumentActivity:
+  description: |
+    Activity associated with a document.
+  type: object
+  properties:
+    documentActivityType:
+      description: |
+        Type of document activity
+      $ref: "#/DocumentActivityTypeEnum"
+    document:
+      description: |
+        Document associated with the activity.
+      $ref: "document.yaml#/TransactionDocument"
+  additionalProperties: false
+  required:
+    - documentActivityType 
+
+DocumentActivityTypeEnum:
+  description: |
+    List of document activity types
+  type: string
+  enum:
+    - PrintDocument
+    - CreateDocument
+    - SendDocument
+    - Unknown    

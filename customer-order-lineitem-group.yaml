@@ -13,12 +13,19 @@ CustomerOrderLineItemGroup:
       description: |
         Type of customer order group.
       $ref: "#/GroupTypeEnum"
+    customGroupType:
+      description: |
+        Custom code that identifies the type of the customer order line item group.
+        It can only be used if groupType is set to Custom.
+      type: string
     subsetFlag:
       description: |
-        Indicates that group inludes only a subset of line items.
+        Indicates that group includes only a subset of line items.
         If this flag is set then collection of line item numbers
         must be specified to indicate which line numbers belong
-        to the group.
+        to the group. 
+        An example for using subsets is shipping order items 
+        from different sources instead of shipping all of them from the same source.
       type: boolean
       default: false
     lineItemSequenceNumbers:
