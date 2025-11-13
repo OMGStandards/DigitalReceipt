@@ -1,0 +1,196 @@
+Discount:
+  description: |
+    A conditional reduction in the payable amount resulting from a defined rule
+    that is activated by specific triggers.
+  type: object
+  properties:
+    reductionAmount:
+      description: |
+        The amount of reduction expressed in terms of default currency,
+        specified in the transaction header.
+      $ref: "common.yaml#/MonetaryAmount"
+    sequenceNumber:
+      description: |
+        A sequence number of the discount.
+        It is used when multiple discounts are applied to the same
+        line item. The order in which different discounts are applied
+        is important.
+      type: integer
+      format: int32
+    amountBefore:
+      description: |
+        The amount before the discount.
+      $ref: "common.yaml#/MonetaryAmount"
+    amountAfter:
+      description: |
+        The amount after the discount.
+      $ref: "common.yaml#/MonetaryAmount"
+    aggregationIndex:
+      description: |
+        An index associated with a particlar transaction or group scope rule.
+        Such index allows to pull together all discounts prorated to item level
+        related to the  same application of a particular rule. It is necessary
+        since all the discount are prorated to line item level.
+      type: integer
+      format: int32
+    discountRule:
+      description: |
+        Rule that was used to get this discount.
+      $ref: "#/DiscountRule"
+    discountTrigger:
+      description: |
+        Trigger for the discount.
+      $ref: "#/DiscountTrigger"
+    employeeFlag:
+      description: |
+        A flag that indicates that discount was given an employee as part of 
+        some Employee reward program. In this case purchasing Employee should
+        be captured in employeeCustomer property of Retail Transaction.
+      type: boolean
+      default: false
+    controlledOperation:
+      description: |
+        Additional control information about manual discount.
+      $ref: "common.yaml#/ControlledOperation"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  required:
+    - amount
+    - actionCode
+  additionalProperties: false
+
+DiscountRule:
+  description: |
+    Rule that is used to reduce the amounts at transaction, group or item scope.
+  type: object
+  properties:
+    discountRuleID:
+      description: |
+        A unique identifier of the Discount Rule that was used
+        to calculate new amount.
+      type: string
+    amountReductionTypeCode:
+      description: |
+        The type of amount reduction.
+        It can be percentage or amount off, or replacing the whole
+        amount with a new lesser value.
+      $ref: "#/AmountReductionTypeCodeEnum"
+    amount:
+      description: |
+        The amount of the discount if reduction type is AmountOff or NewAmount.
+      $ref: "common.yaml#/MonetaryAmount"
+    percent:
+      description: |
+        Percent value of the discount if reduction type is PercentOff.
+      $ref: "common.yaml#/DecimalString"
+    name:
+      description: |
+        Name of the discount rule.
+      type: string
+    description:
+      description: |
+        Description of the discount rule.
+      type: string
+    promotionID:
+      description: |
+        Unique identifier for the Promotion associated with the discount.
+      type: string
+    promotionName:
+      description: |
+        Name of the promotion associated with discount.
+      type: string
+    discountScope:
+      description: |
+        Scope at wich the discount rule is applied.
+        It can be Item, Group, or Transaction.
+      $ref: "#/DiscountScopeEnum"
+  additionalProperties: false
+
+AmountReductionTypeCodeEnum:
+  description: |
+    Defines the type of amount reduction.
+  type: string
+  enum:
+    - PercentOff
+    - AmountOff
+    - NewAmount
+
+DiscountScopeEnum:
+  description: |
+    Defines the scope of the discount.
+  type: string
+  enum:
+    - Item
+    - Group
+    - Transaction
+
+DiscountTrigger:
+  description: |
+    Trigger that causes the discount.
+  type: object
+  properties:
+    triggerType:
+      description: |
+        Type of discount trigger.
+      $ref: "#/DiscountTriggerTypeEnum"
+    rewardCoupon:
+      description: |
+        Reward Coupon that was part of the discount trigger.
+      $ref: "reward-coupon.yaml#/RewardCoupon"
+  additionalProperties: false
+
+DiscountTriggerTypeEnum:
+  description: |
+    Type of the discount trigger.
+    Triggers can be of the following types:
+      Coupon - discount was triggered by applying a coupon.
+      Automatic - discount was triggered automatically by the system.
+      Manual - discount was triggered manually by a performing associate.
+  type: string
+  enum:
+    - Coupon
+    - Automatic
+    - Manual
+    - Unknown
+
+DiscountCollection:
+  description: |
+    Collection of the Discounts.
+  type: array
+  items:
+    $ref: "#/Discount"
+
+PriceOverride:
+  description: |
+    Manual price override. This is different from manual discounts.
+    The Price Override is used to override price that was obtained as
+    initial price lookup when it is necessary to establish correct
+    unit price. For example, it could happen if item is not on file.
+  type: object
+  properties:
+    lookupUnitPrice:
+      description: |
+        Unit price that was obtained as part of item lookup.
+      $ref: "common.yaml#/MonetaryAmount"
+    overrideUnitPrice:
+      description: |
+        New unit price specified by the Operator.
+      $ref: "common.yaml#/MonetaryAmount"
+    controlledOperation:
+      description: |
+        Additional control information about Price Override.
+      $ref: "common.yaml#/ControlledOperation"
+    extensibilityData:
+      description: |
+        Data that provides extensibility to the defined data structure.
+        This property is an array of DataSets where each DataSet is a
+        named collection of name-value pairs.
+      $ref: "common.yaml#/ExtensibilityData"
+  required:
+    - overrideUnitPrice
+  additionalProperties: false
+

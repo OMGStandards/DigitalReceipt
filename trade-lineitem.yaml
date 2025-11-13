@@ -65,8 +65,8 @@ TradeLineItem:
       $ref: "#/TaxLineItem"
     taxRefundLineItem:
       $ref: "#/TaxRefundLineItem"
-    amountModifierLineItem:
-      $ref: "#/AmountModifierLineItem"
+    discountLineItem:
+      $ref: "#/DiscountLineItem"
     feeLineItem:
       $ref: "#/FeeLineItem"
     feeRefundLineItem:
@@ -83,8 +83,8 @@ TradeLineItem:
       $ref: "#/TaxLineItem"
     taxRefundReversalLineItem:
       $ref: "#/TaxRefundLineItem"
-    amountModifierReversalLineItem:
-      $ref: "#/AmountModifierLineItem"
+    DiscountReversalLineItem:
+      $ref: "#/DiscountLineItem"
     feeReversalLineItem:
       $ref: "#/FeeLineItem"
     feeRefundReversalLineItem:
@@ -125,7 +125,7 @@ LineItemTypeEnum:
     - TenderIn
     - TenderOut
     - Tax
-    - AmountModifier
+    - Discount
     - TaxRefund
     - Fee
     - FeeRefund
@@ -138,7 +138,7 @@ LineItemTypeEnum:
     - TenderInReversal
     - TenderOutReversal
     - TaxReversal
-    - AmountModifierReversal
+    - DiscountReversal
     - TaxRefundReversal
     - FeeReversal
     - FeeRefundReversal
@@ -362,19 +362,17 @@ FeeRefundLineItem:
     - fee
   additionalProperties: false
 
-AmountModifierLineItem:
+DiscountLineItem:
   description: |
-    A Line Item that represents transaction level Amount Modifier.
-    Examples of amount modifiers include but are not limited to discounts
-    or markdowns.
+    A Line Item that represents transaction scope Discount.
   type: object
   properties:
-    amountModifier:
+    discount:
       description: |
-        Information about transaction level amount modifier.
-      $ref: "amountmodifier.yaml#/AmountModifier"
+        Information about transaction scope discount.
+      $ref: "discount.yaml#/Discount"
   required:
-    - amountModifier
+    - discount
   additionalProperties: false
 
 TransferFromAccountLineItem:

@@ -109,16 +109,15 @@ TransactionItem:
       description: |
         Collection of taxes associated with this Line Item.
       $ref: "tax.yaml#/TaxCollection"
-    amountModifiers:
+    DiscountScopeEnum:
       description: |
-        Collection of amount modifiers such applied to the Line Item.
-        This collection contains all discounts and markdowns.
-      $ref: "amountmodifier.yaml#/AmountModifierCollection"
+        Collection of discounts applied to the Line Item.
+      $ref: "discount.yaml#/DiscountCollection"
     priceOverride:
       description: |
         Manual adjustment of the regular unit price.
         This process is used if item lookup fails or item price is incorrect.
-      $ref: "amountmodifier.yaml#/PriceOverride"
+      $ref: "discount.yaml#/PriceOverride"
     manuallyEnteredPriceFlag:
       description: |
         Flag that indicates that item price was entered manually.
