@@ -47,8 +47,8 @@ CustomerOrderLineItem:
       $ref: "#/CustomerOrderItemLineItem"
     orderTaxLineItem:
       $ref: "#/CustomerOrderTaxLineItem"
-    orderAmountModifierLineItem:
-      $ref: "#/CustomerOrderAmountModifierLineItem"
+    orderDiscountLineItem:
+      $ref: "#/CustomerOrderDiscountLineItem"
     orderFeeLineItem:
       $ref: "#/CustomerOrderFeeLineItem"
   additionalProperties: false
@@ -63,7 +63,7 @@ CustomerOrderLineItemTypeEnum:
   enum:
     - Item
     - Tax
-    - AmountModifier
+    - Discount
     - Fee
 
 CustomerOrderItemLineItem:
@@ -140,20 +140,18 @@ CustomerOrderTaxLineItem:
   required:
     - tax
 
-CustomerOrderAmountModifierLineItem:
+CustomerOrderDiscountLineItem:
   description: |
-    A Line Item that represents Amount Modification within Customer Order.
-    Examples of amount modifiers include but are not limited to discounts
-    or markdowns.
+    A Line Item that represents Dsicount within Customer Order.
   type: object
   properties:
-    amountModifier:
+    discount:
       description: |
-        Information about order  level amount modifier.
-      $ref: ./amountmodifier.yaml#/AmountModifier
+        Information about order level discounts.
+      $ref: ./discount.yaml#/Discount
   additionalProperties: false
   required:
-    - amountModifier
+    - discount
 
 CustomerOrderFeeLineItem:
   description: |

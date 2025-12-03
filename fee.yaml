@@ -81,10 +81,10 @@ Fee:
       description: |
         Collection of taxes associated with the fee.
       $ref: "tax.yaml#/TaxCollection"
-    amountModifiers:
+    discounts:
       description: |
-        Collection of amount modifiers such applied to the fee.
-      $ref: "amountmodifier.yaml#/AmountModifierCollection"
+        Collection of discounts such applied to the fee.
+      $ref: "discount.yaml#/DiscountCollection"
     rate:
       description: |
         If fee is rate based this column shows the rate
