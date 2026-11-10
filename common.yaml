@@ -668,6 +668,15 @@ Barcode:
       description: |
         Data elements parsed from raw barcode data.
       $ref: "#/NameValuePairCollection"
+    payloadFormat:
+      description: |
+        Format of the data payload (string, URL, etc.).
+      type: string
+    payloadType:
+      description: |
+        Semantic meaning of the data payload. For example, GS1 Digital Link,
+        transaction reference, customer review link, etc.        
+      type: string
   additionalProperties: false
 
 BarcodeSymbologyEnum:
